@@ -65,7 +65,9 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
                        {
                         $window.sessionStorage.webroot = webroot;
                         $window.sessionStorage.usuario = response.data.d.email;
-                        $window.sessionStorage.id_perfil = response.data.d.perfil
+                        $window.sessionStorage.tipo_perfil = response.data.d.tipo_perfil
+                        $window.sessionStorage.id_perfil = response.data.d.id_perfil
+
                         $window.sessionStorage.nombre = response.data.d.nombre
                         $window.sessionStorage.primer_apellido = response.data.d.primer_apellido
                         $window.sessionStorage.segundo_apellido = response.data.d.segundo_apellido
