@@ -19,19 +19,20 @@ namespace webapp.Controllers
         /// <param name="item">parámetro donde se recogen la fecha de incio y la fecha final</param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult getVacaciones(Dictionary<string, object> item)
+        public JsonResult getDiasVacaciones(Dictionary<string, object> item)
         {
             RespGeneric resp = new RespGeneric("KO");
-            resp.msg = validarFecha(item) + verificarFechas(item);
+            resp.msg = verificarDiasRestantesVacaciones(item);
 
             if (string.IsNullOrEmpty(resp.msg))
             {
                 try
                 {
-                    item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
-                    item["fecha_final_vacaciones"] = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
-                    resp.d.Add("data", Data.Vacaciones.getDiasVacaciones(item));
+                    //item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
+                    //item["fecha_final_vacaciones"] = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
+                    resp.d.Add("data", Data.Vacaciones.getDiasTotalVacaciones(item));
                     resp.cod = "OK";
+                
                 }
                 catch (Exception ex)
                 {
@@ -43,7 +44,7 @@ namespace webapp.Controllers
         }
 
         [HttpPost]
-        public JsonResult getRestantesVacaciones(Dictionary<string, object> item)
+        public JsonResult createPeticionVacaciones(Dictionary<string, object> item)
         {
             RespGeneric resp = new RespGeneric("KO");
             resp.msg = validarFecha(item) + verificarFechas(item);
@@ -52,7 +53,9 @@ namespace webapp.Controllers
             {
                 try
                 {
-                    resp.d.Add("data", Data.Vacaciones.getVacacionesRestantes(item));
+                    item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
+                    item["fecha_final_vacaciones"] = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
+                    resp.d.Add("data", Data.Vacaciones.create(item));
                     resp.cod = "OK";
                 }
                 catch (Exception ex)

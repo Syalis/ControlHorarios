@@ -1,27 +1,34 @@
-﻿angular.module('webapp').controller('vacacionesCtrl', ["$scope", "$http", vacacionesCtrl]);
+﻿angular.module('webapp').controller('vacacionesCtrl', ["$scope", "$http", "$window", vacacionesCtrl]);
 
-function vacacionesCtrl($scope, $http) {
+function vacacionesCtrl($scope, $http, $window) {
 
     var vm = this;
     vm.lista = { data: [] };
 
-    vm.vacaciones = vacaciones;
-    vm.diasVacaciones = diasVacaciones
+    vm.session = $window.sessionStorage;
+    vm.peticionVacaciones = peticionVacaciones;
+    vm.diasRestantesVacaciones = diasRestantesVacaciones
 
-    diasVacaciones();
-    vm.vacaciones = [];
+    diasRestantesVacaciones();
+
+    vm.diasVacaciones = [];
 
 
-    function diasVacaciones(item) {
+    function diasRestantesVacaciones() {
         try {
-            $http.post("Vacaciones/getRestantesVacaciones", {
+            $http.post("Vacaciones/getDiasVacaciones", {
                 item:
                 {
-                    id_usuario: 1
+                    id_usuario: 3
                 }
             }).then(function (r) {
-                vm.vacaciones = r.data;
-                console.log(r.data);
+                if (r.data.cod == "OK") {
+                    vm.diasVacaciones = r.data.d.data;
+                    console.log(r.data);
+                } else {
+                    console.log("Error");
+                }
+               
             });
         } catch (ex) {
             return ex.message;
@@ -29,23 +36,21 @@ function vacacionesCtrl($scope, $http) {
     }
 
 
-    function vacaciones(item) {
-        
-        $http.post("Vacaciones/getVacaciones", {
+    function peticionVacaciones(item) {
+        console.log(item);
+        $http.post("Vacaciones/createPeticionVacaciones", {
             item:
             {
-                id_usuario: 1,
+                id_usuario: 3,
                 fecha_inicio_vacaciones: vm.item.fecha_inicio_vacaciones,
                 fecha_final_vacaciones: vm.item.fecha_final_vacaciones
             }
         }).then(function (r) {
-            console.log(item);
-            if (r.data.cod == "OK") {
-                vm.lista.data = r.data.d.data;
-                console.log(vm.lista.data);
-            } else {
-                console.log("Error");
-            }
+            
+            vm.lista.data = r.data.d.data;
+            console.log(r.data.d.data);
+            diasRestantesVacaciones();
+           
         });
 
 
