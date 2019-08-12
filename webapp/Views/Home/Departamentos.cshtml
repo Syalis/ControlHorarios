@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Departamentos";
+}
+
+<div class="row h-100">
+    <!--Renderizado de la nav-bar-->
+    <div id="aside" class="col-2 p-0 m-0 bg-dark">
+        @Html.Partial("lateral")
+    </div>
+    <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
+        <div class="row">
+            <a class="nav-link active" target="_self" href="@Url.Action("Empleados", "Home")"><h3><i class="far fa-address-card mr-2"></i>Empleados</h3></a>
+            <a class="nav-link disabled" href="" ><h3><i class="far fa-building mr-2"></i>Departamentos</h3></a>
+
+           
+        </div>
+
+        <div>
+            <form id="formDepartamentos">
+                <div class="form-row ml-3">
+                    <div class="form-group mr-2">
+                        <label class="font-weight-bold">Búsqueda de empleado</label>
+                        <div isteven-multi-select input-model="" output-model="" button-label="empleado" item-label="empleado" tick-property="ticked" max-labels="1" selection-mode="single"></div>
+                    </div>
+                    <div class="form-group my-auto pt-2 ml-auto mr-4">
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><span><i class="fas fa-plus mr-2"></i></span>Nuevo Departamento </button>
+                    </div>
+
+                </div>
+                
+            </form>
+        </div>
+
+
+        <!--Inicio de la tabla que muestra los resultados de la peticion-->
+        <div id="table" class="container-fluid mt-4 mx-auto">
+
+            <table class="table table-hover" st-table="vm.lista.disp" st-safe-src="vm.lista.data" st-filtered-collection="vm.lista.filter">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-md-left" st-sort="Nombre" ng-click="vm.ordenar('Nombre')">Nombre Departamento</th>
+                        <th scope="col" class="text-md-left" st-sort="Nombre" ng-click="vm.ordenar('Acciones')">Acciones </th>
+
+
+                    </tr>
+                    <tr>
+                        <td scope="col" class="text-md-left" st-search="Nombre"><input type="text" class="bg-white text-white text-center border-left-0 border-right-0 border-top-0"></td>
+                        <td scope="col" class="text-md-left" st-search="Acciones">
+                            <a href="#" class="fas fa-trash-alt text-md-left"></a>
+                            <a href="#" class="fas fa-file-export text-md-left"></a>
+                            <a href="#" class="fas fa-list-ul text-md-left"></a>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="empleado in vm.lista.disp | orderBy: vm.myOrder">
+
+                        <td class="text-center">{{empleado.Nombre}}</td>
+                        <td class="text-center">{{empleado.Apellidos}}</td>
+                        <td class="text-center">{{empleado.Departamento}}</td>
+                        <td class="text-center">{{empleado.Horas}}</td>
+                        <td class="text-center">{{empleado.Vacaciones}}</td>
+
+
+
+                    </tr>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="15" class="text-center">
+                            <div st-pagination="" st-items-by-page="10"></div>
+
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button ng-click="vm.excelExport();" ng-show="vm.lista.data.length > 0" class="btn btn-dark pull-right m-l-10">Exportar <i class="glyphicon glyphicon-chevron-right"></i></button>
+        </div>
+
+        <!--Fin de la tabla-->
+
+    </div>
+</div>
+
+<!--Modal registro empleado-->
+<div class="modal fade mt-5" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal Formulario Registro-->
+        <div class="modal-content mr-2 ml-2 mb-2">
+            <div class="modal-header">
+                <h4> <i class="far fa-building mr-2"></i>Departamentos</h4>
+            </div>
+            <form class="ml-2">
+                <div class="form-group m-2">
+                    <h5 class="font-weight-bold">Añadir departamento</h5>
+                    <h6 class="form-text text-muted mt-3">Nombre del departamento</h6>
+                    <input type="text" class="form-control mt-3 w-75 text-left" placeholder="Nombre Departamento">
+                </div>
+
+                <div class="form-row  mr-2 ml-2 mb-2">
+                    <button class="btn btn-primary mt-3 " type="submit">Guardar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--Fin del modal-->

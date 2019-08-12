@@ -1,0 +1,11 @@
+﻿<a class="dropdown-toggle pointer" style="color:#555"  ng-class="{'disabled' : $ctrl.ngDisabled}" id="{{$ctrl.id}}" role="button" data-toggle="dropdown" data-target="#">
+    <div class="input-group input-group-sm">
+        <input type="text" placeholder="{{$ctrl.placeholder}}" class="form-control" ng-model="$ctrl.ngModel" ng-disabled="$ctrl.ngDisabled" ng-required="$ctrl.ngRequired">
+        <span class="input-group-addon align-content-center">
+            <i id="icono" class="far fa-calendar-alt fa-2x fa-lg mt-1 ml-1 align-content-center"></i>
+        </span>
+    </div>
+</a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <datetimepicker data-ng-model="$ctrl.ngModel" data-datetimepicker-config="$ctrl.config" date-disabled="$ctrl.ngDisabled" />
+</ul>

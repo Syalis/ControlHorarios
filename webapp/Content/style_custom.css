@@ -1,0 +1,40 @@
+﻿body {
+    font-size: 13px;
+}
+
+/*
+    Elimina Delay ngIf ngShow por ngAnimate
+*/
+.ng-hide.ng-hide-animate {
+    display: none !important;
+}
+
+.nowrap {
+    white-space: nowrap !important;
+}
+
+.card-indicador-main {
+    min-height: 163px;
+    padding-top: 30px;
+}
+
+/* Inicio Bootstrap 4 Alpha Styles */
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background: 0 0;
+    border: 0;
+}
+
+/* Fin Bootstrap 4 Alpha Styles */

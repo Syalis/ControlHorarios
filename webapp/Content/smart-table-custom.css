@@ -1,0 +1,32 @@
+.smart-table {
+    margin-bottom: 0 !important;
+}
+
+    .smart-table > thead > tr > th {
+        text-align: center !important;
+    }
+
+        .smart-table > thead > tr > th > input {
+            min-width: 60px !important;
+        }
+
+    .smart-table > tbody > tr > td {
+        vertical-align: middle !important;
+    }
+
+        .smart-table > tbody > tr > td > a .fa {
+            color: #3f51b5;
+        }
+
+.st-sort-ascent:before {
+    content: '\25B2';
+}
+
+.st-sort-descent:before {
+    content: '\25BC';
+}
+
+th[st-sort] {
+    cursor: pointer;
+    white-space: normal !important;
+}

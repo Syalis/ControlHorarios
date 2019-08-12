@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "FormularioAdmin";
+}
+
+<div class="row h-100">
+    <div id="aside" class="col-2 p-0 m-0 bg-dark">
+        @Html.Partial("lateral")
+    </div>
+    <br />
+    <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
+        <div class="container">
+            <h2>Registrar nuevos Usuarios </h2>
+            <br /><br />
+            <form action="#">
+                <div class="form-group">
+                    <label class="alinear">Nombre Usuario</label>
+                    <input type="text" class="form-control" id="uname" placeholder="Nombre de usuario" name="uname" required />
+                </div>
+                <div class="form-group">
+                    <label class="alinear">Contraseña</label>
+                    <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña" name="Contraseña" required><br />
+                    <label class="alinear"> Repetir contraseña</label>
+                    <input type="password" class="form-control" id="RContraseña" placeholder="repetir contraseña" name="RContraseña" required>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="aceptar" required>Acepto las condiciones y terminos.
+
+
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </form>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_blank.cshtml";
+    ViewBag.Title = "ToPdf";
+}
+<div ng-controller="toPdfCtrl as vm">
+    <div class="row m-t-15 m-l-15 m-r-15">
+        <div class="col-md-12">
+            <img class="pull-right" src="~/images/logo-main.png" height="50">
+        </div>
+        <div class="col-md-12 pdf">
+            <table class="table table-bordered table-condensed m-t-5 tablePdf">
+                <thead>
+                <tr class="table-head-1">
+                    <th colspan="12" class="font-bold text-center">Incentive Offer & Claim Form</th>
+                </tr>
+                <tr class="table-head-1">
+                    <th colspan="3" class="font-normal">Huawei Offer No.</th>
+                    <th colspan="2" class="font-normal">{{vm.incentivo[0].referencia}}</th>
+                    <th colspan="2" class="text-center font-normal">{{vm.incentivo[0].fecha_creacion | date:'dd/MM/yyyy'}}</th>
+                    <th colspan="1"></th>
+                    <th colspan="4"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="3">From</td>
+                    <td colspan="9">Huawei Technologies España, S.L. ("Huawei")</td>
+                </tr>
+                <tr>
+                    <td colspan="3">To</td>
+                    <td colspan="9" style="color: red">{{vm.incentivo[0].nombre}}</td>
+                </tr>
+                </tbody>
+                <thead>
+                <tr class="table-head-2">
+                    <th class="text-center font-bold" colspan="9">Offer</th>
+                    <th class="text-center font-bold" colspan="3">Claim</th>
+                </tr>
+                <tr>
+                    <th class="font-bold text-center">No.</th>
+                    <th class="font-bold text-center">Incentive Name&Description</th>
+                    <th class="font-bold text-center">Product</th>
+                    <th class="font-bold text-center">Start date</th>
+                    <th class="font-bold text-center">End date</th>
+                    <th class="font-bold text-center">Sale out Forecast(pcs)</th>
+                    <th class="font-bold text-center">Incentive per Unit (€)<br/>
+                        <div style="color: red">MS > = {{vm.incentivo.lineas.data[0].rango1}}%</div></th>
+                    <th class="font-bold text-center">Incentive per Unit (€)<br/>
+                        <div style="color: red">MS < {{vm.incentivo.lineas.data[0].rango2}}%</div></th>
+                    <th class="font-bold text-center">Remark: Incentive Type</th>
+                    <th class="font-bold text-center table-head-1">AchievedQty (PC)</th>
+                    <th class="font-bold text-center table-head-1">AchievedAmount (€)<br/> MS > = {{vm.incentivo.lineas.data[0].rango1}}%</th>
+                    <th class="font-bold text-center table-head-1">AchievedAmount (€)<br/> MS < {{vm.incentivo.lineas.data[0].rango2}}%</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="linea in vm.incentivo.lineas.data">
+                    <td class="text-center">{{$index+1}}</td>
+                    <td class="text-center">{{linea.nombre}}</td>
+                    <td class="text-left">{{linea.producto}}</td>
+                    <td class="text-center">{{linea.desde}}</td>
+                    <td class="text-center">{{linea.hasta}}</td>
+                    <td class="text-center">
+                        <div style="color: red">{{linea.forecast}}</div></td>
+                    <td class="text-right">{{linea.incentivo_unidad_rango1 | currency}}</td>
+                    <td class="text-right">{{linea.incentivo_unidad_rango2 | currency}}</td>
+                    <td class="text-center">{{linea.tipo}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="text-center font-bold">Total (€)</td>
+                    <td></td>
+                    <td class="text-right font-bold">{{vm.getSumRango('1') | currency}}</td>
+                    <td class="text-right font-bold">{{vm.getSumRango('2') | currency}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="1"></td>
+                    <td colspan="11" class="text-left font-bold">Remark: Pago del 100% del apoyo unitario por cada modelo si la cuota de Huawei > = 30%, en caso de ser < 30% pago del 50%</td>
+                </tr>
+                <tr style="height: 80px;">
+                    <td class="text-center" colspan="1" style="-webkit-transform: rotate(-90deg); transform: rotate(-90deg); padding-top: 30px;">
+                        <div style="color: blue">Remark</div></td>
+                    <td class="text-left" colspan="11"><br/><b>Incentive Tpye A:</b> Huwei will increase the investment accordingly in case the actual sales quanity is more than sell out forecast which indicated in this offer;</td>
+                </tr>
+                </tbody>
+                <thead>
+                <tr class="table-head-1">
+                    <th colspan="12" class="text-left font-bold">Claim & Payment</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="12">1. Evidences requirement: On a quarterly basis, within <font color="red">ten (10) days</font> after the end of each month, the Partner shall provide Huawei with the incentive report with the sell out details including but not limited to product model, sales date and/or store name, pricing details shall not be shared. <font color="red">Also all the documentation requested by Huawei for the verification process.</font></td>
+                </tr>
+                <tr>
+                    <td colspan="12">2. Verification: Huawei shall complete the incentive report verification within five (5) days after the report receipt. In case of any discrepancy, Huawei reserves the right to request for additional evidence regarding the discrepancy.</td>
+                </tr>
+                <tr>
+                    <td colspan="12">3. Payment: <font color="red">The day fifteen (15) after finish incentive period and</font> After the incentive report verification by both parties, Huawei shall pay the incentive to Partner in the form of cash in accordance with the agreed amount within thirty (30) calender days. All payments related to commercial actions or services provided by the Partner, as described herein, or any other related payment arising out of this contract must be requested by the Partner within sixty (60) calendar days from the completion of the commercial actions or completed services. The lack of request of payment by the Partner shall imply and shall be understood as a waiver to receive such payment by the Partner. No request for payment after such date shall be valid.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation" style="height: 100%; background-color: #283c4c;">
+    <div class="sidebar-collapse">
+        <ul side-navigation class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="profile-element" uib-dropdown>
+                    <a uib-dropdown-toggle href>
+                        <span class="clear text-center">
+                            <img src="~/images/logo.png" class="img-responsive center-block" />
+                            <span class="block m-t-md">
+                                <strong class="font-bold">{{vm.session.usuario}}</strong>
+                            </span>
+                            <span class="text-muted text-xs block">{{vm.session.tipologia}}</span>
+                        </span>
+                    </a>
+                </div>
+                <div class="logo-element">
+                    <img src="~/images/logo.png" class="img-responsive center-block" />
+                </div>
+            </li>
+            <li class="back-bg">
+                <a href="@Url.Action("Cuota", "Analisis")"><i class="fa fa-money" aria-hidden="true"></i><span class="nav-label">Análisis de Cuota</span></a>
+            </li>
+            <li class="back-bg">
+                <a href="@Url.Action("Imei", "Analisis")"><i class="fa fa-search" title="Analisis de imei"></i><span class="nav-label">Análisis de Imei</span></a>
+            </li>
+            <li class="back-bg">
+                <a href="@Url.Action("Gestion", "Incentivos")"><i class="fa fa-tag" title="Promociones"></i><span class="nav-label">Incentivos</span></a>
+            </li>
+            @*<li class="back-bg">
+                <a href="@Url.Action("Tarifas", "Home")"><i class="fa fa-usd" title="Tarifas"></i><span class="nav-label"> TARIFAS</span></a>
+            </li>*@
+            <li class="back-bg">
+                <a href="@Url.Action("Tiendas", "Manage")"><i class="fa fa-building" title="Tiendas"></i><span class="nav-label"> Tiendas</span></a>
+            </li>
+            <li class="back-bg">
+                <a href="@Url.Action("Terminales", "Manage")"><i class="fa fa-mobile-phone" title="Terminales"></i><span class="nav-label"> Terminales</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>

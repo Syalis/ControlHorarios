@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Vacaciones";
+}
+@*<div ng-controller="homeCtrl as vm">
+        <webapp-loader ng-if="vm.loading"></webapp-loader>
+        <div ng-show="!vm.loading">
+        </div>
+    </div>*@
+<div class="row h-100" ng-controller="vacacionesCtrl as vm">
+    <!--Renderizado de la nav-bar-->
+    <div id="aside" class="col-2 p-0 m-0 bg-dark">
+        @Html.Partial("lateral")
+    </div>
+    <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
+        <!--Inicio card de dias de vacaciones-->
+        <div class="row p-3">
+            <div class="col-md-3">
+                <div id="caja" class="card align-content-center">
+                    <div class="p-4">
+                        <h4 class="text-center font-weight-bold">Días Pendientes</h4>
+                        <h4 class="text-center font-weight-bold p-1">{{vm.vacaciones.dias_restantes}}/30</h4>
+                    </div>
+                </div>
+            </div>
+            <!--Fin card de dias de vacaciones-->
+            <div class="col-md-9">
+                <!--Inicio formulario para recoger las fechas-->
+                <form ng-submit="vm.vacaciones(vm.item)">
+                    <div>
+                        <h4 class="text-center font-weight-bold">Solicita tus vacaciones</h4>
+                        <h6 class="text-center p-1">Introduce las fechas</h6>
+
+                        <div class="form-row align-content-center align-items-center p-3">
+                            <div class="col-sm-4">
+                                <label>Fecha Inicio Vacaciones</label><br />
+                                <top-datepicker ng-model="vm.item.fecha_inicio_vacaciones"></top-datepicker>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Fecha Final Vacaciones</label><br />
+                                <top-datepicker ng-model="vm.item.fecha_final_vacaciones"></top-datepicker>
+                            </div>
+                            <div class="col-sm-4 mt-4 pl-3">
+                                <button type="submit" class="btn btn-success btn-sm">Solicitar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!--Fin formulario para recoger las fechas-->
+            </div>
+        </div>
+        <div class="card mb-2 w-100 bg-dark border-bottom"></div>
+        <!--Calendario-->
+        <div data-provide="calendar"></div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@*<div ng-controller="homeCtrl as vm">
+        <webapp-loader ng-if="vm.loading"></webapp-loader>
+        <div ng-show="!vm.loading">
+        </div>
+    </div>*@
+    <div class="row h-100" ng-controller="FichajesCtrl as vm">
+        <div id="aside" class="col-2 p-0 m-0 bg-dark">
+            <!--Renderizado de la nav-bar-->
+            @Html.Partial("lateral")
+        </div>
+        <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
+            <div id="centralPerfil" class="row m-2 align-items-center pb-3 pt-3">
+                <h2>Fichajes</h2>
+                <div class="text-center mx-auto">
+                <a href="#"  class="btn">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </a>
+                <span>
+                    <input id="date"  class="text-center" placeholder={{vm.fichajesEmpleado.data[0].mes}} readonly/>
+                </span>
+                <a href="#" class="btn">
+                    <i class="fas fa-arrow-circle-right"></i>
+                </a>
+                </div>
+                <button type="button" class="btn btn-primary  ml-auto">Check IN</button>
+                
+            </div>
+            
+            <div id="centralDatos" class="row m-2">
+                <h2>Jornadas</h2>
+                <div class="container" ng-repeat="x in vm.fichajesEmpleado.data">
+                    <label>{{x.fecha}}</label>
+                    <div class="progress">
+                        <a class="progress-bar" data-toggle="collapse" href="#horaFichajes" role="button" aria-expanded="false"  aria-controls="multiCollapseExample1" style="width:{{x.porcentaje}}"></a>
+                    </div> 
+                    <div id="HoraFichajes"  class="collapse multi-collapse">
+                        <ul>
+                            <li class="font-weight-bold">Check In:{{x.hora_entrada}}</li>
+                            <li class="font-weight-bold">Check Out:{{x.hora_salida}}</li>
+                        </ul>
+
+                        
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+    
+        
+ 
+
+
+

@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_blank.cshtml";
+    ViewBag.Title = "Login";
+}
+    <link href="~/Content/Site2.css" rel="stylesheet" />
+
+<!--===============================================================================================-->
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown" ng-controller="loginInicioCtrl as vm">
+    <div id="formContent">
+
+    
+
+        <!-- logo empresa -->
+        <div class="fadeIn first">
+            <img src="~/images/logo.png" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- formulario acceso -->
+        <form ng-submit="vm.login()">
+            <input type="text" id="user" class="fadeIn second" name="user" placeholder="User" ng-model="vm.usuario">
+            <input type="password" id="password" class="fadeIn third" name="pass" placeholder="Password" ng-model=" vm.password ">
+            <input type="submit" class="botonlogin" value="Log In" ladda="vm.loading">
+        </form>
+
+        <!-- recordar contraseña -->
+        <div id="formFooter">
+
+            <span>fsdfd</span>
+            <a href="#" ng-click=" vm.ShowHide()" ng-hide="vm.visible">No recuerdas tu contraseña?</a>
+            <form>
+                <br><br><div ng-show="vm.visible">
+                    <h5>Introduce tu email para que te enviemos un enlace</h5>
+                    <br />
+                    <input type="text" id="Email" class="fadeIn third" name="Email" placeholder="Email">
+
+                    <input ng-click=" vm.Enviar()" type="submit" class="btn btn-outline-secondary" value="restablecer">
+                </div>
+
+            </form>
+
+        </div>
+
+
+
+    </div>
+</div>
