@@ -44,5 +44,21 @@ namespace webapp.Controllers
             return View();
         }
         //Fin de las vistas
+        [HttpPost]
+         [AllowAnonymous]
+        public JsonResult InsertUser(Dictionary<string, object> data)
+        {
+
+            try
+            {
+
+
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return Json(Webapp.Data.Empleados.InsertUser(data));
+        }
     }
 }

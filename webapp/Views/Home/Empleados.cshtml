@@ -80,37 +80,37 @@
 </div>
 
 <!--Modal registro empleado-->
-<div class="modal fade mt-5" id="myModal" role="dialog">
+<div class="modal fade mt-5" id="myModal" role="dialog" ng-controller="EmpleadosCtrl as vm">
     <div class="modal-dialog">
         <!-- Modal Formulario Registro-->
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Formulario de registro</h4>
             </div>
-            <form class="m-2">
+            <form class="m-2" ng-submit="vm.InsertUser()">
                 <div class="form-row  mr-2 ml-2 ">
                     <div class="col-md-6 mb-2">
                         <label class="font-weight-bold">Nombre</label>
-                        <input type="text" class="form-control" id="validationCustom01" placeholder="Nombre" required>
+                        <input type="text" class="form-control" ng-model="vm.datosUser.nombre" placeholder="Nombre" required>
                     </div>
                     <div class="col-md-6 mb-2">
                         <label class="font-weight-bold">Apellidos</label>
-                        <input type="text" class="form-control" placeholder="Apellidos " required>
+                        <input type="text" class="form-control"  ng-model="vm.datosUser.primer_apellido" placeholder="Primer Apellido" required>
                     </div>
 
                 </div>
                 <div class="form-row  mr-2 ml-2">
                     <div class="col-md-6 mb-3">
-                        <label class="font-weight-bold">Nombre usuario</label>
+                        <label class="font-weight-bold">Segundo Apellido</label>
                         <div class="input-group">
 
-                            <input type="text" class="form-control" placeholder="Username" required>
+                            <input type="text" class="form-control"ng-model="vm.datosUser.segundo_apellido" placeholder="Segundo Apellido" required>
 
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="font-weight-bold">Email</label>
-                        <input type="text" class="form-control" placeholder="Email" required>
+                        <input type="text" class="form-control"ng-model="vm.datosUser.email" placeholder="Email" required>
 
                     </div>
 
@@ -120,7 +120,7 @@
 
                     </div>
                     <div class="my-auto pt-2 ml-auto mr-1">
-                        <button class="btn btn-primary  " type="submit">Registrar</button>
+                        <button class="btn btn-primary  " type="submit">Enviar Invitacion</button>
                     </div>
                 </div>
                 
