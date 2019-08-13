@@ -45,20 +45,23 @@ namespace webapp.Controllers
         }
         //Fin de las vistas
         [HttpPost]
-         [AllowAnonymous]
+        
         public JsonResult InsertUser(Dictionary<string, object> data)
+          
         {
 
             try
             {
-
-
+                //enviar email a la direccion email dentro del data
+                Extensiones.sendEmail(to:(Convert.ToString(data["email"])), subject: "Invitacion", body: "link", file: "");
             }
             catch (Exception e)
             {
                 return null;
             }
             return Json(Webapp.Data.Empleados.InsertUser(data));
+           
         }
     }
+
 }
