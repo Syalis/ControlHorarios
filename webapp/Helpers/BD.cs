@@ -128,16 +128,8 @@ namespace webapp.Helpers
 
                     cmd.ExecuteNonQuery();
                     newId = Convert.ToInt32(cmd.LastInsertedId);
-                }
-                if (log)
-                {
-                    using (MySqlCommand cmd = new MySqlCommand("insert into log_general (fecha, usuario, evento) VALUES (now(), ?usuario, ?evento)", con))
-                    {
-                        var frameStack = new StackTrace().GetFrame(1).GetMethod();
-                        cmd.Parameters.AddWithValue("?usuario", HttpContext.Current.Session["usuario"]);
-                        cmd.Parameters.AddWithValue("?evento", $"{frameStack.ReflectedType.Name} - {frameStack.Name} - {query.Substring(0, 6).ToUpper()} - [ {sb.ToString()}]");
-                        cmd.ExecuteNonQuery();
-                    }
+
+
                 }
                 con.Close();
             }

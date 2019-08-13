@@ -224,6 +224,7 @@
     <Compile Include="Controllers\FichajesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VacacionesController.cs" />
+    <Compile Include="Data\Empleados.cs" />
     <Compile Include="Data\Fichajes.cs" />
     <Compile Include="Data\Vacaciones.cs" />
     <Compile Include="Global.asax.cs">
@@ -252,6 +253,7 @@
     <Content Include="app\config.js" />
     <Content Include="app\controllers\FichajesCtrl.js" />
     <Content Include="app\controllers\homeCtrl.js" />
+    <Content Include="app\controllers\EmpleadosCtrl.js" />
     <Content Include="app\controllers\loginCtrl.js" />
     <Content Include="app\controllers\loginInicioCtrl.js" />
     <Content Include="app\controllers\mainCtrl.js" />
@@ -1119,6 +1121,7 @@
     <Folder Include="Plugins\angular-bootstrap-datetimepicker\src\scss\NewFolder1\" />
     <Folder Include="Plugins\angular-bootstrap-datetimepicker\src\templates\NewFolder1\" />
     <Folder Include="Views\BD\" />
+    <Folder Include="Views\Empleados\" />
     <Folder Include="Views\Fichajes\" />
   </ItemGroup>
   <ItemGroup>
