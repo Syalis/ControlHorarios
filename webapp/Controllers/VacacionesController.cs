@@ -44,13 +44,38 @@ namespace webapp.Controllers
         }
 
         [HttpPost]
-        public JsonResult createPeticionVacaciones(Dictionary<string, object> item)
+        public JsonResult getDiasVacacionesCalendario(Dictionary<string, object> item)
         {
             RespGeneric resp = new RespGeneric("KO");
-            resp.msg = validarFecha(item) + verificarFechas(item);
+            resp.msg = verificarDiasRestantesVacaciones(item);
 
             if (string.IsNullOrEmpty(resp.msg))
             {
+                try
+                {
+                    //item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
+                    //item["fecha_final_vacaciones"] = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
+                    resp.d.Add("data", Data.Vacaciones.getDiasCalendario(item));
+                    resp.cod = "OK";
+
+                }
+                catch (Exception ex)
+                {
+                    resp.msg = ex.Message;
+                }
+            }
+
+            return Json(resp);
+        }
+
+        [HttpPost]
+        public JsonResult createPeticionVacaciones(Dictionary<string, object> item)
+        {
+            RespGeneric resp = new RespGeneric();
+            //resp.msg = validarFecha(item) + verificarFechas(item);
+
+            ////if (string.IsNullOrEmpty(resp.msg))
+            ////{
                 try
                 {
                     item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
@@ -62,7 +87,7 @@ namespace webapp.Controllers
                 {
                     resp.msg = ex.Message;
                 }
-            }
+            //}
 
             return Json(resp);
         }

@@ -40,7 +40,7 @@
                                 <top-datepicker ng-model="vm.item.fecha_final_vacaciones"></top-datepicker>
                             </div>
                             <div class="col-sm-4 mt-4 pl-3">
-                                <button type="submit" class="btn btn-success btn-sm">Solicitar</button>
+                                <button type="submit" id="save-event" class="btn btn-success btn-sm">Solicitar</button>
                             </div>
                         </div>
                     </div>
@@ -50,6 +50,6 @@
         </div>
         <div class="card mb-2 w-100 bg-dark border-bottom"></div>
         <!--Calendario-->
-        <div data-provide="calendar"></div>
+        <div id="calendar" data-provide="calendar"></div>
     </div>
 </div>
