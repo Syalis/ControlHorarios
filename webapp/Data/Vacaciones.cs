@@ -35,13 +35,17 @@ namespace webapp.Data
 
         public static List<Dictionary<string, object>> getDiasCalendario(Dictionary<string, object> item)
         {
-            return BD.getQueryResult($@"SELECT v.id, v.id_usuario, 
+            return BD.getQueryResult($@"SELECT v.id, v.id_usuario, day(v.fecha_inicio_vacaciones) as dia_inicio, 
 
-                    date_format( v.fecha_inicio_vacaciones, '%a %b %e %Y %H-%i-%s') as fecha_inicio, 
+                month(v.fecha_inicio_vacaciones) as mes_inicio, year (v.fecha_inicio_vacaciones) as anio_inicio, 
 
-                    date_format( v.fecha_final_vacaciones, '%a %b %e %Y %H-%i-%s') as fecha_final 
+                day(v.fecha_final_vacaciones) as dia_final, 
 
-                    FROM vacaciones v  where v.id_usuario = ?id_usuario",
+                month(v.fecha_final_vacaciones) as mes_final, year (v.fecha_final_vacaciones) as anio_final
+
+                from vacaciones v
+
+                where v.id_usuario = ?id_usuario",
 
                       new Dictionary<string, object>() { { "id_usuario", item["id_usuario"] } });
         }

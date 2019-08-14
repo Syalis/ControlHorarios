@@ -13,7 +13,7 @@ namespace webapp.Controllers
 
 
         /// <summary>
-        /// Método de llamada a la consulta y donde se validan y se parsean los datos
+        /// Método de llamada a la consulta para que nos devuelva cuantos días de vacaciones nos queda
         /// </summary>
         /// <param name="item">párametro donde se recogen la id del usuario y los días de vacaciones</param>
         /// <param name="item">parámetro donde se recogen la fecha de incio y la fecha final</param>
@@ -43,11 +43,16 @@ namespace webapp.Controllers
             return Json(resp);
         }
 
+        /// <summary>
+        /// Método de llamada a la consulta para que nos devuelva tos los registro de vacaciones
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult getDiasVacacionesCalendario(Dictionary<string, object> item)
         {
             RespGeneric resp = new RespGeneric("KO");
-            resp.msg = verificarDiasRestantesVacaciones(item);
+            resp.msg =  verificarDiasRestantesVacaciones(item);
 
             if (string.IsNullOrEmpty(resp.msg))
             {
@@ -71,11 +76,11 @@ namespace webapp.Controllers
         [HttpPost]
         public JsonResult createPeticionVacaciones(Dictionary<string, object> item)
         {
-            RespGeneric resp = new RespGeneric();
-            //resp.msg = validarFecha(item) + verificarFechas(item);
+            RespGeneric resp = new RespGeneric("KO");
+            resp.msg = validarFecha(item) + verificarFechas(item) + verificarDiasRestantesVacaciones(item);
 
-            ////if (string.IsNullOrEmpty(resp.msg))
-            ////{
+            if (string.IsNullOrEmpty(resp.msg))
+            {
                 try
                 {
                     item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
@@ -87,7 +92,13 @@ namespace webapp.Controllers
                 {
                     resp.msg = ex.Message;
                 }
-            //}
+            }
+            else {
+
+                resp.msg = "Petición incorrecta";
+
+            }
+
 
             return Json(resp);
         }
@@ -132,6 +143,7 @@ namespace webapp.Controllers
             RespGeneric resp = new RespGeneric();
             string msg = string.Empty;
 
+
             try
             {
                 if (DateTime.Parse(item["fecha_inicio_vacaciones"].ToString()) > DateTime.Parse(item["fecha_final_vacaciones"].ToString()))
@@ -160,7 +172,7 @@ namespace webapp.Controllers
 
             try
             {
-                if (DateTime.Parse(item["dias_restantes"].ToString()) > DateTime.Parse(diasVacaciones.ToString()))
+                if (int.Parse(item["dias_disfrutados_vacaciones"].ToString()) >= diasVacaciones)
                 {
                     msg = "Los días de vacaciones no pueden sobrepasar los días de vaciones restantes";
                 }
