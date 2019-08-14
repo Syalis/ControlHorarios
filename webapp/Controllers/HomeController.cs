@@ -43,25 +43,12 @@ namespace webapp.Controllers
         {
             return View();
         }
-        //Fin de las vistas
-        [HttpPost]
-        
-        public JsonResult InsertUser(Dictionary<string, object> data)
-          
+        public ActionResult FormularioRegistro()
         {
-
-            try
-            {
-                //enviar email a la direccion email dentro del data
-                Extensiones.sendEmail(to:(Convert.ToString(data["email"])), subject: "Invitacion", body: "link", file: "");
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            return Json(Webapp.Data.Empleados.InsertUser(data));
-           
+            return View();
         }
-    }
-
-}
+   
+ 
+   }
+ }
+ 

@@ -13,7 +13,7 @@ function mainCtrl($scope, $http, $timeout, $window) {
                 $window.sessionStorage.email = r.data.d.email;
                 $window.sessionStorage.isAdmin = r.data.d.isAdmin;
             } else {
-                $window.location.href = "/Account/Login";
+              //$window.location.href = "/Account/Login";
             }
         });
     }

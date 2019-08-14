@@ -34,6 +34,7 @@ namespace webapp.Controllers
             return View();
         }
 
+
         public ActionResult LogOut()
         {
             Session.Clear();
