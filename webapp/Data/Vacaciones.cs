@@ -33,6 +33,19 @@ namespace webapp.Data
             return BD.getInsertQueryResult("insert into vacaciones (id_usuario, fecha_inicio_vacaciones, fecha_final_vacaciones, dias_disfrutados_vacaciones) values (?id_usuario, ?fecha_inicio_vacaciones, ?fecha_final_vacaciones, (datediff(?fecha_final_vacaciones, ?fecha_inicio_vacaciones)))", data);
         }
 
+        public static List<Dictionary<string, object>> getDiasCalendario(Dictionary<string, object> item)
+        {
+            return BD.getQueryResult($@"SELECT v.id, v.id_usuario, 
+
+                    date_format( v.fecha_inicio_vacaciones, '%a %b %e %Y %H-%i-%s') as fecha_inicio, 
+
+                    date_format( v.fecha_final_vacaciones, '%a %b %e %Y %H-%i-%s') as fecha_final 
+
+                    FROM vacaciones v  where v.id_usuario = ?id_usuario",
+
+                      new Dictionary<string, object>() { { "id_usuario", item["id_usuario"] } });
+        }
+
     }
 
   
