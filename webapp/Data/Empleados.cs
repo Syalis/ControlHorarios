@@ -27,7 +27,10 @@ namespace Webapp.Data
         }
 
 
-
+        public static int UpdateUser(Dictionary<string, object> data)
+        {
+            return BD.getNonQueryResult("UPDATE usuarios  SET password = ?ClaveHashed, telefono = ?telefono,validado = '1'  WHERE email = 'Prueba@1122.com' ", data);
+        }
 
     }
 }

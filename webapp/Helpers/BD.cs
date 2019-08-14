@@ -91,17 +91,7 @@ namespace webapp.Helpers
                     }
                     nrows = cmd.ExecuteNonQuery();
                 }
-                if (log)
-                {
-                    using (MySqlCommand cmd = new MySqlCommand("insert into log_general (fecha, usuario, evento) VALUES (now(), ?usuario, ?evento)", con))
-                    {
-                        var frameStack = new StackTrace().GetFrame(1).GetMethod();
-                        cmd.Parameters.AddWithValue("?usuario", HttpContext.Current.Session["usuario"]);
-                        cmd.Parameters.AddWithValue("?evento", $"{frameStack.ReflectedType.Name} - {frameStack.Name} - {query.Substring(0, 6).ToUpper()} - [ {sb.ToString()}]");
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                con.Close();
+                
             }
             return nrows;
         }
@@ -142,7 +132,7 @@ namespace webapp.Helpers
         }
 
         #region SECURITY
-        private const string salt = "RaQKu3Mvc0M=";
+      
         public static bool CheckPassword(string passwordHash, string salt, string pass)
         {
             String hashed = HashPassword(pass, salt);
@@ -156,14 +146,17 @@ namespace webapp.Helpers
         }
 
         public static string HashPassword(string pass, string salt)
+
         {
+
             string SaltYPass;
             string ClaveHashed;
 
             SaltYPass = pass + salt;
             ClaveHashed = CalculateSha1(SaltYPass, System.Text.Encoding.UTF8);
-
+           
             return ClaveHashed;
+            
         }
 
         private static string CalculateSha1(string text, System.Text.Encoding enc)
@@ -171,7 +164,7 @@ namespace webapp.Helpers
             byte[] buffer = enc.GetBytes(text);
             SHA1CryptoServiceProvider cryptoTransformSha1 = new SHA1CryptoServiceProvider();
             string hash = BitConverter.ToString(cryptoTransformSha1.ComputeHash(buffer)).Replace("-", "");
-
+            
             return hash;
         }
 
