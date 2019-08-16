@@ -40,3 +40,10 @@
     border-width: 1px;
     background-color: #b2e3df;
 }
+.odd {
+    color: green;
+}
+
+.even {
+    color: red;
+}

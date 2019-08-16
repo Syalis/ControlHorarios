@@ -169,6 +169,7 @@
             header.append(headerTable);
 
             this.element.append(header);
+
         },
         _renderBody: function () {
             $('.calendar').append("<div id='mes' class='row mx-auto mb-4'></div>");

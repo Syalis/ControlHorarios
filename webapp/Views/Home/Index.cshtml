@@ -15,34 +15,41 @@
             <div id="centralPerfil" class="row m-2 align-items-center pb-3 pt-3">
                 <h2>Fichajes</h2>
                 <div class="text-center mx-auto">
-                <a href="#"  class="btn">
+                <a   class="btn" ng-click="vm.sumarContador()">
                     <i class="fas fa-arrow-circle-left"></i>
                 </a>
                 <span>
-                    <input id="date"  class="text-center" placeholder={{vm.fichajesEmpleado.data[0].mes}} readonly/>
+                    <input id="date"  class="text-center" placeholder={{vm.fichajesMes[0].mes}} readonly/>
                 </span>
-                <a href="#" class="btn">
+                <a  class="btn" ng-click="vm.restarContador()">
                     <i class="fas fa-arrow-circle-right"></i>
                 </a>
                 </div>
-                <button type="button" class="btn btn-primary  ml-auto">Check IN</button>
+                <button id="checkIn" type="button" class="btn btn-success  ml-auto" ng-click="vm.empleadoCheckIn()">Check IN</button>
+                <button id="checkOut" type="button" class="btn btn-danger  ml-1"  ng-click="vm.empleadoCheckOut()" >Check Out</button>
                 
             </div>
             
             <div id="centralDatos" class="row m-2">
                 <h2>Jornadas</h2>
-                <div class="container" ng-repeat="x in vm.fichajesEmpleado.data">
-                    <label>{{x.fecha}}</label>
-                    <div class="progress">
-                        <a class="progress-bar" data-toggle="collapse" href="#horaFichajes" role="button" aria-expanded="false"  aria-controls="multiCollapseExample1" style="width:{{x.porcentaje}}"></a>
+                <div class="container" ng-repeat="x in vm.fichajesTotales">
+                    <div class="row">
+                        <label class="ml-3 font-weight-bold">{{x.fecha}}</label>
+                        <label class="ml-auto mr-3 font-weight-bold">Tiempo transcurrido: {{x.computado}}</label>
+                    </div>
+                    
+                    <div class="progress mb-2">
+                        <button class="btn progress-bar progress-bar-striped bg-success progress-bar-animated"  type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="width:{{x.porcentaje}}"><span class="mx-auto">{{x.porcentaje}}</span></button>
                     </div> 
-                    <div id="HoraFichajes"  class="collapse multi-collapse">
-                        <ul>
-                            <li class="font-weight-bold">Check In:{{x.hora_entrada}}</li>
-                            <li class="font-weight-bold">Check Out:{{x.hora_salida}}</li>
-                        </ul>
+                    <div id="collapseExample" class="collapse multi-collapse">
+                        <table class="table table-hover">
+                            <tr ng-repeat="a in x.horas track by $index">
 
-                        
+                                <td class="font-weight-bold" ng-show="a!=0"><span ng-class-odd="'odd'" ng-class-even="'even'"><i class="far fa-clock mr-2"></i>{{a}}</span></td>
+                            </tr>
+                        </table>
+
+
                     </div>
                 </div>
 

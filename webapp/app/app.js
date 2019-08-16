@@ -21,6 +21,7 @@
         'datetime',
         'ui.mask',
         'angular-ladda',            // Angular-ladda (Loading Buttons)
+       
     ]).constant('APP_CONFIG', {
         TPL_VERSION: 14.534534534
     });
