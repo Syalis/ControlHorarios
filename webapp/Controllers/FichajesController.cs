@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using webapp.Models;
+using webapp.Helpers;
 
 namespace webapp.Controllers
 {
     //Controllador de los metodos para los fichajes de empleados
     public class FichajesController : Controller
     {
-        //Metodo para iniciar la carga de fichajes hasta el momento del empleado en el mes actual por su id
+        //Metodo para iniciar la carga de fichajes hasta el momento del empleado en el mes actual por su id+comprobacion del boton de check
         [HttpPost]
         public JsonResult getInicioFichajes(int id)
         {
@@ -21,7 +22,17 @@ namespace webapp.Controllers
             {
                 try
                 {
-                    resp.d.Add("data", Data.Fichajes.getInicioFichajes(id));
+                    //Comprobacion del estado del boton+fichajes del mes en curso+totales de horas
+                    resp.d.Add("boton", Data.Fichajes.getEstadoBoton(id));
+                    resp.d.Add("fichajesTotales", Data.Fichajes.getTotalesFichajes(id));
+                    var fichajes = Data.Fichajes.getMesFichajes(id);
+                    foreach (var a in fichajes)
+                    {
+                       a["horas"]= a["horas"].ToString().Split(',').ToArray();
+                    }
+
+
+                    resp.d.Add("mesFichajes", fichajes);
                     resp.cod = "OK";
                     resp.msg = "Exito en la petición";
                 }
@@ -44,97 +55,152 @@ namespace webapp.Controllers
             return msg;
         }
 
+        //Metodo para hacer CheckIn
+
+        [HttpPost]
+        public JsonResult CheckIn(Dictionary<string, object> checkIn)
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            resp.msg = validarCheckIn(checkIn);
+            if (string.IsNullOrEmpty(resp.msg))
+            {
+                try
+                {
+                    resp.d.Add("data", Data.Fichajes.CheckIn(checkIn));
+                    resp.cod = "OK";
+                    resp.msg = "Exito en la petición";
+                }
+                catch (Exception e)
+                {
+                    resp.msg = e.Message;
+                }
+            }
+            return Json(resp);
 
 
+        }
 
 
+        //Metodo para hacer CheckOut
+        [HttpPost]
+        public JsonResult CheckOut(Dictionary<string, object> checkOut)
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            resp.msg = validarCheckOut(checkOut);
+            if (string.IsNullOrEmpty(resp.msg))
+            {
+                try
+                {
+                    resp.d.Add("data", Data.Fichajes.CheckOut(checkOut));
+                    resp.cod = "OK";
+                    resp.msg = "Exito en la petición";
+                }
+                catch (Exception e)
+                {
+                    resp.msg = e.Message;
+                }
+            }
+            return Json(resp);
 
 
+        }
 
 
+        //Metodo para validar el id_usuario en el checkin
+        public string validarCheckIn(Dictionary<string,object> checkIn)
+        {
+            string msg = string.Empty;
+            if(!Util.hasValidValue(checkIn, "id_usuario", "int"))
+            {
+                msg = "La id de usuario es necesaria";
+            }
+            return msg;
+        }
+        //Metodo para validar el id_usuario en el checkout
+        public string validarCheckOut(Dictionary<string, object> checkOut)
+        {
+            string msg = string.Empty;
+            if (!Util.hasValidValue(checkOut, "id_usuario", "int"))
+            {
+                msg = "La id de usuario es necesaria";
+            }
+            return msg;
+        }
+        //Metodo para obtener fichajes mes inferior al actual
+        public JsonResult mesResta(int id, int nMes)
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            resp.msg = validarIntEmpleado(id);
 
+            if (string.IsNullOrEmpty(resp.msg))
+            {
+                try
+                {
+                    //Comprobacion del estado del boton+fichajes del mes en curso+totales de horas
+                    resp.d.Add("boton", Data.Fichajes.getEstadoBoton(id));
+                    resp.d.Add("fichajesTotalesResta", Data.Fichajes.getTotalesFichajesResta(id, nMes));
+                    var fichajes = Data.Fichajes.mesResta(id, nMes);
+                    foreach (var a in fichajes)
+                    {
+                        a["horas"] = a["horas"].ToString().Split(',').ToArray();
+                    }
 
-
-
-
-
-
-        //// GET: Fichajes
-        //public ActionResult Index()
+                    resp.d.Add("mesFichajesResta", fichajes);
+                    resp.cod = "OK";
+                    resp.msg = "Exito en la petición";
+                }
+                catch (Exception e)
+                {
+                    resp.msg = e.Message;
+                }
+            }
+            return Json(resp);
+        }
+        //Metodo para obtener fichajes mes superior al actual
+        //public JsonResult mesSuma(int id, int nMes)
         //{
-        //    return View();
-        //}
+        //    RespGeneric resp = new RespGeneric("KO");
+        //    resp.msg = validarIntEmpleado(id);
 
-        //// GET: Fichajes/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
-
-        //// GET: Fichajes/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Fichajes/Create
-        //[HttpPost]
-        //public ActionResult Create(FormCollection collection)
-        //{
-        //    try
+        //    if (string.IsNullOrEmpty(resp.msg))
         //    {
-        //        // TODO: Add insert logic here
+        //        try
+        //        {
+        //            //Comprobacion del estado del boton+fichajes del mes en curso+totales de horas
+        //            resp.d.Add("boton", Data.Fichajes.getEstadoBoton(id));
+        //            resp.d.Add("fichajesTotalesSuma", Data.Fichajes.getTotalesFichajesSuma(id, nMes));
+        //            var fichajes = Data.Fichajes.mesSuma(id, nMes);
+        //            foreach (var a in fichajes)
+        //            {
+        //                a["horas"] = a["horas"].ToString().Split(',').ToArray();
+        //            }
 
-        //        return RedirectToAction("Index");
+        //            resp.d.Add("mesFichajesSuma", fichajes);
+        //            resp.cod = "OK";
+        //            resp.msg = "Exito en la petición";
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            resp.msg = e.Message;
+        //        }
         //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
+        //    return Json(resp);
         //}
 
-        //// GET: Fichajes/Edit/5
-        //public ActionResult Edit(int id)
+        //Metodo para validar el mes y convertirlo a valor absoluto
+        //public string ConvertirMes(int nMes)
         //{
-        //    return View();
+        //    string msg = string.Empty;
+        //    if(nMes < 0)
+        //    {
+        //        nMes = ((-1)*(nMes));
+        //    }
+            
+        //    return msg;
         //}
 
-        //// POST: Fichajes/Edit/5
-        //[HttpPost]
-        //public ActionResult Edit(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
 
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
 
-        //// GET: Fichajes/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
 
-        //// POST: Fichajes/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
     }
 }
