@@ -1,6 +1,6 @@
-﻿angular.module('webapp').controller('vacacionesCtrl', ["$scope", "$http", "$window", vacacionesCtrl]);
+﻿angular.module('webapp').controller('vacacionesCtrl', ["$scope", "$http", "$window",'auxVacacionesCtrl', vacacionesCtrl]);
 
-function vacacionesCtrl($scope, $http, $window) {
+function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
 
     var vm = this;
     vm.lista = { data: [] };
@@ -16,11 +16,18 @@ function vacacionesCtrl($scope, $http, $window) {
     diasRestantesVacaciones();
     calendario();
 
+    vm.item = [];
     vm.dataSource = [];
     vm.diasVacaciones = [];
     vm.vacacionesCalendario = [];
     vm.vacacionesBD = [];
-  
+
+    //$(document).ready(function () {
+    //    $("save-event").show();
+
+    //});
+
+
     // Método para saber cúantos días restatntes nos queda de vacaciones
     function diasRestantesVacaciones() {
         try {
@@ -33,11 +40,16 @@ function vacacionesCtrl($scope, $http, $window) {
                 if (r.data.cod == "OK") {
                     vm.diasVacaciones = r.data.d.data;
                     console.log(r.data);
+                    //if (vm.diasVacaciones[0].total_vacaciones == 0) {
+                    //    $("#save-event").hide();
+                    //}
                 } else {
                     console.log("Error");
                 }
-               
+
+                
             });
+           
         } catch (ex) {
             return ex.message;
         }
@@ -70,13 +82,7 @@ function vacacionesCtrl($scope, $http, $window) {
     // Método para enviar a la BBDD los dias de que nos vamos de vacaciones
     function peticionVacaciones(item) {
         console.log(item);
-        var fechaini = new Date(vm.item.fecha_inicio_vacaciones);
-        var fechafin = new Date(vm.item.fecha_final_vacaciones);
-        var diasdif = fechafin.getTime() - fechaini.getTime();
-       
-        console.log(diasdif);
-      
-        
+
         if (vm.item.fecha_inicio_vacaciones != null && vm.item.fecha_final_vacaciones != null) {
             $http.post("Vacaciones/createPeticionVacaciones", {
                 item:
@@ -91,19 +97,30 @@ function vacacionesCtrl($scope, $http, $window) {
                     diasRestantesVacaciones();
                     calendario();
                     eventoCalendario();
+                    //auxVacacionesCtrl.consultaCorrecta();
+                    vm.item = {};
                 } else {
-                    toastr.error("error");
+                    vm.item = {};
+                    //auxVacacionesCtrl.consultaInCorrecta();
 
                 }
             });
         } else {
-            Swal.fire({
-                type: 'error',
-                title: r.data.msg,
-                text: 'Error',
 
-            })
+            auxVacacionesCtrl.validarFecha();
         }
+    }
+
+    function resetearDiasVacaciones() {
+
+        var currentYear = new Date().getFullYear();
+
+        $('#calendar').calendar({
+
+            
+
+        });
+
     }
 
     // Método para pintar los días que nos vamos de vacaciones

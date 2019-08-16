@@ -30,7 +30,7 @@ namespace webapp.Data
  
         public static int create(Dictionary<string, object> data) {
 
-            return BD.getInsertQueryResult("insert into vacaciones (id_usuario, fecha_inicio_vacaciones, fecha_final_vacaciones, dias_disfrutados_vacaciones) values (?id_usuario, ?fecha_inicio_vacaciones, ?fecha_final_vacaciones, (datediff(?fecha_final_vacaciones, ?fecha_inicio_vacaciones)))", data);
+            return BD.getInsertQueryResult("insert into vacaciones (id_usuario, fecha_inicio_vacaciones, fecha_final_vacaciones, dias_disfrutados_vacaciones) values (?id_usuario, ?fecha_inicio_vacaciones, ?fecha_final_vacaciones, (datediff(?fecha_final_vacaciones, ?fecha_inicio_vacaciones) + 1))", data);
         }
 
         public static List<Dictionary<string, object>> getDiasCalendario(Dictionary<string, object> item)

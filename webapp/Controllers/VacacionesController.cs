@@ -22,7 +22,7 @@ namespace webapp.Controllers
         public JsonResult getDiasVacaciones(Dictionary<string, object> item)
         {
             RespGeneric resp = new RespGeneric("KO");
-            resp.msg = verificarDiasRestantesVacaciones(item);
+           
 
             if (string.IsNullOrEmpty(resp.msg))
             {
@@ -52,8 +52,7 @@ namespace webapp.Controllers
         public JsonResult getDiasVacacionesCalendario(Dictionary<string, object> item)
         {
             RespGeneric resp = new RespGeneric("KO");
-            resp.msg =  verificarDiasRestantesVacaciones(item);
-
+   
             if (string.IsNullOrEmpty(resp.msg))
             {
                 try
@@ -77,16 +76,43 @@ namespace webapp.Controllers
         public JsonResult createPeticionVacaciones(Dictionary<string, object> item)
         {
             RespGeneric resp = new RespGeneric("KO");
-            resp.msg = validarFecha(item) + verificarFechas(item) + verificarDiasRestantesVacaciones(item);
+            resp.msg = validarFecha(item) + verificarFechas(item); ;
 
+            
             if (string.IsNullOrEmpty(resp.msg))
             {
+                var fecha1 = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
+                var fecha2 = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
+
+                TimeSpan dif = fecha2 - fecha1;
+
+                int dias = dif.Days;
+                var d = dias + 1;
+                var a = Data.Vacaciones.getDiasTotalVacaciones(item);
+
+                foreach (var x in a)
+                {
+                    x["total_vacaciones"].ToString();
+                }
+
+                var b = Convert.ToInt32(a[0]["total_vacaciones"].ToString());
+
+              
+
                 try
                 {
-                    item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
-                    item["fecha_final_vacaciones"] = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
-                    resp.d.Add("data", Data.Vacaciones.create(item));
-                    resp.cod = "OK";
+                    if (b >= d)
+                    {
+                        item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
+                        item["fecha_final_vacaciones"] = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
+                        resp.d.Add("data", Data.Vacaciones.create(item));
+                        resp.cod = "OK";
+                        resp.msg = "El intervalo de fechas introducidas no supera a tus días de vacaciones";
+                    }
+                    else {
+                        resp.msg = "Error";
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -164,26 +190,52 @@ namespace webapp.Controllers
         /// </summary>
         /// <param name="item"></param>
         /// <returns>Mensaje de error si los dias de vaciones excede de los dias de vaciones restantes</returns>
-        public string verificarDiasRestantesVacaciones(Dictionary<string, object> item)
-        {
-            RespGeneric resp = new RespGeneric();
-            string msg = string.Empty;
-            const int diasVacaciones = 30;
+    //    public string verificarDiasRestantesVacaciones(Dictionary<string, object> item)
+    //    {
+    //        RespGeneric resp = new RespGeneric();
+    //        string msg = string.Empty;
+     
+             
 
-            try
-            {
-                if (int.Parse(item["dias_disfrutados_vacaciones"].ToString()) >= diasVacaciones)
-                {
-                    msg = "Los días de vacaciones no pueden sobrepasar los días de vaciones restantes";
-                }
-            }
-            catch (Exception ex)
-            {
-                resp.msg = ex.Message;
-            }
+    //        try
+    //        {
+    //            var fecha1 = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
+    //            var fecha2 = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
 
-            return msg;
-        }
+    //            TimeSpan dif = fecha2 - fecha1;
+
+    //            int dias = dif.Days;
+    //            var a = Data.Vacaciones.getDiasTotalVacaciones(item);
+
+    //            foreach (var x in a)
+    //            {
+    //                x["total_vacaciones"].ToString();
+    //            }
+    //            var b = Convert.ToInt32(a[0]["total_vacaciones"].ToString());
+
+    //            if (b == 0)
+    //            {
+    //                b = 30;
+    //            }
+                
+
+    //            if ((dias +1) <= b) {
+
+    //                msg = "El intervalo de fechas introducidas no supera a tus días de vacaciones";
+
+    //            }
+    //            else {
+    //                msg = "El intervalo de fechas introducidas supera a tus días de vacaciones";
+    //            }
+
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            resp.msg = ex.Message;
+    //        }
+
+    //        return msg;
+    //    }
 
     }
 }
