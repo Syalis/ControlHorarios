@@ -12,15 +12,31 @@ function EmpleadosCtrl($scope, $http, $window, $location, $document) {
 
     vm.datosUser = {};
     function InsertUser() {
-        $http.post("CreateUser/InsertUser", { data: vm.datosUser }).then(function (r) { console.log(vm.datosUser) });
+        $http.post("CreateUser/InsertUser", { data: vm.datosUser }).then(function (resp) {
+            var respuesta = resp.data;
 
+         
+            if (respuesta.cod == "OK") {
+                toastr.success("ususario creado");          
+            }
+            else
+                toastr.error(respuesta.msg);
+        });
     }
 
     vm.UpdateUser = UpdateUser;
     vm.UpadateUserDatos = {};
     function UpdateUser() {
-        $http.post("CreateUser/UpdateUser", { data: vm.UpadateUserDatos }).then(function (r) { console.log(vm.UpadateUserDatos) });
-       
+        $http.post("CreateUser/UpdateUser", { data: vm.UpadateUserDatos }).then(function (r) {
+            var respuesta = resp.data;
+
+
+            if (respuesta.cod == "OK") {
+                toastr.success("ususario creado");
+            }
+            else
+                toastr.error(respuesta.msg);
+        });
     }
 
 

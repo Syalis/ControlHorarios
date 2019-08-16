@@ -89,28 +89,11 @@
             </div>
             <form class="m-2" ng-submit="vm.InsertUser()">
                 <div class="form-row  mr-2 ml-2 ">
-                    <div class="col-md-6 mb-2">
-                        <label class="font-weight-bold">Nombre</label>
-                        <input type="text" class="form-control" ng-model="vm.datosUser.nombre" placeholder="Nombre" required>
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <label class="font-weight-bold">Apellidos</label>
-                        <input type="text" class="form-control"  ng-model="vm.datosUser.primer_apellido" placeholder="Primer Apellido" required>
-                    </div>
-
-                </div>
-                <div class="form-row  mr-2 ml-2">
-                    <div class="col-md-6 mb-3">
-                        <label class="font-weight-bold">Segundo Apellido</label>
-                        <div class="input-group">
-
-                            <input type="text" class="form-control"ng-model="vm.datosUser.segundo_apellido" placeholder="Segundo Apellido" required>
-
-                        </div>
+                   
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="font-weight-bold">Email</label>
-                        <input type="text" class="form-control"ng-model="vm.datosUser.email" placeholder="Email" required>
+                        <input type="text" class="form-control" ng-model="vm.datosUser.email" placeholder="Email" required>
 
                     </div>
 
@@ -120,7 +103,10 @@
 
                     </div>
                     <div class="my-auto pt-2 ml-auto mr-1">
-                        <button class="btn btn-primary  " type="submit">Enviar Invitacion</button>
+                        <button class="btn btn-primary" type="submit">Enviar Invitacion</button>
+                    </div>
+                    <div class="my-auto pt-2 ml-auto mr-1">
+                        <button class="btn btn-primary"  data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
                 

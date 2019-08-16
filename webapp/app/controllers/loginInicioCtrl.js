@@ -75,6 +75,7 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
                         if (newUrl == undefined) {
                             $window.location.href = webroot + response.data.d.url;
                         } else {
+                            swal({ title: 'Oops...', text: response.data.msg, type: 'error' });
                             $window.location.href = webroot;
                         }
 
@@ -82,6 +83,7 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
                         vm.loading = false;
                         swal({ title: 'Oops...', text: response.data.msg, type: 'error' });
                     }
+          
                 });
         }
     }
