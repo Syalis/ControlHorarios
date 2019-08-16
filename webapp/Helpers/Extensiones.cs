@@ -217,13 +217,8 @@ namespace webapp.Helpers
                 }
                 email.From = new MailAddress("alertas@topgestion.es");
                 email.Subject = subject;
-                
-                Attachment tdAt = new Attachment(HostingEnvironment.MapPath("~/docs/td.png"),"image/png");
-                email.Attachments.Add(tdAt);
-                
-                Attachment isoAt = new Attachment(HostingEnvironment.MapPath("~/docs/iso.jpg"), MediaTypeNames.Image.Jpeg);
-                email.Attachments.Add(isoAt);
-                email.Body = String.Format(body,tdAt.ContentId,isoAt.ContentId);
+             
+                email.Body = String.Format(body);
                 email.IsBodyHtml = true;
                 email.Priority = MailPriority.Normal;
                 if (!file.IsEmpty())
@@ -234,7 +229,6 @@ namespace webapp.Helpers
                     inline.ContentType.MediaType = "file/pdf";
                     inline.ContentType.Name = Path.GetFileName(file);
 
-                    email.Attachments.Add(inline);
                 }
                 
                 SmtpClient smtp = new SmtpClient();

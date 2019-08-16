@@ -43,6 +43,12 @@ namespace webapp.Controllers
         {
             return View();
         }
-        //Fin de las vistas
-    }
-}
+        public ActionResult FormularioRegistro()
+        {
+            return View();
+        }
+   
+ 
+   }
+ }
+ 

@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "FormularioRegistro";
+}
+
+<div class="row h-100">
+    <div id="aside" class="col-2 p-0 m-0 bg-dark">
+        @Html.Partial("lateral")
+    </div>
+    <br />
+    <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
+        <div class="container" ng-controller="EmpleadosCtrl as vm">
+            <h2>Formulario registro nuevos Usuarios </h2>
+            <br /><br />
+                  <form ng-submit="vm.UpdateUser()">
+                           
+                      <div class="form-group">
+                          <label class="alinear">Contraseña</label>
+                          <input type="password" class="form-control"  placeholder="Contraseña" name="Contraseña"  ng-model="vm.UpadateUserDatos.pass" required><br />
+                          <label class="alinear"> Repetir contraseña</label>
+                          <input type="password" class="form-control"  placeholder="repetir contraseña" name="RContraseña"  required>
+                      </div>
+                      <div class="form-group">
+                          <input  type="text"  placeholder="Telefono " name="Telefono "  ng-model="vm.UpadateUserDatos.telefono"required/>
+                      </div>
+                      <div class="form-group">
+                          <input  type="checkbox" name="aceptar" required>Acepto las condiciones y terminos.
+                     </div>
+                      <button type="submit" class="btn btn-primary">Registrar</button>
+                  </form>
+                </div>
+              
+        </div>
+    <a href="~/Views/Home/FormularioRegistro"></a>
+
+
+    </div>
+
+
+
