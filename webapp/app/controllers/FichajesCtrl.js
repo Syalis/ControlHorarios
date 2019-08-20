@@ -74,7 +74,7 @@ function FichajesCtrl($scope, $http, $window) {
     function empleadoCheckIn() {
     $http.post("Fichajes/CheckIn", {
           checkIn: {
-            id_usuario: vm.session.id
+              id_usuario: vm.session.id
             }
           }).then(function (r) {
              getDatosInicioFichajes();
