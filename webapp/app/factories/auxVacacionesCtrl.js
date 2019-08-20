@@ -21,8 +21,8 @@
             try {
                 Swal.fire({
                     position: 'top-end',
-                    type: 'success',
-                    title: 'Petición correta!',
+                    type: 'error',
+                    title: 'Petición incorreta!',
                     showConfirmButton: false,
                     timer: 1700
                 })
@@ -41,8 +41,22 @@
                 text: 'Revisa los campos de las fechas!'
             })
 
+        },
+        peticionVacacionesAceptada: function () {
+            try {
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Vacaciones aceptadas!',
+                    showConfirmButton: false,
+                    timer: 1700
+                })
 
-        }
+            } catch (ex) {
+                return ex.message;
+            }
+
+        },
     }
 
 

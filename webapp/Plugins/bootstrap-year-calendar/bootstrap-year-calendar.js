@@ -95,36 +95,46 @@
             var prevDiv = $(document.createElement('th'));
             prevDiv.addClass('prev');
 
-            if (this.options.minDate != null && this.options.minDate > new Date(this.options.startYear - 1, 11, 31)) {
-                prevDiv.addClass('disabled');
-            }
+            //prevDiv = prevDiv.addEvent('click', myFunction);
+
+            //function myFunction() {
+
+            
+            //    yearDiv = new Date().getFullYear()-1;
+                
+         
+            //    console.log(yearDiv);
+
+            //}
 
             var prevIcon = $(document.createElement('span'));
-            prevIcon.addClass('glyphicon glyphicon-chevron-left');
+            prevIcon.addClass('fas fa-arrow-left');
+
+            
 
             prevDiv.append(prevIcon);
 
             headerTable.append(prevDiv);
 
-            var prev2YearDiv = $(document.createElement('th'));
-            prev2YearDiv.addClass('year-title year-neighbor2 hidden-sm hidden-xs');
-            prev2YearDiv.text(this.options.startYear - 2);
+            //var prev2YearDiv = $(document.createElement('th'));
+            //prev2YearDiv.addClass('year-title year-neighbor2 hidden-sm hidden-xs');
+            //prev2YearDiv.text(this.options.startYear - 2);
 
-            if (this.options.minDate != null && this.options.minDate > new Date(this.options.startYear - 2, 11, 31)) {
-                prev2YearDiv.addClass('disabled');
-            }
+            //if (this.options.minDate != null && this.options.minDate > new Date(this.options.startYear - 2, 11, 31)) {
+            //    prev2YearDiv.addClass('disabled');
+            //}
 
-            headerTable.append(prev2YearDiv);
+            //headerTable.append(prev2YearDiv);
 
-            var prevYearDiv = $(document.createElement('th'));
-            prevYearDiv.addClass('year-title year-neighbor hidden-xs');
-            prevYearDiv.text(this.options.startYear - 1);
+            //var prevYearDiv = $(document.createElement('th'));
+            //prevYearDiv.addClass('year-title year-neighbor hidden-xs');
+            //prevYearDiv.text(this.options.startYear - 1);
 
-            if (this.options.minDate != null && this.options.minDate > new Date(this.options.startYear - 1, 11, 31)) {
-                prevYearDiv.addClass('disabled');
-            }
+            //if (this.options.minDate != null && this.options.minDate > new Date(this.options.startYear - 1, 11, 31)) {
+            //    prevYearDiv.addClass('disabled');
+            //}
 
-            headerTable.append(prevYearDiv);
+            //headerTable.append(prevYearDiv);
 
             var yearDiv = $(document.createElement('th'));
             yearDiv.addClass('year-title');
@@ -132,35 +142,35 @@
 
             headerTable.append(yearDiv);
 
-            var nextYearDiv = $(document.createElement('th'));
-            nextYearDiv.addClass('year-title year-neighbor hidden-xs');
-            nextYearDiv.text(this.options.startYear + 1);
+            //var nextYearDiv = $(document.createElement('th'));
+            //nextYearDiv.addClass('year-title year-neighbor hidden-xs');
+            //nextYearDiv.text(this.options.startYear + 1);
 
-            if (this.options.maxDate != null && this.options.maxDate < new Date(this.options.startYear + 1, 0, 1)) {
-                nextYearDiv.addClass('disabled');
-            }
+            //if (this.options.maxDate != null && this.options.maxDate < new Date(this.options.startYear + 1, 0, 1)) {
+            //    nextYearDiv.addClass('disabled');
+            //}
 
-            headerTable.append(nextYearDiv);
+            //headerTable.append(nextYearDiv);
 
-            var next2YearDiv = $(document.createElement('th'));
-            next2YearDiv.addClass('year-title year-neighbor2 hidden-sm hidden-xs');
-            next2YearDiv.text(this.options.startYear + 2);
+            //var next2YearDiv = $(document.createElement('th'));
+            //next2YearDiv.addClass('year-title year-neighbor2 hidden-sm hidden-xs');
+            //next2YearDiv.text(this.options.startYear + 2);
 
-            if (this.options.maxDate != null && this.options.maxDate < new Date(this.options.startYear + 2, 0, 1)) {
-                next2YearDiv.addClass('disabled');
-            }
+            //if (this.options.maxDate != null && this.options.maxDate < new Date(this.options.startYear + 2, 0, 1)) {
+            //    next2YearDiv.addClass('disabled');
+            //}
 
-            headerTable.append(next2YearDiv);
+            //headerTable.append(next2YearDiv);
 
             var nextDiv = $(document.createElement('th'));
             nextDiv.addClass('next');
 
-            if (this.options.maxDate != null && this.options.maxDate < new Date(this.options.startYear + 1, 0, 1)) {
-                nextDiv.addClass('disabled');
-            }
+            //if (this.options.maxDate != null && this.options.maxDate < new Date(this.options.startYear + 1, 0, 1)) {
+            //    nextDiv.addClass('disabled');
+            //}
 
             var nextIcon = $(document.createElement('span'));
-            nextIcon.addClass('glyphicon glyphicon-chevron-right');
+            nextIcon.addClass('fas fa-arrow-right');
 
             nextDiv.append(nextIcon);
 
