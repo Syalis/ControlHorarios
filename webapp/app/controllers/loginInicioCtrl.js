@@ -30,7 +30,7 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
     //////////////////////////////
 
     //INIT
-    $window.sessionStorage.clear();
+
     //////////////////////////////
 
     //Estilo
@@ -70,6 +70,19 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
           
                 });
         }
+    }
+    vm.forgotPass = forgotPass;
+    function forgotPass() {
+        $http.post("Account/LoginUser", { pass: vm.forgotPass })
+            .then(function (r) {
+                if (response.data.cod === "OK") {
+
+                }
+                else {
+
+                }
+
+            });
     }
 }
 

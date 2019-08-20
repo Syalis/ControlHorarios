@@ -30,7 +30,7 @@ namespace webapp.Controllers
                         if (Webapp.Data.Empleados.getByEmail(data["email"].ToString()) == null)
                         {
 
-                            //funcion que genera un codigo alfanumerico aleatorio e irrepetible
+                            //funcion que genera un codigo alfanumerico aleatorio e irrepetib
                             int longitud = 7;
                             Guid miGuid = Guid.NewGuid();
                             string token = Convert.ToBase64String(miGuid.ToByteArray());

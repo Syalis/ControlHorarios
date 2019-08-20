@@ -32,7 +32,7 @@
                 <br><br><div ng-show="vm.visible">
                     <h5>Introduce tu email para que te enviemos un enlace</h5>
                     <br />
-                    <input type="text" id="Email" class="fadeIn third" name="Email" placeholder="Email">
+                    <input type="text" id="Email" class="fadeIn third"  placeholder="Email" ng-model="vm.forgotpass">
 
                     <input ng-click="vm.Enviar()" type="submit" class="btn btn-outline-secondary" value="restablecer">
                 </div>
