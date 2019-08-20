@@ -1,6 +1,6 @@
-﻿angular.module('webapp').controller('vacacionesCtrl', ["$scope", "$http", "$window",'auxVacacionesCtrl', vacacionesCtrl]);
+﻿angular.module('webapp').controller('vacacionesCtrl', ["$scope", "$http", "$window", vacacionesCtrl]);
 
-function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
+function vacacionesCtrl($scope, $http, $window) {
 
     var vm = this;
     vm.lista = { data: [] };
@@ -12,21 +12,15 @@ function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
     vm.diasRestantesVacaciones = diasRestantesVacaciones
     vm.eventoCalendario = eventoCalendario;
 
-    // Método que se inicia al recargar la página. 
-    diasRestantesVacaciones();
-    calendario();
-
     vm.item = [];
-    vm.dataSource = [];
+    vm.eventos = [];
     vm.diasVacaciones = [];
     vm.vacacionesCalendario = [];
     vm.vacacionesBD = [];
 
-    //$(document).ready(function () {
-    //    $("save-event").show();
-
-    //});
-
+    // Método que se inicia al iniciar la página. 
+    diasRestantesVacaciones();
+    calendario();
 
     // Método para saber cúantos días restatntes nos queda de vacaciones
     function diasRestantesVacaciones() {
@@ -40,14 +34,9 @@ function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
                 if (r.data.cod == "OK") {
                     vm.diasVacaciones = r.data.d.data;
                     console.log(r.data);
-                    //if (vm.diasVacaciones[0].total_vacaciones == 0) {
-                    //    $("#save-event").hide();
-                    //}
                 } else {
                     console.log("Error");
                 }
-
-                
             });
            
         } catch (ex) {
@@ -68,7 +57,7 @@ function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
                     vm.vacacionesCalendario = r.data.d.data;
                     eventoCalendario();
                     console.log(r.data);
-
+                    
                 } else {
                     console.log("Error");
                 }
@@ -97,31 +86,35 @@ function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
                     diasRestantesVacaciones();
                     calendario();
                     eventoCalendario();
-                    //auxVacacionesCtrl.consultaCorrecta();
+                    Swal.fire({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Petición correta!',
+                        footer: 'Vacaciones aceptadas!',
+                        showConfirmButton: false,
+                        timer: 1700
+                    })
                     vm.item = {};
                 } else {
                     vm.item = {};
-                    //auxVacacionesCtrl.consultaInCorrecta();
+                    Swal.fire({
+                        position: 'top-end',
+                        type: 'error',
+                        title: 'Petición incorreta!',
+                        showConfirmButton: false,
+                        timer: 1700
+                    })
 
                 }
             });
         } else {
-
-            auxVacacionesCtrl.validarFecha();
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...Fechas erroreas!',
+                text: 'Revisa los campos de las fechas!'
+            })
         }
     }
-
-    //function resetearDiasVacaciones() {
-
-    //    var currentYear = new Date().getFullYear();
-
-    //    $('#calendar').calendar({
-
-            
-
-    //    });
-
-    //}
 
     // Método para pintar los días que nos vamos de vacaciones
     function eventoCalendario() {
@@ -129,23 +122,21 @@ function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
         var currentYear = new Date().getFullYear();
 
         for (var i = 0; i < vm.vacacionesCalendario.length; i++) {
-            
-                var event = {
-                    id: vm.vacacionesCalendario[i].id,
-                    startDate: new Date(currentYear, (vm.vacacionesCalendario[i].mes_inicio -1), vm.vacacionesCalendario[i].dia_inicio ),
-                    endDate: new Date(currentYear, (vm.vacacionesCalendario[i].mes_final -1), vm.vacacionesCalendario[i].dia_final)
-                }
-           
-            vm.dataSource[i] = event;
-           
+
+            var event = {
+                id: vm.vacacionesCalendario[i].id,
+                startDate: new Date(currentYear, (vm.vacacionesCalendario[i].mes_inicio - 1), vm.vacacionesCalendario[i].dia_inicio),
+                endDate: new Date(currentYear, (vm.vacacionesCalendario[i].mes_final - 1), vm.vacacionesCalendario[i].dia_final)
+            }
+
+            vm.eventos[i] = event;
         }
    
         vm.dataSource = $('#calendar').data('calendar').getDataSource();
 
-        $('#calendar').data('calendar').setDataSource(vm.dataSource);
+        $('#calendar').data('calendar').setDataSource(vm.eventos);
 
-        console.log(vm.dataSource);
-
+        console.log(vm.eventos);
 
     }
 
@@ -154,7 +145,7 @@ function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
 
         $('#calendar').calendar({
 
-            dataSource:  vm.dataSource
+            dataSource: vm.eventos
                 
         });
        
