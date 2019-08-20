@@ -3,9 +3,9 @@
     ViewBag.Title = "lateral";
 }
 
-    <nav id="aside" class="navbar bg-dark text-white">
+    <nav id="aside" class="navbar bg-dark text-white" ng-controller="lateralCtrl as vm">
 
-        <div  class="col-12 mx-auto mb-3 mt-2 rounded" isteven-multi-select input-model="" output-model="" button-label="" item-label="" tick-property="ticked" max-labels="1" selection-mode="single"></div>
+        <div  class="col-12 mx-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown.data" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single"></div>
         
         <p class="w-100 m-0">
             <strong>Acciones</strong>
