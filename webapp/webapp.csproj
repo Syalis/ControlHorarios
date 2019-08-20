@@ -222,12 +222,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BDController.cs" />
     <Compile Include="Controllers\CreateUserController.cs" />
+    <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
+    <Compile Include="Controllers\EmpleadosTablaController.cs" />
     <Compile Include="Controllers\FichajesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\lateralController.cs" />
     <Compile Include="Controllers\VacacionesController.cs" />
+    <Compile Include="Data\Departamentos.cs" />
     <Compile Include="Data\Empleados.cs" />
+    <Compile Include="Data\EmpleadosTabla.cs" />
     <Compile Include="Data\Fichajes.cs" />
     <Compile Include="Data\lateral.cs" />
     <Compile Include="Data\Vacaciones.cs" />
@@ -255,6 +259,7 @@
     <Content Include="app\components\webapp-loader\webapp-loader.html" />
     <Content Include="app\components\webapp-loader\webapp-loader.js" />
     <Content Include="app\config.js" />
+    <Content Include="app\controllers\DepartamentosCtrl.js" />
     <Content Include="app\controllers\FichajesCtrl.js" />
     <Content Include="app\controllers\homeCtrl.js" />
     <Content Include="app\controllers\EmpleadosCtrl.js" />
@@ -1129,6 +1134,8 @@
     <Folder Include="Plugins\angular-bootstrap-datetimepicker\src\templates\NewFolder1\" />
     <Folder Include="Views\BD\" />
     <Folder Include="Views\CreateUser\" />
+    <Folder Include="Views\Departamentos\" />
+    <Folder Include="Views\EmpleadosTabla\" />
     <Folder Include="Views\Empleados\" />
     <Folder Include="Views\Empleado\" />
     <Folder Include="Views\Fichajes\" />

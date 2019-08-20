@@ -5,8 +5,8 @@ function lateralCtrl($scope, $http, $window) {
     vm.session = $window.sessionStorage;
 
     //Declaracion de variables
-    vm.listaDropdown = { data: [], disp: [] };
-
+    vm.listaDropdown = [];
+    
     //Declaracion de funciones
     vm.getNombresDropdown = getNombresDropdown;
     //Init
@@ -16,9 +16,8 @@ function lateralCtrl($scope, $http, $window) {
     function getNombresDropdown() {
         $http.post("lateral/getNombresDropdown").then(function (r) {
             if (r.data.cod == "OK") {
-                vm.listaDropdown.data = r.data.d.data;
-                
-                
+                vm.listaDropdown = r.data.d.data;
+              
             }
         })
     }

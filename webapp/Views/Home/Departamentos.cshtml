@@ -3,7 +3,7 @@
     ViewBag.Title = "Departamentos";
 }
 
-<div class="row h-100">
+<div class="row h-100" ng-controller="DepartamentosCtrl as vm">
     <!--Renderizado de la nav-bar-->
     <div id="aside" class="col-2 p-0 m-0 bg-dark">
         @Html.Partial("lateral")
@@ -39,29 +39,34 @@
             <table class="table table-hover" st-table="vm.lista.disp" st-safe-src="vm.lista.data" st-filtered-collection="vm.lista.filter">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-md-left" st-sort="Nombre" ng-click="vm.ordenar('Nombre')">Nombre Departamento</th>
-                        <th scope="col" class="text-md-left" st-sort="Nombre" ng-click="vm.ordenar('Acciones')">Acciones </th>
+                        <th scope="col" class="text-md-left" st-sort="Departamento">Departamento</th>
+                        <th scope="col" class="text-md-left" st-sort="Nombre">Nombre</th>
+                        <th scope="col" class="text-md-left" st-sort="Apellidos">Apellidos</th>
+                        <th scope="col" class="text-md-left" st-sort="Correo">Correo</th>
+                        <th scope="col" class="text-md-left" st-sort="Nombre">Acciones </th>
 
 
                     </tr>
                     <tr>
+                        <td scope="col" class="text-md-left" st-search="Departamento"><input type="text" class="bg-white text-white text-center border-left-0 border-right-0 border-top-0"></td>
                         <td scope="col" class="text-md-left" st-search="Nombre"><input type="text" class="bg-white text-white text-center border-left-0 border-right-0 border-top-0"></td>
-                        <td scope="col" class="text-md-left" st-search="Acciones">
-                            <a href="#" class="fas fa-trash-alt text-md-left"></a>
-                            <a href="#" class="fas fa-file-export text-md-left"></a>
-                            <a href="#" class="fas fa-list-ul text-md-left"></a>
+                        <td scope="col" class="text-md-left" st-search="Apellidos"><input type="text" class="bg-white text-white text-center border-left-0 border-right-0 border-top-0"></td>
+                        <td scope="col" class="text-md-left" st-search="Correo"><input type="text" class="bg-white text-white text-center border-left-0 border-right-0 border-top-0"></td>
+                        <td scope="col" class="text-md-left" st-search="Acciones">                        
                         </td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="empleado in vm.lista.disp | orderBy: vm.myOrder">
-
-                        <td class="text-center">{{empleado.Nombre}}</td>
-                        <td class="text-center">{{empleado.Apellidos}}</td>
-                        <td class="text-center">{{empleado.Departamento}}</td>
-                        <td class="text-center">{{empleado.Horas}}</td>
-                        <td class="text-center">{{empleado.Vacaciones}}</td>
-
+                    <tr ng-repeat="empleado in vm.lista.disp">
+                        <td class="text-center font-weight-bold">{{empleado.Departamento}}</td>
+                        <td class="text-center font-weight-bold">{{empleado.Nombre}}</td>
+                        <td class="text-center font-weight-bold">{{empleado.Apellidos}}</td>
+                        <td class="text-center font-weight-bold">{{empleado.Correo}}</td>
+                        <td  class="text-center">
+                            <a href="#" class="fas fa-trash-alt text-md-left"></a>
+                            <a href="#" class="fas fa-file-export text-md-left"></a>
+                            <a href="#" class="fas fa-list-ul text-md-left"></a>
+                        </td>
 
 
                     </tr>
@@ -76,7 +81,7 @@
                     </tr>
                 </tfoot>
             </table>
-            <button ng-click="vm.excelExport();" ng-show="vm.lista.data.length > 0" class="btn btn-dark pull-right m-l-10">Exportar <i class="glyphicon glyphicon-chevron-right"></i></button>
+            @*<button ng-click="vm.excelExport();" ng-show="vm.lista.data.length > 0" class="btn btn-dark pull-right m-l-10">Exportar <i class="glyphicon glyphicon-chevron-right"></i></button>*@
         </div>
 
         <!--Fin de la tabla-->
