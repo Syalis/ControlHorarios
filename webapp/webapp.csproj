@@ -270,7 +270,6 @@
     <Content Include="app\controllers\vacacionesCtrl.js" />
     <Content Include="app\directives\directives.js" />
     <Content Include="app\directives\smart-table-addons.js" />
-    <Content Include="app\factories\auxVacacionesCtrl.js" />
     <Content Include="app\factories\BD.js" />
     <Content Include="app\factories\http-interceptor.js" />
     <Content Include="app\filters\props.js" />
