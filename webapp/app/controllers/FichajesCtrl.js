@@ -71,7 +71,7 @@ function FichajesCtrl($scope, $http, $window) {
             }
 
         }
-        console.log(vm.fichajesTotales)
+        //console.log(vm.fichajesTotales)
 
     }
     
