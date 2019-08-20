@@ -7,8 +7,8 @@ namespace webapp
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-           //ilters.Add(new HandleErrorAttribute());
-            //filters.Add(new AuthorizeAttribute());  //Filtro [Authorize] para Todos los controllers
+           filters.Add(new HandleErrorAttribute());
+            filters.Add(new AuthorizeAttribute());  //Filtro [Authorize] para Todos los controllers
         }
     }
 }

@@ -38,7 +38,7 @@ namespace webapp.Controllers
         public ActionResult LogOut()
         {
             Session.Clear();
-            string test = "";
+
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }

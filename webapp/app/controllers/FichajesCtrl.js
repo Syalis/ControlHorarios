@@ -35,26 +35,32 @@ function FichajesCtrl($scope, $http, $window) {
                 vm.fichajesTotales = r.data.d.fichajesTotales;
                 vm.fichajesMes = r.data.d.mesFichajes;
                 vm.fichajesBoton = r.data.d.boton;
-                console.log(r.data.d);
+                //console.log(r.data.d);
                 comprobacionBoton();
                 agrupacionPorDia();
 
             }
         });
     }
-    //Funcion de comprobacion de boton de check
+   //Funcion comprobacion boton Check
     function comprobacionBoton() {
-        for (var i = 0; i < vm.fichajesBoton.length; i++) {
-            if (vm.fichajesBoton[i].hora_salida == null) {
-                $('#checkIn').prop('disabled', true);
-                $('#checkOut').prop('disabled', false);
-                break;
-            } else {
-                $('#checkIn').prop('disabled', false);
-                $('#checkOut').prop('disabled', true);
+        if (vm.fichajesBoton.length == 0) {
+            $('#checkIn').prop('disabled', false);
+            $('#checkOut').prop('disabled', true);
+        } else {
+            for (var i = 0; i < vm.fichajesBoton.length; i++) {
+                if (vm.fichajesBoton[i].hora_salida == null) {
+                    $('#checkIn').prop('disabled', true);
+                    $('#checkOut').prop('disabled', false);
+                    break;
+                } else {
+                    $('#checkIn').prop('disabled', false);
+                    $('#checkOut').prop('disabled', true);
+                }
             }
         }
     }
+
     //Funcion para hacer añadir horas
     function agrupacionPorDia() {
         for (var i = 0; i < vm.fichajesTotales.length; i++) {
@@ -65,7 +71,7 @@ function FichajesCtrl($scope, $http, $window) {
             }
 
         }
-        console.log(vm.fichajesTotales)
+        //console.log(vm.fichajesTotales)
 
     }
     
@@ -102,7 +108,7 @@ function FichajesCtrl($scope, $http, $window) {
                 vm.fichajesTotales = r.data.d.fichajesTotalesResta;
                 vm.fichajesMes = r.data.d.mesFichajesResta;
                 vm.fichajesBoton = r.data.d.boton;
-                console.log(r.data.d);
+                //console.log(r.data.d);
                 comprobacionBoton();
                 agrupacionPorDia();
 
@@ -117,7 +123,7 @@ function FichajesCtrl($scope, $http, $window) {
                 vm.fichajesTotales = r.data.d.fichajesTotalesResta;
                 vm.fichajesMes = r.data.d.mesFichajesResta;
                 vm.fichajesBoton = r.data.d.boton;
-                console.log(r.data.d);
+                //console.log(r.data.d);
                 comprobacionBoton();
                 agrupacionPorDia();
 
