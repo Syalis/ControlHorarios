@@ -111,17 +111,17 @@ function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
         }
     }
 
-    function resetearDiasVacaciones() {
+    //function resetearDiasVacaciones() {
 
-        var currentYear = new Date().getFullYear();
+    //    var currentYear = new Date().getFullYear();
 
-        $('#calendar').calendar({
+    //    $('#calendar').calendar({
 
             
 
-        });
+    //    });
 
-    }
+    //}
 
     // Método para pintar los días que nos vamos de vacaciones
     function eventoCalendario() {
