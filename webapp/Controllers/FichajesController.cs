@@ -126,7 +126,7 @@ namespace webapp.Controllers
             }
             return msg;
         }
-        //Metodo para obtener fichajes mes inferior al actual
+        //Metodo para obtener fichajes de meses distintos al actual
         public JsonResult mesResta(int id, int nMes)
         {
             RespGeneric resp = new RespGeneric("KO");
@@ -156,48 +156,7 @@ namespace webapp.Controllers
             }
             return Json(resp);
         }
-        //Metodo para obtener fichajes mes superior al actual
-        //public JsonResult mesSuma(int id, int nMes)
-        //{
-        //    RespGeneric resp = new RespGeneric("KO");
-        //    resp.msg = validarIntEmpleado(id);
-
-        //    if (string.IsNullOrEmpty(resp.msg))
-        //    {
-        //        try
-        //        {
-        //            //Comprobacion del estado del boton+fichajes del mes en curso+totales de horas
-        //            resp.d.Add("boton", Data.Fichajes.getEstadoBoton(id));
-        //            resp.d.Add("fichajesTotalesSuma", Data.Fichajes.getTotalesFichajesSuma(id, nMes));
-        //            var fichajes = Data.Fichajes.mesSuma(id, nMes);
-        //            foreach (var a in fichajes)
-        //            {
-        //                a["horas"] = a["horas"].ToString().Split(',').ToArray();
-        //            }
-
-        //            resp.d.Add("mesFichajesSuma", fichajes);
-        //            resp.cod = "OK";
-        //            resp.msg = "Exito en la petición";
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            resp.msg = e.Message;
-        //        }
-        //    }
-        //    return Json(resp);
-        //}
-
-        //Metodo para validar el mes y convertirlo a valor absoluto
-        //public string ConvertirMes(int nMes)
-        //{
-        //    string msg = string.Empty;
-        //    if(nMes < 0)
-        //    {
-        //        nMes = ((-1)*(nMes));
-        //    }
-            
-        //    return msg;
-        //}
+        
 
 
 
