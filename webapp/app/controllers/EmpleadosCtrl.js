@@ -6,10 +6,16 @@ function EmpleadosCtrl($scope, $http, $window) {
 
     //Declaracion de variables
     vm.lista = { data: [], disp: [], filter: [] };
+    vm.listaEmpleados = { data: [], disp: [], filter: [] };
+    vm.listaDepartamentos = { data: [], disp: [], filter: [] };
     //Declaracion de funciones
-    vm.getEmpleadosTabla = getEmpleadosTabla
+    vm.getEmpleadosTabla = getEmpleadosTabla;
+    vm.getEmpleadosDropdown = getEmpleadosDropdown;
+    vm.getDepartamentosDropdown = getDepartamentosDropdown;
     //Init
     getEmpleadosTabla();
+    getEmpleadosDropdown();
+    getDepartamentosDropdown();
     //Funciones
     //funcion para cargar todos los empleados en la tabla
     function getEmpleadosTabla() {
@@ -17,6 +23,24 @@ function EmpleadosCtrl($scope, $http, $window) {
             if (r.data.cod == "OK") {
                 vm.lista.data = r.data.d.tablaEmpleado
                 vm.lista.disp = [].concat(vm.lista.data);
+            }
+        })
+    }
+    //Funcion para cargar empleados en dropdown
+    function getEmpleadosDropdown() {
+        $http.post("lateral/getNombresDropdown").then(function (r) {
+            if (r.data.cod == "OK") {
+                vm.listaEmpleados.data = r.data.d.data;
+                
+            }
+        })
+    }
+    //Funcion para cargar departamentos en dropdown
+    function getDepartamentosDropdown() {
+        $http.post("Departamentos/getDepartamentosTotal").then(function (r) {
+            if (r.data.cod == "OK") {
+                vm.listaDepartamentos.data = r.data.d.data;
+                
             }
         })
     }

@@ -29,5 +29,25 @@ namespace webapp.Controllers
             return Json(resp);
 
         }
+        [HttpPost]
+        public JsonResult getDepartamentosTotal()
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            resp.msg = string.Empty;
+
+            try
+            {
+                resp.d.Add("data", Data.Departamentos.getDepartamentosTotal());
+                resp.cod = "OK";
+                resp.msg = "Exito en la petición";
+            }
+            catch (Exception e)
+            {
+                resp.msg = e.Message;
+            }
+
+            return Json(resp);
+
+        }
     }
 }

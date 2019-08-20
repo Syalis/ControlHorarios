@@ -13,5 +13,9 @@ namespace webapp.Data
             return BD.getQueryResult($@"select  d.id as id, d.nombre as Departamento, upper(u.nombre) as Nombre, upper(concat_ws(' ', u.primer_apellido, u.segundo_apellido)) as Apellidos, 
                 u.email as Correo from usuarios u left join departamentos d on d.id = u.departamento");
         }
+        public static List<Dictionary<string, object>> getDepartamentosTotal()
+        {
+            return BD.getQueryResult($@"select * from departamentos");
+        }
     }
 }
