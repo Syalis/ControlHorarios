@@ -34,7 +34,7 @@ function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
             $http.post("Vacaciones/getDiasVacaciones", {
                 item:
                 {
-                    id_usuario: 3
+                    id_usuario: vm.session.id
                 }
             }).then(function (r) {
                 if (r.data.cod == "OK") {
@@ -61,7 +61,7 @@ function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
             $http.post("Vacaciones/getDiasVacacionesCalendario", {
                 item:
                 {
-                    id_usuario: 3
+                    id_usuario: vm.session.id
                 }
             }).then(function (r) {
                 if (r.data.cod == "OK") {
@@ -87,7 +87,7 @@ function vacacionesCtrl($scope, $http, $window, auxVacacionesCtrl) {
             $http.post("Vacaciones/createPeticionVacaciones", {
                 item:
                 {
-                    id_usuario: 3,
+                    id_usuario: vm.session.id,
                     fecha_inicio_vacaciones: vm.item.fecha_inicio_vacaciones,
                     fecha_final_vacaciones: vm.item.fecha_final_vacaciones
                 }

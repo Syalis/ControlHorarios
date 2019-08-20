@@ -8,6 +8,11 @@ namespace webapp.Data
 {
     public class Vacaciones
     {
+        /// <summary>
+        /// Método para pintar los días de vacaciones que nos queda en el año presente
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public static List<Dictionary<string, object>> getDiasTotalVacaciones(Dictionary<string, object> item)
         {
             return BD.getQueryResult($@"select u.id, t.id_usuario, usuario, ifnull( t.total_vacaciones, 30) as total_vacaciones
@@ -22,17 +27,26 @@ namespace webapp.Data
 
                 on u.id = v.id_usuario
 
-                group by v.id_usuario , usuario) t on u.id = t.id_usuario where u.id= ?id_usuario",  
+                group by v.id_usuario , usuario) t on u.id = t.id_usuario where u.id= ?id_usuario and year(curdate())" ,  
 
                       new Dictionary<string, object>() { { "id_usuario", item["id_usuario"] } });
         }
 
- 
+        /// <summary>
+        /// Método para insertar un nuevo registro de vacaciones
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static int create(Dictionary<string, object> data) {
 
             return BD.getInsertQueryResult("insert into vacaciones (id_usuario, fecha_inicio_vacaciones, fecha_final_vacaciones, dias_disfrutados_vacaciones) values (?id_usuario, ?fecha_inicio_vacaciones, ?fecha_final_vacaciones, (datediff(?fecha_final_vacaciones, ?fecha_inicio_vacaciones) + 1))", data);
         }
 
+        /// <summary>
+        /// Método para recoger los días de vacaciones para pintarlo en el calendario. 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public static List<Dictionary<string, object>> getDiasCalendario(Dictionary<string, object> item)
         {
             return BD.getQueryResult($@"SELECT v.id, v.id_usuario, day(v.fecha_inicio_vacaciones) as dia_inicio, 
@@ -45,7 +59,7 @@ namespace webapp.Data
 
                 from vacaciones v
 
-                where v.id_usuario = ?id_usuario",
+                where v.id_usuario = ?id_usuario and year (curdate())",
 
                       new Dictionary<string, object>() { { "id_usuario", item["id_usuario"] } });
         }
