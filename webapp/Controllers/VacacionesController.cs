@@ -81,6 +81,7 @@ namespace webapp.Controllers
             
             if (string.IsNullOrEmpty(resp.msg))
             {
+                // Comprobación de los días a través de las fechas introducidas para que no sea mayor al total de vacaciones actual.
                 var fecha1 = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
                 var fecha2 = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
 
@@ -89,15 +90,13 @@ namespace webapp.Controllers
                 int dias = dif.Days;
                 var d = dias + 1;
                 var a = Data.Vacaciones.getDiasTotalVacaciones(item);
-
+               //Recooremos el el campo "total_vacaciones" del diccionario. 
                 foreach (var x in a)
                 {
                     x["total_vacaciones"].ToString();
                 }
-
+                //Convertimos ese resultado en un número entero. 
                 var b = Convert.ToInt32(a[0]["total_vacaciones"].ToString());
-
-              
 
                 try
                 {
@@ -130,7 +129,7 @@ namespace webapp.Controllers
         }
 
         /// <summary>
-        /// Validación de los campos fechas
+        /// Validación de los campos fechas para que no vengan vacios
         /// </summary>
         /// <param name="item">parámetro donde se recogen la fecha de incio y la fecha final</param>
         /// <returns>Mensaje de error si no introduce una fecha</returns>
@@ -160,7 +159,8 @@ namespace webapp.Controllers
         }
 
         /// <summary>
-        /// Método para comprobar las fecha de inicio de vacaciones no sea mayor que la fecha final de vacaciones
+        /// Método para comprobar las fecha de inicio de vacaciones no sea mayor que la fecha final de vacaciones y que la fecha de inicio no sea
+        /// inferior a la fecha actual
         /// </summary>
         /// <param name="item">parámetro donde se recogen la fecha de incio y la fecha final</param>
         /// <returns>Mensaje de error si la fecha de inicio es superior a la fecha final</returns>
@@ -168,13 +168,17 @@ namespace webapp.Controllers
         {
             RespGeneric resp = new RespGeneric();
             string msg = string.Empty;
-
+            var fechaActual = DateTime.Today;
 
             try
             {
                 if (DateTime.Parse(item["fecha_inicio_vacaciones"].ToString()) > DateTime.Parse(item["fecha_final_vacaciones"].ToString()))
                 {
                     msg = "Fecha de inicio de vacaciones no puede ser posterior a la fecha final de vaciones";
+
+                } else if (DateTime.Parse(item["fecha_inicio_vacaciones"].ToString()) < fechaActual)
+                {
+                    msg = "Fecha de inicio de vacaciones no puede ser posterior a la fecha actual";
                 }
             }
             catch (Exception ex)
@@ -184,58 +188,6 @@ namespace webapp.Controllers
 
             return msg;
         }
-
-        /// <summary>
-        /// Método para comprobar que los dias solicitados no excenden de los días total de vacaciones 
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns>Mensaje de error si los dias de vaciones excede de los dias de vaciones restantes</returns>
-    //    public string verificarDiasRestantesVacaciones(Dictionary<string, object> item)
-    //    {
-    //        RespGeneric resp = new RespGeneric();
-    //        string msg = string.Empty;
-     
-             
-
-    //        try
-    //        {
-    //            var fecha1 = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
-    //            var fecha2 = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
-
-    //            TimeSpan dif = fecha2 - fecha1;
-
-    //            int dias = dif.Days;
-    //            var a = Data.Vacaciones.getDiasTotalVacaciones(item);
-
-    //            foreach (var x in a)
-    //            {
-    //                x["total_vacaciones"].ToString();
-    //            }
-    //            var b = Convert.ToInt32(a[0]["total_vacaciones"].ToString());
-
-    //            if (b == 0)
-    //            {
-    //                b = 30;
-    //            }
-                
-
-    //            if ((dias +1) <= b) {
-
-    //                msg = "El intervalo de fechas introducidas no supera a tus días de vacaciones";
-
-    //            }
-    //            else {
-    //                msg = "El intervalo de fechas introducidas supera a tus días de vacaciones";
-    //            }
-
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            resp.msg = ex.Message;
-    //        }
-
-    //        return msg;
-    //    }
 
     }
 }
