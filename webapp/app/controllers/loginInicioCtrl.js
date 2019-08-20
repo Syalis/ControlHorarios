@@ -3,37 +3,18 @@
 
 function loginInicioCtrl($scope, $http, $window, $location, $document) {
 
-    ////Funcion para mostrar y ocultar la funcion ¿no recuerdas tu contraseña?.
-    //vm.ShowHide = function () {
-    //    vm.visible = false;
-    //    vm.visible = vm.visible = true;
-    //}
-    //vm.Enviar = function () {
-    //    vm.visible = false;
-    //    vm.visible = vm.visible = false;
-    //}
-    //// fin de funcion (aun en desarrollo)
+    //Funcion para mostrar y ocultar la funcion ¿no recuerdas tu contraseña?.
+    
 
-    //        vm.login = login;
-    //        //
-    //        function login() {
-    //            if (vm.usuario && vm.contraseña) {
-    //                $http.post("Account/LoginUser", { Usuario: vm.usuario, Contraseña: vm.contraseña }).then(function (response) {
-    //                    if (response.data.cod == "OK") {
-    //                        console.log(response.data);
-    //                    }
-    //                    else {
-    //                        swal({ title: 'Oops...', text: response.data.msg, type: 'error' })
-    //                    }
-    //                }
-    //            }
+    function show () {
+        vm.visible = false;
+        vm.visible = vm.visible = true;
+    }
+    function enviar () {
+        vm.visible = false;
+        vm.visible = vm.visible = false;
+    }
 
-    //        }
-
-    //    }
-
-    //}
-    /////////////////////////////////////////
 
     var vm = this;
     //Variables
@@ -44,10 +25,12 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
 
     //Funciones
     vm.login = login;
+    vm.ShowHide = show;
+    vm.Enviar = enviar;
     //////////////////////////////
 
     //INIT
-    $window.sessionStorage.clear();
+
     //////////////////////////////
 
     //Estilo
@@ -67,6 +50,7 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
                         $window.sessionStorage.usuario = response.data.d.email;
                         $window.sessionStorage.tipo_perfil = response.data.d.tipo_perfil
                         $window.sessionStorage.id_perfil = response.data.d.id_perfil
+                        $window.sessionStorage.id = response.data.d.id
 
                         $window.sessionStorage.nombre = response.data.d.nombre
                         $window.sessionStorage.primer_apellido = response.data.d.primer_apellido
@@ -86,6 +70,19 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
           
                 });
         }
+    }
+    vm.forgotPass = forgotPass;
+    function forgotPass() {
+        $http.post("Account/LoginUser", { pass: vm.forgotPass })
+            .then(function (r) {
+                if (response.data.cod === "OK") {
+
+                }
+                else {
+
+                }
+
+            });
     }
 }
 

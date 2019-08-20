@@ -1,7 +1,8 @@
-﻿angular.module('webapp').controller('FichajesCtrl', ["$scope", "$http", FichajesCtrl]);
+﻿angular.module('webapp').controller('FichajesCtrl', ["$scope", "$http", "$window", FichajesCtrl]);
 
-function FichajesCtrl($scope, $http) {
+function FichajesCtrl($scope, $http, $window) {
     var vm = this;
+    vm.session = $window.sessionStorage;
 
     //Declaracion de variables
     vm.fichajesTotales = [];
@@ -29,7 +30,7 @@ function FichajesCtrl($scope, $http) {
 
     //Funcion de muestra de fichajes mes actual (inicio) 
     function getDatosInicioFichajes() {
-        $http.post("Fichajes/getInicioFichajes", { id: 2 }).then(function (r) {
+        $http.post("Fichajes/getInicioFichajes", { id: vm.session.id }).then(function (r) {
             if (r.data.cod == "OK") {
                 vm.fichajesTotales = r.data.d.fichajesTotales;
                 vm.fichajesMes = r.data.d.mesFichajes;
@@ -73,7 +74,7 @@ function FichajesCtrl($scope, $http) {
     function empleadoCheckIn() {
     $http.post("Fichajes/CheckIn", {
           checkIn: {
-              id_usuario: 2
+              id_usuario: vm.session.id
             }
           }).then(function (r) {
              getDatosInicioFichajes();
@@ -86,7 +87,7 @@ function FichajesCtrl($scope, $http) {
     function empleadoCheckOut() {
     $http.post("Fichajes/CheckOut", {
           checkOut: {
-               id_usuario: 2
+            id_usuario: vm.session.id
             }
           }).then(function (r) {
              getDatosInicioFichajes();
@@ -96,7 +97,7 @@ function FichajesCtrl($scope, $http) {
     //Funcion para suma contador
     function sumarContador() {
         ++vm.contador;
-        $http.post("Fichajes/mesResta", { id: 2, nMes: vm.contador }).then(function (r) {
+        $http.post("Fichajes/mesResta", { id: vm.session.id, nMes: vm.contador }).then(function (r) {
             if (r.data.cod == "OK") {
                 vm.fichajesTotales = r.data.d.fichajesTotalesResta;
                 vm.fichajesMes = r.data.d.mesFichajesResta;
@@ -111,7 +112,7 @@ function FichajesCtrl($scope, $http) {
     //Funcion para resta contador
     function restarContador() {
         --vm.contador;
-        $http.post("Fichajes/mesResta", { id: 2, nMes: vm.contador }).then(function (r) {
+        $http.post("Fichajes/mesResta", { id: vm.session.id, nMes: vm.contador }).then(function (r) {
             if (r.data.cod == "OK") {
                 vm.fichajesTotales = r.data.d.fichajesTotalesResta;
                 vm.fichajesMes = r.data.d.mesFichajesResta;

@@ -87,27 +87,18 @@
             <div class="modal-header">
                 <h4>Formulario de registro</h4>
             </div>
+
             <form class="m-2" ng-submit="vm.InsertUser()">
-                <div class="form-row  mr-2 ml-2 ">
-                   
-                    </div>
-                    <div class="col-md-6 mb-3">
+            
+                    <div class="form-group">
                         <label class="font-weight-bold">Email</label>
-                        <input type="text" class="form-control" ng-model="vm.datosUser.email" placeholder="Email" required>
-
-                    </div>
-
-                    <div class="col-md-3 mb-3">
+                        <input type="text" class="form-control" ng-model="vm.datosUser.email" placeholder="Email" required>                   
                         <label class="font-weight-bold">Tipo Usuario</label>
-                        <div isteven-multi-select input-model="" output-model="" button-label="Tipo Usuario" item-label="Tipo Usuario" tick-property="ticked" max-labels="1" selection-mode="single"></div>
-
-                    </div>
-                    <div class="my-auto pt-2 ml-auto mr-1">
-                        <button class="btn btn-primary" type="submit">Enviar Invitacion</button>
-                    </div>
-                    <div class="my-auto pt-2 ml-auto mr-1">
-                        <button class="btn btn-primary"  data-dismiss="modal">Cerrar</button>
-                    </div>
+                        <div isteven-multi-select input-model="" output-model="" button-label="Tipo Usuario" item-label="Tipo Usuario" tick-property="ticked" max-labels="1" selection-mode="single">
+                        </div>                                  
+                        <button class="btn btn-primary" type="submit">Enviar Invitacion</button>                 
+                       <button class="btn btn-primary"  data-dismiss="modal">Cerrar</button>
+               
                 </div>
                 
             </form>

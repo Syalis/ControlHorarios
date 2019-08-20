@@ -19,6 +19,7 @@ namespace Webapp.Data
         {
             return getAll().Where(p => Convert.ToString(p["email"].ToString()) == email).FirstOrDefault();
         }
+
        //insertar usuario (EMAIL,ACTIVO,NOMBRE 1 Y 2 APELLIDO , SI ESTA VALIDADO EL CORREO Y SALT   
         public static int InsertUser(Dictionary<string, object> data)
         {

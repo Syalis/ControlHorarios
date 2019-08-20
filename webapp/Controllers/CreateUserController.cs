@@ -29,6 +29,8 @@ namespace webapp.Controllers
                         //comprobar si usuario que se va a crear esta en la base de datos
                         if (Webapp.Data.Empleados.getByEmail(data["email"].ToString()) == null)
                         {
+
+                            //funcion que genera un codigo alfanumerico aleatorio e irrepetib
                             int longitud = 7;
                             Guid miGuid = Guid.NewGuid();
                             string token = Convert.ToBase64String(miGuid.ToByteArray());
@@ -45,7 +47,7 @@ namespace webapp.Controllers
 
                         else
                         {
-                            resp.msg = "Ya un usuario con ese Email";
+                            resp.msg = "Ya existe un usuario con ese Email";
                         }
                     }
                     else
