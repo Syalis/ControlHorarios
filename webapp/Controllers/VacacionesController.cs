@@ -87,8 +87,8 @@ namespace webapp.Controllers
 
                 TimeSpan dif = fecha2 - fecha1;
 
-                int dias = dif.Days;
-                var d = dias + 1;
+                int dias = dif.Days; // Diferencia de dias entre la fecha final y la fecha de inicio.
+                var d = dias + 1; 
                 var a = Data.Vacaciones.getDiasTotalVacaciones(item);
                //Recooremos el el campo "total_vacaciones" del diccionario. 
                 foreach (var x in a)
@@ -100,6 +100,7 @@ namespace webapp.Controllers
 
                 try
                 {
+
                     if (b >= d)
                     {
                         item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
