@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using webapp.Helpers;
+using System.Web;
 
 
 namespace Webapp.Data
@@ -23,7 +24,7 @@ namespace Webapp.Data
        //insertar usuario (EMAIL,ACTIVO,NOMBRE 1 Y 2 APELLIDO , SI ESTA VALIDADO EL CORREO Y SALT   
         public static int InsertUser(Dictionary<string, object> data)
         {
-            return BD.getInsertQueryResult("INSERT INTO usuarios (email, activo,salt,invitacion) VALUES (?email,'0','L_854WWWE*',?invitacion)", data);
+            return BD.getInsertQueryResult("INSERT INTO usuarios (email, activo,salt,invitacion) VALUES (?email,'0','',?invitacion)", data);
 
         }
         public static int UpdateUser(Dictionary<string, object> data)
@@ -34,6 +35,6 @@ namespace Webapp.Data
         {
             return getAll().Where(p => Convert.ToString(p["invitacion"].ToString()) == invitacion).FirstOrDefault();
         }
-
+       
     }
 }

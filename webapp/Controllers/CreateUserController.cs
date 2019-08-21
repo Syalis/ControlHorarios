@@ -78,16 +78,28 @@ namespace webapp.Controllers
             RespGeneric resp = new RespGeneric("KO");
             try
             {
-                if (Webapp.Data.Empleados.getByInvitacion(data["invitacion"].ToString()) != null)
-                {
+                if (Convert.ToString(data["pass"])== Convert.ToString(data["passR"]))
+                    if(Convert.ToString(data["pass"]).Length>6)
+                    if (Webapp.Data.Empleados.getByInvitacion(data["invitacion"].ToString()) != null)
+                    {
 
-                    var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass"])), salt: "");
-                    data.Add("ClaveHashed", passhashed);
-                    Webapp.Data.Empleados.UpdateUser(data);
-                }
-                else
-                {
-                    resp.msg = "El codigo de invitacion no es valido";
+                        var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass"])), salt: "");
+                        data.Add("ClaveHashed", passhashed);
+                        Webapp.Data.Empleados.UpdateUser(data);
+                        resp.cod = "OK";
+                        resp.d.Add("url", "Account/Login");
+                    }
+                    else
+                    {
+                        resp.msg = "El codigo de invitacion no es valido";
+
+                    }
+                    else
+                    {
+                        resp.msg = "la contraseña debe tener minimo 6 caracteres";
+                    }
+                else {
+                    resp.msg = "Las contraseñas no coinciden";
                 }
             }
 

@@ -6,8 +6,7 @@ using webapp.Helpers;
 
 namespace webapp.Data
 {
-    //Clase que contiene consultas para el registro de fichajes
-    public class Fichajes
+    public class FichajesEmpleados
     {
         //Metodo para obtener los fichajes del mes en curso por pares de entrada y salida
         public static List<Dictionary<string, object>> getMesFichajes(int id)
@@ -94,29 +93,8 @@ namespace webapp.Data
 
                                           from control_horas group by date_format(fecha, '%d/%m/%Y')) h on t.fecha = h.fecha  and h.id_usuario = ?id order by(t.fecha)asc", new Dictionary<string, object>() { { "id", id } });
         }
-        //Metodo de comprobacion de boton de fichajes
-        public static List<Dictionary<string, object>> getEstadoBoton(int id)
-        {
-            return BD.getQueryResult($@"SELECT date_format(now(), '%d/%m/%Y') as hoy, time_format(hora_entrada, '%H:%i:%s')as hora_entrada, 
-
-                                            time_format(hora_salida, '%H:%i:%s') as hora_salida 
-
-
-                                            FROM control_horas where id_usuario = ?id and date_format(fecha, '%d/%m/%Y') = date_format(now(), '%d/%m/%Y') order by (fecha)asc", new Dictionary<string, object>() { { "id", id } });
-        }
-        //Metodo para crear un checkIn en base de datos
-        public static int CheckIn(Dictionary<string, object> checkIn)
-        {
-            return BD.getInsertQueryResult($"INSERT into control_horas(id_usuario, hora_entrada, fecha) values(?id_usuario, now(), now())", checkIn);
-        }
-
-        //Metodo para hacer checkOut en base de datos en una row ya creada
-        public static int CheckOut(Dictionary<string, object> checkOut)
-        {
-            return BD.getNonQueryResult($"update control_horas set hora_salida= now() where id_usuario= ?id_usuario and hora_salida is null", checkOut);
-        }
         //Metodo para obtener fichajes de los meses inferiores
-        
+
         public static List<Dictionary<string, object>> mesResta(int id, int nMes)
         {
             return BD.getQueryResult($@"SET lc_time_names = 'es_ES'; select t.fecha, ifnull(a.id, ?id) as id, ifnull(a.empleado,0) as empleado, ifnull(a.email, 0) as email, 
