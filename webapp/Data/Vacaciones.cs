@@ -59,10 +59,14 @@ namespace webapp.Data
         /// Consulta para recoger los días de vacaciones para pintarlo en el calendario. 
         public static List<Dictionary<string, object>> getDiasCalendario(Dictionary<string, object> item)
         {
-            return BD.getQueryResult($@"SELECT v.id, v.id_usuario, day(v.fecha_inicio_vacaciones) as dia_inicio, 
+            return BD.getQueryResult($@"select a.anio, b.id, b.id_usuario, dia_inicio, mes_inicio, anio_inicio, dia_final, mes_final, 
                 
-                year(now()) as anio,
+                anio_final from (select DATE_FORMAT(now(), '%Y') as anio) a
 
+                left join
+
+                (SELECT v.id, v.id_usuario, day(v.fecha_inicio_vacaciones) as dia_inicio, 
+                
                 month(v.fecha_inicio_vacaciones) as mes_inicio, year (v.fecha_inicio_vacaciones) as anio_inicio, 
 
                 day(v.fecha_final_vacaciones) as dia_final, 
@@ -71,7 +75,7 @@ namespace webapp.Data
 
                 from vacaciones v
 
-                where v.id_usuario = ?id_usuario",
+                where v.id_usuario = ?id_usuario) b on a.anio = year(now())",
 
                       new Dictionary<string, object>() { { "id_usuario", item["id_usuario"] } });
         }
@@ -79,7 +83,15 @@ namespace webapp.Data
         /// Consulta para pasar sumar o restar al año actual. 
         public static List<Dictionary<string, object>> getYear(Dictionary<string, object> item)
         {
-            return BD.getQueryResult($@"SELECT v.id, ifnull(v.id_usuario, ?id_usuario) as id_usuario, 
+            return BD.getQueryResult($@"select a.anio, b.id, b.id_usuario, dia_inicio, mes_inicio, anio_inicio, dia_final, mes_final, 
+                
+                anio_final 
+                from (select year(date_sub(now(), interval ?nYear year)) as anio) a
+
+                left join 
+
+
+                    (SELECT v.id, ifnull(v.id_usuario, ?id_usuario) as id_usuario, 
 
                     year(date_sub(now(), interval ?nYear year)) as anio,
 
@@ -97,7 +109,7 @@ namespace webapp.Data
 
                     from vacaciones v 
 
-                    where v.id_usuario = ?id_usuario ",
+                    where v.id_usuario = ?id_usuario ) b  on a.anio = year(date_sub(now(), interval ?nYear year))",
 
                     new Dictionary<string, object>() { { "id_usuario", item["id_usuario"] }, { "nYear", item["nYear"] } });
         }

@@ -38,8 +38,6 @@ function vacacionesCtrl($scope, $http, $window) {
             }).then(function (r) {
                 if (r.data.cod == "OK") {
                     vm.diasVacaciones = r.data.d.data;
-                    console.log(r.data);
-                   
                 } else {
                     console.log("Error");
                 }
@@ -66,7 +64,6 @@ function vacacionesCtrl($scope, $http, $window) {
                         vm.diasVacaciones[0].total_vacaciones = 30;
                     } else {
                         vm.diasVacaciones = r.data.d.data;
-                        console.log(r.data);
                     }
                    
                 } else {
@@ -91,8 +88,6 @@ function vacacionesCtrl($scope, $http, $window) {
                 if (r.data.cod == "OK") {
                     vm.vacacionesCalendario = r.data.d.data;
                     eventoCalendario();
-                    console.log(r.data);
-
                 } else {
                     console.log("Error");
                 }
@@ -105,8 +100,6 @@ function vacacionesCtrl($scope, $http, $window) {
 
     // Método para enviar a la BBDD los dias de que nos vamos de vacaciones
     function peticionVacaciones(item) {
-        console.log(item);
-
         if (vm.item.fecha_inicio_vacaciones != null && vm.item.fecha_final_vacaciones != null) {
             $http.post("Vacaciones/createPeticionVacaciones", {
                 item:
@@ -171,8 +164,6 @@ function vacacionesCtrl($scope, $http, $window) {
 
         $('#calendar').data('calendar').setDataSource(vm.eventos);
 
-        console.log(vm.eventos);
-
     }
 
     // Método que hace el dibujado en el calendario. 
@@ -202,8 +193,6 @@ function vacacionesCtrl($scope, $http, $window) {
                 var year = vm.vacacionesCalendario[0].anio;
                 $('#calendar').data('calendar').setYear(year);
                 diasRestantesVacacionesNueva();
-
-                console.log(r.data);
             }
         })
 
@@ -224,7 +213,6 @@ function vacacionesCtrl($scope, $http, $window) {
                 var year = vm.vacacionesCalendario[0].anio;
                 $('#calendar').data('calendar').setYear(year);
                 diasRestantesVacacionesNueva();
-                console.log(r.data);
             }
         })
 
