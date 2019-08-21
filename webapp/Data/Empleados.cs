@@ -24,7 +24,7 @@ namespace Webapp.Data
        //insertar usuario (EMAIL,ACTIVO,NOMBRE 1 Y 2 APELLIDO , SI ESTA VALIDADO EL CORREO Y SALT   
         public static int InsertUser(Dictionary<string, object> data)
         {
-            return BD.getInsertQueryResult("INSERT INTO usuarios (email, activo,salt,invitacion) VALUES (?email,'0','L_854WWWE*',?invitacion)", data);
+            return BD.getInsertQueryResult("INSERT INTO usuarios (email, activo,salt,invitacion) VALUES (?email,'0','',?invitacion)", data);
 
         }
         public static int UpdateUser(Dictionary<string, object> data)

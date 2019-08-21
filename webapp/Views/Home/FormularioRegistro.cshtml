@@ -1,41 +1,41 @@
 ﻿
 @{
-    ViewBag.Title = "FormularioRegistro";
+                /**/
+
+                ViewBag.Title = "FormularioRegistro";
 }
 
 <div class="row h-100">
-    <div id="aside" class="col-2 p-0 m-0 bg-dark">
-        @Html.Partial("lateral")
-    </div>
+
     <br />
     <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
         <div class="container" ng-controller="EmpleadosCtrl as vm">
             <h2>Formulario registro nuevos Usuarios </h2>
             <br /><br />
-                  <form ng-submit="vm.UpdateUser()">
-                      <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Nombre " name="Nombre " ng-model="vm.UpadateUserDatos.nombre" required /> <br />
-                          <input type="text" class="form-control" placeholder="Primer apellido " name="Primer apellido " ng-model="vm.UpadateUserDatos.primer_apellido" required /> <br />
-                          <input type="text" class="form-control" placeholder="Segundo apellido " name="Segundo apellido " ng-model="vm.UpadateUserDatos.segundo_apellido" required /> <br />
-                          <label class="alinear">Contraseña</label>
-                          <input type="password" class="form-control" placeholder="Contraseña" name="Contraseña" ng-model="vm.UpadateUserDatos.pass" required><br />
-                          <label class="alinear"> Repetir contraseña</label>
-                          <input type="password" class="form-control" placeholder="repetir contraseña" name="RContraseña" required /><br />
-                          <label class="alinear"> telefono</label>
+            <form ng-submit="vm.UpdateUser()">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nombre " name="Nombre " ng-model="vm.UpadateUserDatos.nombre" required /> <br />
+                    <input type="text" class="form-control" placeholder="Primer apellido " name="Primer apellido " ng-model="vm.UpadateUserDatos.primer_apellido" required /> <br />
+                    <input type="text" class="form-control" placeholder="Segundo apellido " name="Segundo apellido " ng-model="vm.UpadateUserDatos.segundo_apellido" required /> <br />
+                    <label class="alinear">Contraseña</label>
+                    <input type="password" class="form-control" placeholder="Contraseña" name="Contraseña" ng-model="vm.UpadateUserDatos.pass" required><br />
+                    <label class="alinear"> Repetir contraseña</label>
+                    <input type="password" class="form-control" placeholder="repetir contraseña" name="RContraseña" required  ng-model="vm.UpadateUserDatos.passR"/><br />
+                    <label class="alinear"> telefono</label>
 
-                          <input type="text" placeholder="Telefono" class="form-control" name="Telefono " ng-model="vm.UpadateUserDatos.telefono" required /><br />
-                          <input type="text" placeholder="codigo invitacion" class="form-control" name="invitacion" ng-model="vm.UpadateUserDatos.invitacion" required /><br />
-                          <input type="checkbox" name="aceptar" required>Acepto las condiciones y terminos.<br />
-                          <button type="submit" class="btn btn-primary">Registrar</button>
-                      </div>
-                  </form>
+                    <input type="text" placeholder="Telefono" class="form-control" name="Telefono " ng-model="vm.UpadateUserDatos.telefono" required /><br />
+                    <input type="text" placeholder="codigo invitacion" class="form-control" name="invitacion" ng-model="vm.UpadateUserDatos.invitacion" required /><br /><br />
+                    <br />
+                    <button type="submit" class="btn btn-primary">Registrar</button>
                 </div>
-              
+            </form>
         </div>
+
+    </div>
     <a href="~/Views/Home/FormularioRegistro"></a>
 
 
-    </div>
+</div>
 
 
 
