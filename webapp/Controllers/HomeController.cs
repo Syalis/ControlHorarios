@@ -47,8 +47,12 @@ namespace webapp.Controllers
         {
             return View();
         }
-   
- 
-   }
+        public ActionResult FichajesEmpleados()
+        {
+            return View();
+        }
+
+
+    }
  }
  
