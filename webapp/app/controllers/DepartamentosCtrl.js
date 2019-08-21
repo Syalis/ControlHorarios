@@ -7,12 +7,16 @@ function DepartamentosCtrl($scope, $http, $window) {
     //Declaracion de variables
     vm.lista = { data: [], disp: [], filter: [] };
     vm.listaEmpleados = { data: [], disp: [], filter: [] };
+
     //Declaracion de funciones
     vm.getDepartamentosTabla = getDepartamentosTabla;
     vm.getEmpleadosDropdown = getEmpleadosDropdown;
+    vm.getEmpleadosFiltrados = getEmpleadosFiltrados;
+
     //Init
     getDepartamentosTabla();
     getEmpleadosDropdown();
+
     //Funciones
     //funcion para cargar todos los empleados en la tabla
     function getDepartamentosTabla() {
@@ -28,6 +32,14 @@ function DepartamentosCtrl($scope, $http, $window) {
             if (r.data.cod == "OK") {
                 vm.listaEmpleados.data = r.data.d.data
                 console.log(vm.listaEmpleados.data);
+            }
+        })
+    }
+    function getEmpleadosFiltrados(id) {
+        $http.post("Departamentos/getDepartamentoEmpleadosFiltro", { id: id }).then(function (r) {
+            if (r.data.cod == "OK") {
+                vm.lista.data = r.data.d.getDepartamentoEmpleadosFiltro;
+                vm.lista.disp = [].concat(vm.lista.data);
             }
         })
     }

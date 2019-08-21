@@ -23,7 +23,7 @@ namespace webapp.Data
         public static List<Dictionary<string, object>> getDepartamentoEmpleados(int id)
         {
             return BD.getQueryResult($@"select upper(u.nombre) as Nombre,  upper(concat_ws(' ', u.primer_apellido, u.segundo_apellido)) as Apellidos, 
-                    u.email as Correo, ifnull(sum(dias_disfrutados_vacaciones), 0) as Vacaciones, d.nombre as Departamento
+                    u.email as Correo, ifnull(sum(dias_disfrutados_vacaciones), 0) as Vacaciones, upper(d.nombre) as Departamento
                     from usuarios u
                     left
                     join departamentos d
@@ -31,6 +31,20 @@ namespace webapp.Data
                     left
                     join vacaciones v on u.id = v.id_usuario
                     where d.id = ?id
+                    group by u.id", new Dictionary<string, object>() { { "id", id } });
+        }
+        //Metodo para filtrar empleados por departamento seleccionando del dropdown
+        public static List<Dictionary<string, object>> getDepartamentoEmpleadosFiltro(int id)
+        {
+            return BD.getQueryResult($@"select upper(u.nombre) as Nombre,  upper(concat_ws(' ', u.primer_apellido, u.segundo_apellido)) as Apellidos, 
+                    u.email as Correo, ifnull(sum(dias_disfrutados_vacaciones), 0) as Vacaciones, upper(d.nombre) as Departamento
+                    from usuarios u
+                    left
+                    join departamentos d
+                    on u.departamento = d.id
+                    left
+                    join vacaciones v on u.id = v.id_usuario
+                    where u.id = ?id
                     group by u.id", new Dictionary<string, object>() { { "id", id } });
         }
     }

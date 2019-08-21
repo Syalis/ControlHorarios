@@ -71,5 +71,25 @@ namespace webapp.Controllers
 
             return Json(resp);
         }
+        //Metodo para filtrar y buscar por id de usuario y mostrar en tabla
+        [HttpPost]
+        public JsonResult getDepartamentoEmpleadosFiltro(int id)
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            resp.msg = string.Empty;
+
+            try
+            {
+                resp.d.Add("getDepartamentoEmpleadosFiltro", Data.Departamentos.getDepartamentoEmpleadosFiltro(id));
+                resp.cod = "OK";
+                resp.msg = "Exito en la petición";
+            }
+            catch (Exception e)
+            {
+                resp.msg = e.Message;
+            }
+
+            return Json(resp);
+        }
     }
 }

@@ -14,6 +14,7 @@ function EmpleadosCtrl($scope, $http, $window) {
     vm.getEmpleadosDropdown = getEmpleadosDropdown;
     vm.getDepartamentosDropdown = getDepartamentosDropdown;
     vm.getDepartamentoEmpleados = getDepartamentoEmpleados;
+    vm.getEmpleadosFiltrados = getEmpleadosFiltrados;
 
     //Init
     getEmpleadosTabla();
@@ -52,11 +53,20 @@ function EmpleadosCtrl($scope, $http, $window) {
     function getDepartamentoEmpleados(id) {
         $http.post("Departamentos/getDepartamentoEmpleados", { id: id }).then(function (r) {
             if (r.data.cod == "OK") {
-                vm.lista.data = r.data.d.getDepartamentoEmpleados
+                vm.lista.data = r.data.d.getDepartamentoEmpleados;
                 vm.lista.disp = [].concat(vm.lista.data);
             }
         })
-    }
+    } 
+    //Metodo para filtrar en la tabla por empleado
+    function getEmpleadosFiltrados(id) {
+        $http.post("EmpleadosTabla/getEmpleadosFiltrados", { id: id }).then(function (r) {
+            if (r.data.cod == "OK") {
+                vm.lista.data = r.data.d.getEmpleadosFiltrados;
+                vm.lista.disp = [].concat(vm.lista.data);
+            }
+        })
+    } 
 
 
     //Funciones de Jesus para el modal
