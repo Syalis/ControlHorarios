@@ -48,8 +48,15 @@ namespace webapp.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-   
- 
-   }
+        public ActionResult FichajesEmpleados()
+        {
+            return View();
+        }
+        public ActionResult VacacionesEmpleados()
+        {
+            return View();
+        }
+
+    }
  }
  

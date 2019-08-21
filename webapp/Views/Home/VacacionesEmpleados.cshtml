@@ -1,19 +1,27 @@
-﻿@{
-    ViewBag.Title = "Vacaciones";
+﻿
+@{
+    ViewBag.Title = "VacacionesEmpleados";
 }
+
 @*<div ng-controller="homeCtrl as vm">
         <webapp-loader ng-if="vm.loading"></webapp-loader>
         <div ng-show="!vm.loading">
         </div>
     </div>*@
-<div class="row h-100" ng-controller="vacacionesCtrl as vm">
+<div class="row h-100" ng-controller="VacacionesEmpleadosCtrl as vm">
     <!--Renderizado de la nav-bar-->
     <div id="aside" class="col-2 p-0 m-0 bg-dark">
         @Html.Partial("lateral")
     </div>
     <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
+
+        @*<div  class="col-4 mx-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-reset="vm.getNombresDropdown()"></div>*@
+
         <!--Inicio card de dias de vacaciones-->
         <div class="row p-3">
+
+            <div class="col-4 mx-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-item-click="vm.gripCompleto(vm.listaDropdown.select[0].id)" on-reset="vm.getNombresDropdown()"></div>
+
             <div class="col-md-3">
                 <div id="caja" class="card align-content-center">
                     <div class="p-4">
@@ -23,30 +31,7 @@
                 </div>
             </div>
             <!--Fin card de dias de vacaciones-->
-            <div class="col-md-9">
-                <!--Inicio formulario para recoger las fechas-->
-                <form ng-submit="vm.peticionVacaciones(vm.item)">
-                    <div>
-                        <h4 class="text-center font-weight-bold">Solicita tus vacaciones</h4>
-                        <h6 class="text-center p-1">Introduce las fechas</h6>
 
-                        <div class="form-row align-content-center align-items-center p-3">
-                            <div class="col-sm-4">
-                                <label>Fecha Inicio Vacaciones</label><br />
-                                <top-datepicker ng-model="vm.item.fecha_inicio_vacaciones"></top-datepicker>
-                            </div>
-                            <div class="col-sm-4">
-                                <label>Fecha Final Vacaciones</label><br />
-                                <top-datepicker ng-model="vm.item.fecha_final_vacaciones"></top-datepicker>
-                            </div>
-                            <div class="col-sm-4 mt-4 pl-3">
-                                <button type="submit" id="save-event" class="btn btn-success btn-sm">Solicitar</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <!--Fin formulario para recoger las fechas-->
-            </div>
         </div>
         <div class="card mb-2 w-100 bg-dark border-bottom"></div>
         <!--Calendario-->
@@ -58,7 +43,7 @@
                 <span>
                     <input id="date" class="text-center font-weight-bold" placeholder={{vm.vacacionesCalendario[0].anio}} readonly />
                 </span>
-                <a class="btn-lg"  ng-click="vm.restarAnio(vm.item)">
+                <a class="btn-lg" ng-click="vm.restarAnio(vm.item)">
                     <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
@@ -66,3 +51,4 @@
         <div id="calendar" data-provide="calendar"></div>
     </div>
 </div>
+
