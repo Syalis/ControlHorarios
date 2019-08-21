@@ -9,6 +9,7 @@ namespace webapp.Controllers
 {
     public class DepartamentosController : Controller
     {
+        //Metodo para obtener todos los usuarios con su departamento para representar en tabla
         [HttpPost]
         public JsonResult getDepartamentosTabla()
         {
@@ -23,12 +24,13 @@ namespace webapp.Controllers
             }
             catch (Exception e)
             {
-            resp.msg = e.Message;
+                resp.msg = e.Message;
             }
-            
+
             return Json(resp);
 
         }
+        //Metodo para obtener todos los departamentos para el dropdown
         [HttpPost]
         public JsonResult getDepartamentosTotal()
         {
@@ -48,6 +50,26 @@ namespace webapp.Controllers
 
             return Json(resp);
 
+        }
+        //Metodo para filtrar y buscar por id de departamento y mostrar en tabla
+        [HttpPost]
+        public JsonResult getDepartamentoEmpleados(int id)
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            resp.msg = string.Empty;
+
+            try
+            {
+                resp.d.Add("getDepartamentoEmpleados", Data.Departamentos.getDepartamentoEmpleados(id));
+                resp.cod = "OK";
+                resp.msg = "Exito en la petición";
+            }
+            catch (Exception e)
+            {
+                resp.msg = e.Message;
+            }
+
+            return Json(resp);
         }
     }
 }
