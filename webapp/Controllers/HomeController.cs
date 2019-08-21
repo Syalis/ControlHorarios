@@ -43,8 +43,9 @@ namespace webapp.Controllers
         {
             return View();
         }
-        public ActionResult FormularioRegistro()
+        public ActionResult FormularioRegistro(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
         public ActionResult FichajesEmpleados()

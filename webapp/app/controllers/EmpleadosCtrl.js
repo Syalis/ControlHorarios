@@ -1,6 +1,7 @@
-﻿angular.module('webapp').controller('EmpleadosCtrl', ["$scope", "$http", "$window", EmpleadosCtrl]);
+﻿angular.module('webapp').controller('EmpleadosCtrl', ["$scope", "$http", "$window", '$location', EmpleadosCtrl]);
 
-function EmpleadosCtrl($scope, $http, $window) {
+function EmpleadosCtrl($scope, $http, $window, $location) {
+
     var vm = this;
     vm.session = $window.sessionStorage;
 
@@ -80,25 +81,32 @@ function EmpleadosCtrl($scope, $http, $window) {
 
 
             if (respuesta.cod == "OK") {
-                toastr.success("ususario creado");
+                swal("Invitacion enviada con exito!!", "success");
             }
             else
-                toastr.error(respuesta.msg);
+                swal({ title: 'Oops...', text: respuesta.msg, type: 'error' });
         });
     }
-
+    var newUrl = $location.search().ReturnUrl;
     vm.UpdateUser = UpdateUser;
     vm.UpadateUserDatos = {};
     function UpdateUser() {
-        $http.post("CreateUser/UpdateUser", { data: vm.UpadateUserDatos }).then(function (r) {
+        $http.post("CreateUser/UpdateUser", { data: vm.UpadateUserDatos }).then(function (resp) {
             var respuesta = resp.data;
 
 
             if (respuesta.cod == "OK") {
-                toastr.success("ususario creado");
+                swal("Usuario creado con exito!!", "success");
+                if (newUrl == undefined) {
+
+                    $window.location.href = webroot + resp.data.d.url;
+                }
+                else {
+                    $window.location.href = webroot;
+                }
             }
             else
-                toastr.error(respuesta.msg);
+                swal({ title: 'Oops...', text: resp.data.msg, type: 'error' });
         });
     }
 

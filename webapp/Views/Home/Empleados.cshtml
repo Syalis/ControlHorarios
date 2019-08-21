@@ -10,8 +10,8 @@
     </div>
     <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
         <div class="row">
-            <a class="nav-link disabled" href="" role="tab" ><h3><i class="far fa-address-card mr-2"></i>Empleados</h3></a>
-            <a class="nav-link active"    target="_self" href="@Url.Action("Departamentos", "Home")"><h3><i class="far fa-building mr-2"></i>Departamentos</h3></a>
+            <a class="nav-link disabled" href="" role="tab"><h3><i class="far fa-address-card mr-2"></i>Empleados</h3></a>
+            <a class="nav-link active" target="_self" href="@Url.Action("Departamentos", "Home")"><h3><i class="far fa-building mr-2"></i>Departamentos</h3></a>
 
         </div>
         <!--Inicio del formulario-->
@@ -89,21 +89,23 @@
             </div>
 
             <form class="m-2" ng-submit="vm.InsertUser()">
-            
-                    <div class="form-group">
-                        <label class="font-weight-bold">Email</label>
-                        <input type="text" class="form-control" ng-model="vm.datosUser.email" placeholder="Email" required>                   
-                        <label class="font-weight-bold">Tipo Usuario</label>
-                        <div isteven-multi-select input-model="" output-model="" button-label="Tipo Usuario" item-label="Tipo Usuario" tick-property="ticked" max-labels="1" selection-mode="single">
-                        </div>                                  
-                        <button class="btn btn-primary" type="submit">Enviar Invitacion</button>                 
-                       <button class="btn btn-primary"  data-dismiss="modal">Cerrar</button>
-               
+
+                <div class="form-group">
+                    <label class="font-weight-bold">Email</label>
+                    <input type="text" class="form-control" ng-model="vm.datosUser.email" placeholder="Email" required><br /> <br />
+                    <button class="btn btn-primary" type="submit" >Enviar Invitacion</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+
                 </div>
-                
+
             </form>
 
         </div>
     </div>
 </div>
 <!--Fin del modal-->
+<script>
+      $('body').on('hidden.bs.modal', '.modal', function () {
+        $(this).removeData('bs.modal');
+      });
+    </script>
