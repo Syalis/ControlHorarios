@@ -16,6 +16,8 @@ using System.Text;
 using System.Web.Security;
 using Medo.Security.Cryptography;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace webapp.Controllers
 {
@@ -84,7 +86,7 @@ namespace webapp.Controllers
                     resp.d.Add("id", dtUsuario.Rows[0]["id"]);
                     resp.d.Add("url", "Home/Index");
 
-                    
+
                 }
                 else
                 {
@@ -127,7 +129,7 @@ namespace webapp.Controllers
                 using (MySqlCommand cmd = new MySqlCommand("UPDATE usuarios SET lastlogindate=?fecha WHERE email=?usuario", con))
                 {
                     cmd.Parameters.AddWithValue("?usuario", usuario);
-                   
+
 
                     con.Open();
                     cmd.ExecuteNonQuery();
@@ -184,5 +186,55 @@ namespace webapp.Controllers
 
         #endregion
 
+        #region "OlvidarContraseña"
+        [HttpPost]
+        public JsonResult forgotPass(Dictionary<string,object> data)
+        {
+            RespGeneric resp = new RespGeneric("KO");
+
+            //comprobar formato correcto de email
+            String expresion;
+            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (Regex.IsMatch(Convert.ToString(data["email"]), expresion))
+            {
+                if (Regex.Replace(Convert.ToString(data["email"]), expresion, String.Empty).Length == 0)
+                {
+                    if (Webapp.Data.Empleados.getByEmail(data["email"].ToString()) != null)
+                    {
+                        //funcion que genera un codigo alfanumerico aleatorio e irrepetible
+                        int longitud = 4;
+                        Guid miGuid = Guid.NewGuid();
+                        string token = Convert.ToBase64String(miGuid.ToByteArray());
+                        token = token.Replace("=", "").Replace("+", "");
+                        Console.WriteLine(token.Substring(0, longitud));
+                        data.Add("codigo", token);
+
+                        //insertar codigo olvidar contraseña en la bd
+                       
+                        Webapp.Data.Empleados.InsertCodigoPass(data);
+
+                        //enviar correo
+                        Extensiones.sendEmail(to: (Convert.ToString(data["email"])), subject: (Convert.ToString(data["codigo"])), body: "Introduce el codigo que te hemos enviado para restablecer tu contraseña   ", file: "");
+
+
+
+                    }
+                    else
+                    {
+                        //correo no encontrado
+
+                    };
+                }
+                else
+                {
+                        //correo electronico no valido
+                };
+
+            }
+            
+
+                return Json(resp);
+            #endregion
+        }
     }
 }

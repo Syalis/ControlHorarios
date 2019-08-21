@@ -21,12 +21,15 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
     vm.usuario = "";
     vm.password = "";
     vm.loading = false;
+    vm.email = {};
+ 
     //////////////////////////////
 
     //Funciones
     vm.login = login;
     vm.ShowHide = show;
     vm.Enviar = enviar;
+    vm.forgotPass = forgotPass;
     //////////////////////////////
 
     //INIT
@@ -71,10 +74,11 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
                 });
         }
     }
-    vm.forgotPass = forgotPass;
+    
+   
     function forgotPass() {
-        $http.post("Account/forgotPass", { pass: vm.forgotPass })
-            .then(function (r) {
+        $http.post("Account/forgotPass", { data:vm.email })
+            .then(function (resp) {
                 if (response.data.cod === "OK") {
 
                 }

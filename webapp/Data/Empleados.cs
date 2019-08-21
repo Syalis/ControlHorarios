@@ -35,6 +35,11 @@ namespace Webapp.Data
         {
             return getAll().Where(p => Convert.ToString(p["invitacion"].ToString()) == invitacion).FirstOrDefault();
         }
-       
+        public static int InsertCodigoPass(Dictionary<string, object> data)
+        {
+            return BD.getNonQueryResult("UPDATE usuarios set codigo_forgot_pass = ?codigo WHERE email = email", data);
+
+        }
+
     }
 }
