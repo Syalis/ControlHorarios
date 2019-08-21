@@ -19,7 +19,7 @@ namespace webapp.Controllers
         /// <param name="item">parámetro donde se recogen la fecha de incio y la fecha final</param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult getDiasVacaciones(Dictionary<string, object> item)
+        public JsonResult getDiasTotalVacaciones(Dictionary<string, object> item)
         {
             RespGeneric resp = new RespGeneric("KO");
            
@@ -28,9 +28,35 @@ namespace webapp.Controllers
             {
                 try
                 {
-                    //item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
-                    //item["fecha_final_vacaciones"] = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
                     resp.d.Add("data", Data.Vacaciones.getDiasTotalVacaciones(item));
+                    resp.cod = "OK";
+                
+                }
+                catch (Exception ex)
+                {
+                    resp.msg = ex.Message;
+                }
+            }
+
+            return Json(resp);
+        }
+
+        /// <summary>
+        /// Método de llamada a la consulta para que nos devuelva cuantos días de vacaciones nos queda al pasar del año actual. 
+        /// </summary>
+        /// <param name="item">párametro donde se recogen la id del usuario y los días de vacaciones</param>
+        /// <param name="item">parámetro donde se recogen la fecha de incio y la fecha final</param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult getDiasTotalVacacionesAnio(Dictionary<string, object> item)
+        {
+            RespGeneric resp = new RespGeneric("KO");
+           
+            if (string.IsNullOrEmpty(resp.msg))
+            {
+                try
+                {
+                    resp.d.Add("data", Data.Vacaciones.getDiasTotalVacacionesAnio(item));
                     resp.cod = "OK";
                 
                 }
@@ -57,11 +83,8 @@ namespace webapp.Controllers
             {
                 try
                 {
-                    //item["fecha_inicio_vacaciones"] = DateTime.Parse(item["fecha_inicio_vacaciones"].ToString());
-                    //item["fecha_final_vacaciones"] = DateTime.Parse(item["fecha_final_vacaciones"].ToString());
                     resp.d.Add("data", Data.Vacaciones.getDiasCalendario(item));
                     resp.cod = "OK";
-
                 }
                 catch (Exception ex)
                 {
@@ -72,6 +95,11 @@ namespace webapp.Controllers
             return Json(resp);
         }
 
+        /// <summary>
+        /// Método para crear un evento de vacaciones
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult createPeticionVacaciones(Dictionary<string, object> item)
         {
@@ -128,6 +156,32 @@ namespace webapp.Controllers
 
             return Json(resp);
         }
+
+        /// <summary>
+        /// Método para pasar de año
+        /// </summary>
+        /// <param name="item">Paárametro al quue se le pasa el año</param>
+        /// <returns></returns>
+        public JsonResult getYear(Dictionary<string, object> item)
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            resp.msg = string.Empty;
+
+            if (string.IsNullOrEmpty(resp.msg))
+            {
+                try
+                {
+                    resp.d.Add("year", Data.Vacaciones.getYear(item));
+                    resp.cod = "OK";
+                }
+                catch (Exception e)
+                {
+                    resp.msg = e.Message;
+                }
+            }
+            return Json(resp);
+        }
+
 
         /// <summary>
         /// Validación de los campos fechas para que no vengan vacios

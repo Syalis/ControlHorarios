@@ -11,6 +11,7 @@ function vacacionesCtrl($scope, $http, $window) {
     vm.calendario = calendario;
     vm.diasRestantesVacaciones = diasRestantesVacaciones
     vm.eventoCalendario = eventoCalendario;
+    vm.diasRestantesVacacionesNueva = diasRestantesVacacionesNueva;
 
     vm.item = [];
     vm.eventos = [];
@@ -25,7 +26,7 @@ function vacacionesCtrl($scope, $http, $window) {
     // Método para saber cúantos días restatntes nos queda de vacaciones
     function diasRestantesVacaciones() {
         try {
-            $http.post("Vacaciones/getDiasVacaciones", {
+            $http.post("Vacaciones/getDiasTotalVacaciones", {
                 item:
                 {
                     id_usuario: vm.session.id
@@ -34,11 +35,41 @@ function vacacionesCtrl($scope, $http, $window) {
                 if (r.data.cod == "OK") {
                     vm.diasVacaciones = r.data.d.data;
                     console.log(r.data);
+                   
                 } else {
                     console.log("Error");
                 }
             });
-           
+
+        } catch (ex) {
+            return ex.message;
+        }
+    }
+
+    // Método para saber cúantos días restatntes nos queda de vacaciones en lo siguientes años
+    function diasRestantesVacacionesNueva() {
+        try {
+            $http.post("Vacaciones/getDiasTotalVacacionesAnio", {
+                item:
+                {
+                    id_usuario: vm.session.id,
+                    nYear: vm.vacacionesCalendario[0].anio
+                }
+            }).then(function (r) {
+                if (r.data.cod == "OK") {
+
+                    if (r.data.d.data.length == 0) {
+                        vm.diasVacaciones[0].total_vacaciones = 30;
+                    } else {
+                        vm.diasVacaciones = r.data.d.data;
+                        console.log(r.data);
+                    }
+                   
+                } else {
+                    console.log("Error");
+                }
+            });
+
         } catch (ex) {
             return ex.message;
         }
@@ -57,11 +88,11 @@ function vacacionesCtrl($scope, $http, $window) {
                     vm.vacacionesCalendario = r.data.d.data;
                     eventoCalendario();
                     console.log(r.data);
-                    
+
                 } else {
                     console.log("Error");
                 }
-               
+
             });
         } catch (ex) {
             return ex.message;
@@ -131,7 +162,7 @@ function vacacionesCtrl($scope, $http, $window) {
 
             vm.eventos[i] = event;
         }
-   
+
         vm.dataSource = $('#calendar').data('calendar').getDataSource();
 
         $('#calendar').data('calendar').setDataSource(vm.eventos);
@@ -146,11 +177,57 @@ function vacacionesCtrl($scope, $http, $window) {
         $('#calendar').calendar({
 
             dataSource: vm.eventos
-                
+
         });
-       
+
     });
 
-    
+    vm.sumarAnio = sumarAnio;
+    vm.restarAnio = restarAnio;
+    vm.contador = 0;
+    vm.pintadoCalendario = [];
 
+
+    // Método para sumar añadir un año
+    function sumarAnio(item) {
+        ++vm.contador;
+        $http.post("Vacaciones/getYear", {
+            item:
+            {
+                id_usuario: vm.session.id,
+                nYear: vm.contador
+            }
+        }).then(function (r) {
+            if (r.data.cod == "OK") {
+                vm.vacacionesCalendario = r.data.d.year;
+                var year = vm.vacacionesCalendario[0].anio;
+                $('#calendar').data('calendar').setYear(year);
+                diasRestantesVacacionesNueva();
+
+                console.log(r.data);
+            }
+        })
+
+    }
+
+    // Método para restar un año
+    function restarAnio(item) {
+        --vm.contador;
+        $http.post("Vacaciones/getYear", {
+            item:
+            {
+                id_usuario: vm.session.id,
+                nYear: vm.contador
+            }
+        }).then(function (r) {
+            if (r.data.cod == "OK") {
+                vm.vacacionesCalendario = r.data.d.year;
+                var year = vm.vacacionesCalendario[0].anio;
+                $('#calendar').data('calendar').setYear(year);
+                diasRestantesVacacionesNueva();
+                console.log(r.data);
+            }
+        })
+
+    }
 }

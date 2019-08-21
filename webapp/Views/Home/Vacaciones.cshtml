@@ -50,6 +50,19 @@
         </div>
         <div class="card mb-2 w-100 bg-dark border-bottom"></div>
         <!--Calendario-->
+        <div class="row m-2 align-items-center pb-3 pt-3">
+            <div class="text-center mx-auto">
+                <a class="btn-lg" ng-click="vm.sumarAnio(vm.item)">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <span>
+                    <input id="date" class="text-center font-weight-bold" placeholder={{vm.vacacionesCalendario[0].anio}} readonly />
+                </span>
+                <a class="btn-lg"  ng-click="vm.restarAnio(vm.item)">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
         <div id="calendar" data-provide="calendar"></div>
     </div>
 </div>
