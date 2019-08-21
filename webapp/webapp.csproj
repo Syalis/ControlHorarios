@@ -1138,14 +1138,6 @@
     <Folder Include="descargas\" />
     <Folder Include="Plugins\angular-bootstrap-datetimepicker\src\scss\NewFolder1\" />
     <Folder Include="Plugins\angular-bootstrap-datetimepicker\src\templates\NewFolder1\" />
-    <Folder Include="Views\BD\" />
-    <Folder Include="Views\CreateUser\" />
-    <Folder Include="Views\Departamentos\" />
-    <Folder Include="Views\EmpleadosTabla\" />
-    <Folder Include="Views\Empleados\" />
-    <Folder Include="Views\Empleado\" />
-    <Folder Include="Views\FichajesEmpleados\" />
-    <Folder Include="Views\Fichajes\" />
     <Folder Include="Views\VacacionesEmpleados\" />
   </ItemGroup>
   <ItemGroup>

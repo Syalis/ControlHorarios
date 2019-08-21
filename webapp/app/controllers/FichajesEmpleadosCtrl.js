@@ -77,7 +77,7 @@ function FichajesEmpleadosCtrl($scope, $http, $window) {
     //Funcion para suma contador
     function sumarContador() {
         ++vm.contador;
-        $http.post("FichajesEmpleados/mesResta", { id: vm.listaDropdown[0].id, nMes: vm.contador }).then(function (r) {
+        $http.post("FichajesEmpleados/mesResta", { id: vm.listaDropdown.select[0].id, nMes: vm.contador }).then(function (r) {
             if (r.data.cod == "OK") {
                 vm.fichajesTotales = r.data.d.fichajesTotalesResta;
                 vm.fichajesMes = r.data.d.mesFichajesResta;
@@ -90,7 +90,7 @@ function FichajesEmpleadosCtrl($scope, $http, $window) {
     //Funcion para resta contador
     function restarContador() {
         --vm.contador;
-        $http.post("FichajesEmpleados/mesResta", { id: vm.listaDropdown[0].id, nMes: vm.contador }).then(function (r) {
+        $http.post("FichajesEmpleados/mesResta", { id: vm.listaDropdown.select[0].id, nMes: vm.contador }).then(function (r) {
             if (r.data.cod == "OK") {
                 vm.fichajesTotales = r.data.d.fichajesTotalesResta;
                 vm.fichajesMes = r.data.d.mesFichajesResta;
