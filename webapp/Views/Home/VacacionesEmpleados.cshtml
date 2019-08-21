@@ -3,5 +3,52 @@
     ViewBag.Title = "VacacionesEmpleados";
 }
 
-<h2>VacacionesEmpleados</h2>
+@*<div ng-controller="homeCtrl as vm">
+        <webapp-loader ng-if="vm.loading"></webapp-loader>
+        <div ng-show="!vm.loading">
+        </div>
+    </div>*@
+<div class="row h-100" ng-controller="VacacionesEmpleadosCtrl as vm">
+    <!--Renderizado de la nav-bar-->
+    <div id="aside" class="col-2 p-0 m-0 bg-dark">
+        @Html.Partial("lateral")
+    </div>
+    <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
+
+        @*<div  class="col-4 mx-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-reset="vm.getNombresDropdown()"></div>*@
+
+        <!--Inicio card de dias de vacaciones-->
+        <div class="row p-3">
+
+            <div class="col-4 mx-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-item-click="vm.gripCompleto(vm.listaDropdown.select[0].id)" on-reset="vm.getNombresDropdown()"></div>
+
+            <div class="col-md-3">
+                <div id="caja" class="card align-content-center">
+                    <div class="p-4">
+                        <h4 class="text-center font-weight-bold">Días Pendientes</h4>
+                        <h4 class="text-center font-weight-bold p-1">{{vm.diasVacaciones[0].total_vacaciones}}/30</h4>
+                    </div>
+                </div>
+            </div>
+            <!--Fin card de dias de vacaciones-->
+
+        </div>
+        <div class="card mb-2 w-100 bg-dark border-bottom"></div>
+        <!--Calendario-->
+        <div class="row m-2 align-items-center pb-3 pt-3">
+            <div class="text-center mx-auto">
+                <a class="btn-lg" ng-click="vm.sumarAnio(vm.item)">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <span>
+                    <input id="date" class="text-center font-weight-bold" placeholder={{vm.vacacionesCalendario[0].anio}} readonly />
+                </span>
+                <a class="btn-lg" ng-click="vm.restarAnio(vm.item)">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div id="calendar" data-provide="calendar"></div>
+    </div>
+</div>
 

@@ -272,6 +272,7 @@
     <Content Include="app\controllers\loginInicioCtrl.js" />
     <Content Include="app\controllers\mainCtrl.js" />
     <Content Include="app\controllers\vacacionesCtrl.js" />
+    <Content Include="app\controllers\VacacionesEmpleadosCtrl.js" />
     <Content Include="app\directives\directives.js" />
     <Content Include="app\directives\smart-table-addons.js" />
     <Content Include="app\factories\BD.js" />

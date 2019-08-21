@@ -1,21 +1,22 @@
-﻿angular.module('webapp').controller('vacacionesCtrl', ["$scope", "$http", "$window", vacacionesCtrl]);
+﻿angular.module('webapp').controller('VacacionesEmpleadosCtrl', ["$scope", "$http", "$window", VacacionesEmpleadosCtrl]);
 
-function vacacionesCtrl($scope, $http, $window) {
+function VacacionesEmpleadosCtrl($scope, $http, $window) {
 
     var vm = this;
     vm.lista = { data: [] };
 
     // Variables
     vm.session = $window.sessionStorage;
-    vm.peticionVacaciones = peticionVacaciones;
+
     vm.calendario = calendario;
     vm.diasRestantesVacaciones = diasRestantesVacaciones
-    vm.eventoCalendario = eventoCalendario;
+
     vm.diasRestantesVacacionesNueva = diasRestantesVacacionesNueva;
     vm.sumarAnio = sumarAnio;
     vm.restarAnio = restarAnio;
+    vm.gripCompleto = gripCompleto;
     vm.contador = 0;
-    
+
     vm.pintadoCalendario = [];
     vm.item = [];
     vm.eventos = [];
@@ -23,23 +24,40 @@ function vacacionesCtrl($scope, $http, $window) {
     vm.vacacionesCalendario = [];
     vm.vacacionesBD = [];
 
-    // Método que se inicia al iniciar la página. 
-    diasRestantesVacaciones();
-    calendario();
+    //Inicio Drppdowm
+
+    //Declaracion de variables
+    vm.listaDropdown = [];
+
+    //Declaracion de funciones
+    vm.getNombresDropdown = getNombresDropdown;
+    //Init
+    getNombresDropdown();
+
+    //Funciones
+    function getNombresDropdown() {
+        $http.post("lateral/getNombresDropdown").then(function (r) {
+            if (r.data.cod == "OK") {
+                vm.listaDropdown = r.data.d.data;
+
+            }
+        })
+    }
+    //Final Drppdowm
 
     // Método para saber cúantos días restatntes nos queda de vacaciones
-    function diasRestantesVacaciones() {
+    function diasRestantesVacaciones(id) {
         try {
             $http.post("Vacaciones/getDiasTotalVacaciones", {
                 item:
                 {
-                    id_usuario: vm.session.id
+                    id_usuario: id
                 }
             }).then(function (r) {
                 if (r.data.cod == "OK") {
                     vm.diasVacaciones = r.data.d.data;
                     console.log(r.data);
-                   
+
                 } else {
                     console.log("Error");
                 }
@@ -50,13 +68,21 @@ function vacacionesCtrl($scope, $http, $window) {
         }
     }
 
+    //Función para llamar a dos funciones y para resetar el grip del calendario
+    function gripCompleto(id) {
+        vm.eventos = [];
+        diasRestantesVacaciones(id);
+        calendario(id);
+
+    }
+
     // Método para saber cúantos días restatntes nos queda de vacaciones en lo siguientes años
     function diasRestantesVacacionesNueva() {
         try {
             $http.post("Vacaciones/getDiasTotalVacacionesAnio", {
                 item:
                 {
-                    id_usuario: vm.session.id,
+                    id_usuario: vm.listaDropdown.select[0].id,
                     nYear: vm.vacacionesCalendario[0].anio
                 }
             }).then(function (r) {
@@ -68,7 +94,7 @@ function vacacionesCtrl($scope, $http, $window) {
                         vm.diasVacaciones = r.data.d.data;
                         console.log(r.data);
                     }
-                   
+
                 } else {
                     console.log("Error");
                 }
@@ -79,13 +105,15 @@ function vacacionesCtrl($scope, $http, $window) {
         }
     }
 
+  
+
     // Método para taernos todos los datos de la BBDD sobre filtrado por id_usuario para pintar el calendario
-    function calendario() {
+    function calendario(id) {
         try {
             $http.post("Vacaciones/getDiasVacacionesCalendario", {
                 item:
                 {
-                    id_usuario: vm.session.id
+                    id_usuario: id
                 }
             }).then(function (r) {
                 if (r.data.cod == "OK") {
@@ -103,53 +131,7 @@ function vacacionesCtrl($scope, $http, $window) {
         }
     }
 
-    // Método para enviar a la BBDD los dias de que nos vamos de vacaciones
-    function peticionVacaciones(item) {
-        console.log(item);
-
-        if (vm.item.fecha_inicio_vacaciones != null && vm.item.fecha_final_vacaciones != null) {
-            $http.post("Vacaciones/createPeticionVacaciones", {
-                item:
-                {
-                    id_usuario: vm.session.id,
-                    fecha_inicio_vacaciones: vm.item.fecha_inicio_vacaciones,
-                    fecha_final_vacaciones: vm.item.fecha_final_vacaciones
-                }
-            }).then(function (r) {
-                if (r.data.cod == "OK") {
-                    vm.lista.data = r.data.d.data;
-                    diasRestantesVacaciones();
-                    calendario();
-                    eventoCalendario();
-                    Swal.fire({
-                        position: 'top-end',
-                        type: 'success',
-                        title: 'Petición correta!',
-                        footer: 'Vacaciones aceptadas!',
-                        showConfirmButton: false,
-                        timer: 1700
-                    })
-                    vm.item = {};
-                } else {
-                    vm.item = {};
-                    Swal.fire({
-                        position: 'top-end',
-                        type: 'error',
-                        title: 'Petición incorreta!',
-                        showConfirmButton: false,
-                        timer: 1700
-                    })
-
-                }
-            });
-        } else {
-            Swal.fire({
-                type: 'error',
-                title: 'Oops...Fechas erroreas!',
-                text: 'Revisa los campos de las fechas!'
-            })
-        }
-    }
+    
 
     // Método para pintar los días que nos vamos de vacaciones
     function eventoCalendario() {
@@ -186,14 +168,14 @@ function vacacionesCtrl($scope, $http, $window) {
 
     });
 
- 
+
     // Método para sumar añadir un año
     function sumarAnio(item) {
         ++vm.contador;
         $http.post("Vacaciones/getYear", {
             item:
             {
-                id_usuario: vm.session.id,
+                id_usuario: vm.listaDropdown.select[0].id,
                 nYear: vm.contador
             }
         }).then(function (r) {
@@ -215,7 +197,7 @@ function vacacionesCtrl($scope, $http, $window) {
         $http.post("Vacaciones/getYear", {
             item:
             {
-                id_usuario: vm.session.id,
+                id_usuario: vm.listaDropdown.select[0].id,
                 nYear: vm.contador
             }
         }).then(function (r) {
