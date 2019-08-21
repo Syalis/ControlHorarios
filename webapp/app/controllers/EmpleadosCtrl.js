@@ -81,7 +81,10 @@ function EmpleadosCtrl($scope, $http, $window, $location) {
 
 
             if (respuesta.cod == "OK") {
-                swal("Invitacion enviada con exito!!", "success");
+                Swal.fire(
+                    'Invitacion enviada con exito' 
+                    
+                )
             }
             else
                 swal({ title: 'Oops...', text: respuesta.msg, type: 'error' });
@@ -96,7 +99,10 @@ function EmpleadosCtrl($scope, $http, $window, $location) {
 
 
             if (respuesta.cod == "OK") {
-                swal("Usuario creado con exito!!", "success");
+                Swal.fire(
+                    'Registro completado con exito!',
+                    
+                )
                 if (newUrl == undefined) {
 
                     $window.location.href = webroot + resp.data.d.url;
