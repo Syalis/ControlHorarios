@@ -52,7 +52,10 @@ namespace webapp.Controllers
         {
             return View();
         }
-
+        public ActionResult VacacionesEmpleados()
+        {
+            return View();
+        }
 
     }
  }
