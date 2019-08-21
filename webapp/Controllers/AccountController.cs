@@ -35,12 +35,10 @@ namespace webapp.Controllers
         }
 
 
-        public ActionResult LogOut()
-        {
-            Session.Clear();
 
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Login");
+        public ActionResult forgotPass()
+        {
+            return View();
         }
 
         #region Login

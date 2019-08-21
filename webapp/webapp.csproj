@@ -1132,6 +1132,7 @@
     <Content Include="Views\Home\FormularioRegistro.cshtml" />
     <Content Include="Views\Home\FichajesEmpleados.cshtml" />
     <Content Include="Views\Home\VacacionesEmpleados.cshtml" />
+    <Content Include="Views\Account\forgotPass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
