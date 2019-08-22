@@ -38,8 +38,9 @@ namespace webapp.Controllers
 
 
 
-        public ActionResult forgotPass()
+        public ActionResult forgotPass(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -187,6 +188,7 @@ namespace webapp.Controllers
         #region "OlvidarContraseña"
         [HttpPost]
         public JsonResult forgotPass(Dictionary<string,object> data)
+           
         {
             RespGeneric resp = new RespGeneric("KO");
 
@@ -206,13 +208,14 @@ namespace webapp.Controllers
                         token = token.Replace("=", "").Replace("+", "");
                         Console.WriteLine(token.Substring(0, longitud));
                         data.Add("codigo", token);
+                        resp.cod = "OK";
 
                         //insertar codigo olvidar contraseña en la bd
-                       
+
                         Webapp.Data.Empleados.InsertCodigoPass(data);
 
                         //enviar correo
-                        Extensiones.sendEmail(to: (Convert.ToString(data["email"])), subject: (Convert.ToString(data["codigo"])), body: "Introduce el codigo que te hemos enviado para restablecer tu contraseña   ", file: "");
+                        Extensiones.sendEmail(to: (Convert.ToString(data["email"])), subject: (Convert.ToString(data["codigo"])), body: "Introduce el codigo que te hemos enviado para restablecer tu contraseña   <a href=http://localhost:51934/Account/ForgotPass> link de registro </a> ", file: "");
 
 
 
@@ -220,19 +223,66 @@ namespace webapp.Controllers
                     else
                     {
                         //correo no encontrado
-
+                        resp.msg = "cooreo electronico no encontrado";
                     };
                 }
                 else
                 {
-                        //correo electronico no valido
+                    //correo electronico no valido
+                    resp.msg = "cooreo electronico no valido";
                 };
 
             }
-            
-
                 return Json(resp);
-            #endregion
+
+
+
+           
         }
+
+
+        [HttpPost]
+        public JsonResult resetPass(Dictionary<string, object> data)
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            try { 
+            if (Convert.ToString(data["pass1"]) == Convert.ToString(data["pass2"]))
+                if (Convert.ToString(data["pass1"]).Length > 6)
+                    if (Webapp.Data.Empleados.getByCodigo(data["codigo"].ToString()) != null)
+                    {
+
+                        var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass1"])), salt: "");
+                        data.Add("ClaveHashed", passhashed);
+                        Webapp.Data.Empleados.resetPass(data);
+                        resp.cod = "OK";
+                        resp.d.Add("url", "Account/Login");
+                            Webapp.Data.Empleados.DeleteCodigo(data);
+                        }
+                        else
+                        {
+                            resp.msg = "El codigo para cambiar la contraseña no es valido";
+
+                        }
+                    else
+                    {
+                        resp.msg = "La contraseña debe tener minimo 6 caracteres";
+                    }
+                else
+                {
+                    resp.msg = "Las contraseñas no coinciden";
+                }
+            }
+
+            catch (Exception e)
+            {
+                return null;
+            }
+            return Json(resp);
+
+        }
+        #endregion
+
     }
+
 }
+

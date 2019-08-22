@@ -18,7 +18,7 @@ namespace Webapp.Data
 
         public static Dictionary<string, object> getByEmail(string email)
         {
-            return getAll().Where(p => Convert.ToString(p["email"].ToString()) == email).FirstOrDefault();
+            return getAll().Where(p => Convert.ToString(p["email"].ToString()) == email ).FirstOrDefault();
         }
 
        //insertar usuario (EMAIL,ACTIVO,NOMBRE 1 Y 2 APELLIDO , SI ESTA VALIDADO EL CORREO Y SALT   
@@ -37,8 +37,20 @@ namespace Webapp.Data
         }
         public static int InsertCodigoPass(Dictionary<string, object> data)
         {
-            return BD.getNonQueryResult("UPDATE usuarios set codigo_forgot_pass = ?codigo WHERE email = email", data);
+            return BD.getNonQueryResult("UPDATE usuarios set codigo_forgot_pass = ?codigo WHERE email = ?email", data);
 
+        }
+        public static int resetPass(Dictionary<string, object> data)
+        {
+            return BD.getNonQueryResult("UPDATE usuarios  SET password = ?ClaveHashed  WHERE codigo_forgot_pass = ?codigo ", data);
+        }
+        public static Dictionary<string, object> getByCodigo(string codigo)
+        {
+            return getAll().Where(p => Convert.ToString(p["codigo_forgot_pass"].ToString()) == codigo).FirstOrDefault();
+        }
+        public static int DeleteCodigo(Dictionary<string, object> data)
+        {
+            return BD.getNonQueryResult("UPDATE usuarios  SET codigo_forgot_pass = '0'  WHERE codigo_forgot_pass = ?codigo ", data);
         }
 
     }
