@@ -24,13 +24,14 @@ function VacacionesEmpleadosCtrl($scope, $http, $window) {
     vm.vacacionesCalendario = [];
     vm.vacacionesBD = [];
 
-    //Inicio Drppdowm
+    ////////Inicio Drppdowm///////////////
 
     //Declaracion de variables
     vm.listaDropdown = [];
 
     //Declaracion de funciones
     vm.getNombresDropdown = getNombresDropdown;
+
     //Init
     getNombresDropdown();
 
@@ -43,7 +44,7 @@ function VacacionesEmpleadosCtrl($scope, $http, $window) {
             }
         })
     }
-    //Final Drppdowm
+    ////////Final Drppdowm///////////
 
     // Método para saber cúantos días restatntes nos queda de vacaciones
     function diasRestantesVacaciones(id) {
@@ -56,8 +57,7 @@ function VacacionesEmpleadosCtrl($scope, $http, $window) {
             }).then(function (r) {
                 if (r.data.cod == "OK") {
                     vm.diasVacaciones = r.data.d.data;
-                    console.log(r.data);
-
+       
                 } else {
                     console.log("Error");
                 }
@@ -92,7 +92,6 @@ function VacacionesEmpleadosCtrl($scope, $http, $window) {
                         vm.diasVacaciones[0].total_vacaciones = 30;
                     } else {
                         vm.diasVacaciones = r.data.d.data;
-                        console.log(r.data);
                     }
 
                 } else {
@@ -119,8 +118,6 @@ function VacacionesEmpleadosCtrl($scope, $http, $window) {
                 if (r.data.cod == "OK") {
                     vm.vacacionesCalendario = r.data.d.data;
                     eventoCalendario();
-                    console.log(r.data);
-
                 } else {
                     console.log("Error");
                 }
@@ -184,8 +181,6 @@ function VacacionesEmpleadosCtrl($scope, $http, $window) {
                 var year = vm.vacacionesCalendario[0].anio;
                 $('#calendar').data('calendar').setYear(year);
                 diasRestantesVacacionesNueva();
-
-                console.log(r.data);
             }
         })
 
@@ -206,7 +201,6 @@ function VacacionesEmpleadosCtrl($scope, $http, $window) {
                 var year = vm.vacacionesCalendario[0].anio;
                 $('#calendar').data('calendar').setYear(year);
                 diasRestantesVacacionesNueva();
-                console.log(r.data);
             }
         })
 

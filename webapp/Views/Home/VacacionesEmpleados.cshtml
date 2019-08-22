@@ -18,9 +18,7 @@
         @*<div  class="col-4 mx-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-reset="vm.getNombresDropdown()"></div>*@
 
         <!--Inicio card de dias de vacaciones-->
-        <div class="row p-3">
-
-            <div class="col-4 mx-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-item-click="vm.gripCompleto(vm.listaDropdown.select[0].id)" on-reset="vm.getNombresDropdown()"></div>
+        <div class="row m-2 align-items-center pb-3" id="centralPerfil">
 
             <div class="col-md-3">
                 <div id="caja" class="card align-content-center">
@@ -30,10 +28,16 @@
                     </div>
                 </div>
             </div>
+            <div class="mx-auto">
+                <h4 class="text-center">Vacaciones de los empleados</h4>
+                <div class="col-10 mx-auto mb-2 mt-5 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-item-click="vm.gripCompleto(vm.listaDropdown.select[0].id)" on-reset="vm.getNombresDropdown()"></div>
+
+            </div>
+
             <!--Fin card de dias de vacaciones-->
 
         </div>
-        <div class="card mb-2 w-100 bg-dark border-bottom"></div>
+        
         <!--Calendario-->
         <div class="row m-2 align-items-center pb-3 pt-3">
             <div class="text-center mx-auto">
