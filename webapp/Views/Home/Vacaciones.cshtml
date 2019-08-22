@@ -30,16 +30,16 @@
                         <h4 class="text-center font-weight-bold">Solicita tus vacaciones</h4>
                         <h6 class="text-center p-1">Introduce las fechas</h6>
 
-                        <div class="form-row align-content-center align-items-center mx-auto p-3">
-                            <div class="col-sm-4">
-                                <label>Fecha Inicio Vacaciones</label><br />
+                        <div class="form-row align-content-center align-items-center p-3">
+                            <div class="col-sm-4 ml-5 ">
+                                <label class="mt-0">Fecha Inicio Vacaciones</label>
                                 <top-datepicker ng-model="vm.item.fecha_inicio_vacaciones"></top-datepicker>
                             </div>
-                            <div class="col-sm-4">
-                                <label>Fecha Final Vacaciones</label><br />
+                            <div class="col-sm-4 ml-0 ml-3" >
+                                <label class="mt-0">Fecha Final Vacaciones</label>
                                 <top-datepicker ng-model="vm.item.fecha_final_vacaciones"></top-datepicker>
                             </div>
-                            <div class="col-sm-4 mt-4 pl-3">
+                            <div class="col-sm-2 mt-4 ml-3 pl-3">
                                 <button type="submit" id="save-event" class="btn btn-success btn-sm">Solicitar</button>
                             </div>
                         </div>
