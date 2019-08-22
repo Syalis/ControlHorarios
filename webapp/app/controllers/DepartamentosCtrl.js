@@ -31,7 +31,7 @@ function DepartamentosCtrl($scope, $http, $window) {
         $http.post("lateral/getNombresDropdown").then(function (r) {
             if (r.data.cod == "OK") {
                 vm.listaEmpleados.data = r.data.d.data
-                console.log(vm.listaEmpleados.data);
+                //console.log(vm.listaEmpleados.data);
             }
         })
     }
