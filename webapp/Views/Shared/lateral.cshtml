@@ -3,10 +3,9 @@
     ViewBag.Title = "lateral";
 }
 
-    <nav id="aside" class="navbar bg-dark text-white" ng-controller="lateralCtrl as vm">
+@*<nav id="aside" class="navbar bg-dark text-white" ng-controller="lateralCtrl as vm">
 
-        @*<div  class="col-12 mx-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-reset="vm.getNombresDropdown()"></div>*@
-        
+
         <p class="w-100 m-0 mt-3">
             <strong>Acciones</strong>
         </p>
@@ -19,11 +18,11 @@
                 <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("Index", "Home")"><i class="fas fa-user-clock mr-2"></i>Mis Fichajes</a>
             </li>
             <li class="nav-item" >
-                <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("Vacaciones", "Home")"><i class="fas fa-plane-departure mr-2"></i>Mis vacaciones</a>
+                <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("Vacaciones", "Home")"><i class="fas fa-plane-departure mr-2"></i>Mis Vacaciones</a>
             </li>
 
         </ul>
-        
+
         <p class="w-100 m-0">
             <strong>Empresa</strong>
         </p>
@@ -39,6 +38,48 @@
                 <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("VacacionesEmpleados", "Home")"><i class="fas fa-plane-departure mr-2"></i>Vacaciones</a>
             </li>
         </ul>
-        
-    </nav>
-   
+
+    </nav>*@
+
+<nav class="navbar navbar-expand-xl navbar-light bg-dark">
+
+    <button class="navbar-toggler align-self-baseline text-white" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse align-self-baseline mt-4" id="navbarNavAltMarkup">
+        <div class="navbar-nav nav flex-column">
+            <p class=" m-0">
+                <strong class="text-white">Acciones</strong>
+            </p>
+            <ul class=" nav flex-column mx-auto mb-3 mt-2">
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("Perfil", "Home")"><i class="fas fa-user mr-2"></i>Mi Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("Index", "Home")"><i class="fas fa-user-clock mr-2"></i>Mis Fichajes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("Vacaciones", "Home")"><i class="fas fa-plane-departure mr-2"></i>Mis Vacaciones</a>
+                </li>
+
+            </ul>
+
+            <p class=" m-0">
+                <strong class="text-white">Empresa</strong>
+            </p>
+            <ul class=" nav flex-column mx-auto mb-3 mt-2">
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("Empleados", "Home")"><i class="fas fa-users mr-2"></i>Empleados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("FichajesEmpleados", "Home")"><i class="fas fa-user-clock mr-2"></i>Fichajes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("VacacionesEmpleados", "Home")"><i class="fas fa-plane-departure mr-2"></i>Vacaciones</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

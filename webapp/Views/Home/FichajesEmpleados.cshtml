@@ -4,10 +4,11 @@
 }
 
     <div class="row h-100" ng-controller="FichajesEmpleadosCtrl as vm">
-        <div id="aside" class="col-2 p-0 m-0 bg-dark">
-            <!--Renderizado de la nav-bar-->
-            @Html.Partial("lateral")
-        </div>
+        @*<div id="aside" class="col-2 p-0 m-0 bg-dark">
+
+
+        </div>*@
+        @Html.Partial("lateral")
         <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
             <div class="col-4 mr-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-item-click="vm.getDatosInicioFichajes(vm.listaDropdown.select[0].id)" on-reset="vm.getNombresDropdown()"></div>
             <div id="centralPerfil" class="row m-2 align-items-center pb-3 pt-3">
@@ -23,7 +24,7 @@
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
-                
+
             </div>
 
             <div id="centralDatos" class="row m-2">
