@@ -22,6 +22,7 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
     vm.password = "";
     vm.loading = false;
     vm.email = {};
+    vm.pass= { };
  
     //////////////////////////////
 
@@ -30,6 +31,7 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
     vm.ShowHide = show;
     vm.Enviar = enviar;
     vm.forgotPass = forgotPass;
+    vm.resetPass = resetPass;
     //////////////////////////////
 
     //INIT
@@ -75,20 +77,50 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
         }
     }
     
-   
+   //enviar email de restablecimiento de contraseña
     function forgotPass() {
         $http.post("Account/forgotPass", { data:vm.email })
             .then(function (resp) {
-                if (response.data.cod === "OK") {
+                var respuesta = resp.data;
 
+                if (respuesta.cod == "OK") {
+                    swal("revisa tu bandeja de entrada");
+                    
                 }
                 else {
                     vm.loading = false;
-                    swal({ title: 'Oops...', text: response.data.msg, type: 'error' });
+                    swal({ title: 'Oops...', text: resp.data.msg, type: 'success' });
                 }
 
             });
     }
+
+    //actualizar contraseña antigua olvidada por nueva
+    function resetPass() {
+
+        $http.post("Account/resetPass", { data: vm.pass })
+            .then(function (resp) {
+                var respuesta = resp.data;
+
+
+                if (respuesta.cod == "OK") {
+                    Swal.fire(
+                        'Cambio de contraseña completado con exito!',
+
+                    )
+                    if (newUrl == undefined) {
+
+                        $window.location.href = webroot + respuesta.data.d.url;
+                    }
+                    else {
+                        $window.location.href = webroot;
+                    }
+                }
+                else
+                    swal({ title: 'Oops...', text: resp.data.msg, type: 'error' });
+            });
+    }
+
 }
 
 
