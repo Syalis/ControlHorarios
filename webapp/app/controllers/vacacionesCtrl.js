@@ -138,7 +138,7 @@ function vacacionesCtrl($scope, $http, $window) {
         } else {
             Swal.fire({
                 type: 'error',
-                title: 'Oops...Fechas erroreas!',
+                title: 'Fechas erroreas!',
                 text: 'Revisa los campos de las fechas!'
             })
         }
