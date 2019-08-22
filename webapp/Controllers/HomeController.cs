@@ -43,6 +43,8 @@ namespace webapp.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
         public ActionResult FormularioRegistro(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;

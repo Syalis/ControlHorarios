@@ -36,8 +36,16 @@ namespace webapp.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
 
 
+        [AllowAnonymous]
         public ActionResult forgotPass(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -186,6 +194,7 @@ namespace webapp.Controllers
         #endregion
 
         #region "OlvidarContraseña"
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult forgotPass(Dictionary<string,object> data)
            
@@ -240,6 +249,7 @@ namespace webapp.Controllers
            
         }
 
+        [AllowAnonymous]
 
         [HttpPost]
         public JsonResult resetPass(Dictionary<string, object> data)
