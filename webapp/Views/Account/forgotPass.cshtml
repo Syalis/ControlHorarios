@@ -8,7 +8,7 @@
 <!--===============================================================================================-->
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="wrapper fadeInDown">
+<div class="wrapper fadeInDown" ng-controller="loginInicioCtrl as vm">
     <div id="formContent">
 
 
@@ -19,10 +19,13 @@
         </div>*@
 
         <!-- formulario acceso -->
-        <form ng-submit="" class="mt-2">
-            <input type="text" id="user" class="fadeIn second" name="pass" placeholder="Password" ng-model="">
-            <input type="password" id="password" class="fadeIn third" name="repeatpass" placeholder="Repeat Password" ng-model="">
-            <input type="submit" class="botonlogin" value="Log In" ladda="vm.loading">
+        <label class="font-weight-bold"> restablece tu contraseña</label>
+        <form ng-submit="vm.resetPass()" class="mt-2">
+            <input type="password" id="user" class="fadeIn second" name="pass" placeholder="Password" ng-model="vm.pass.pass1">
+            <input type="password" id="password" class="fadeIn third" name="repeatpass" placeholder="Repeat Password" ng-model="vm.pass.pass2">
+            <input type="text" class="fadeIn third"  placeholder="Codigo" ng-model="vm.pass.codigo">
+
+            <input type="submit" class="botonlogin" value="Restablecer" ladda="vm.loading">
         </form>
 
         <!-- recordar contraseña -->
