@@ -14,16 +14,24 @@
             <br /><br />
             <form ng-submit="vm.UpdateUser()">
                 <div class="form-group">
+                    <label class="alinear">Nombre</label>
+
                     <input type="text" class="form-control" placeholder="Nombre " name="Nombre " ng-model="vm.UpadateUserDatos.nombre" required /> <br />
+                    <label class="alinear">Primer pellido</label>
+
                     <input type="text" class="form-control" placeholder="Primer apellido " name="Primer apellido " ng-model="vm.UpadateUserDatos.primer_apellido" required /> <br />
+                    <label class="alinear">Segundo Apellido</label>
+
                     <input type="text" class="form-control" placeholder="Segundo apellido " name="Segundo apellido " ng-model="vm.UpadateUserDatos.segundo_apellido" required /> <br />
                     <label class="alinear">Contraseña</label>
                     <input type="password" class="form-control" placeholder="Contraseña" name="Contraseña" ng-model="vm.UpadateUserDatos.pass" required><br />
                     <label class="alinear"> Repetir contraseña</label>
-                    <input type="password" class="form-control" placeholder="repetir contraseña" name="RContraseña" required  ng-model="vm.UpadateUserDatos.passR"/><br />
+                    <input type="password" class="form-control" placeholder="repetir contraseña" name="RContraseña" required ng-model="vm.UpadateUserDatos.passR" /><br />
                     <label class="alinear"> telefono</label>
 
                     <input type="text" placeholder="Telefono" class="form-control" name="Telefono " ng-model="vm.UpadateUserDatos.telefono" required /><br />
+                    <label class="alinear">Codigo Invitacion</label>
+
                     <input type="text" placeholder="codigo invitacion" class="form-control" name="invitacion" ng-model="vm.UpadateUserDatos.invitacion" required /><br /><br />
                     <br />
                     <button type="submit" class="btn btn-primary">Registrar</button>
@@ -36,6 +44,7 @@
 
 
 </div>
+
 
 
 

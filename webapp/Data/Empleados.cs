@@ -15,6 +15,10 @@ namespace Webapp.Data
         {
             return BD.getQueryResult($"select u.* from usuarios u ");
         }
+        public static List<Dictionary<string, object>> getPass()
+        {
+            return BD.getQueryResult($"select u.password from usuarios u ");
+        }
         //comprobar email
         public static Dictionary<string, object> getByEmail(string email)
         {
@@ -63,6 +67,11 @@ namespace Webapp.Data
         public static List<Dictionary<string, object>> getSalt()
         {
             return BD.getQueryResult($"select u.* from usuarios u ");
+        }
+        //comprobar que la conraseña no es la misma para restablecerla
+        public static Dictionary<string, object> getByPass(string pass1)
+        {
+            return getAll().Where(p => Convert.ToString(p["password"].ToString()) == pass1).FirstOrDefault();
         }
 
     }
