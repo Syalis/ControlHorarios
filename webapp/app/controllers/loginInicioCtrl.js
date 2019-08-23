@@ -103,14 +103,14 @@ function loginInicioCtrl($scope, $http, $window, $location, $document) {
                 var respuesta = resp.data;
 
 
-                if (respuesta.cod == "OK") {
+                if (respuesta.cod === "OK") {
                     Swal.fire(
                         'Cambio de contraseña completado con exito!',
 
                     )
                     if (newUrl == undefined) {
 
-                        $window.location.href = webroot + respuesta.data.d.url;
+                        $window.location.href = webroot + resp.data.d.url;
                     }
                     else {
                         $window.location.href = webroot;

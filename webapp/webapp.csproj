@@ -1128,7 +1128,7 @@
     <Content Include="Views\Home\Vacaciones.cshtml" />
     <Content Include="Views\Home\Perfil.cshtml" />
     <Content Include="Views\Home\Departamentos.cshtml" />
-    <Content Include="Views\Home\FormularioRegistro.cshtml" />
+    <Content Include="Views\Account\FormularioRegistro.cshtml" />
     <Content Include="Views\Home\FichajesEmpleados.cshtml" />
     <Content Include="Views\Home\VacacionesEmpleados.cshtml" />
     <Content Include="Views\Account\forgotPass.cshtml" />
