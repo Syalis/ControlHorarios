@@ -73,7 +73,7 @@ function EmpleadosCtrl($scope, $http, $window, $location) {
     //Funciones de Jesus para el modal
     //funciones
     vm.InsertUser = InsertUser;
-
+    vm.close = close;
     vm.datosUser = {};
     function InsertUser() {
         $http.post("CreateUser/InsertUser", { data: vm.datosUser }).then(function (resp) {
@@ -115,5 +115,7 @@ function EmpleadosCtrl($scope, $http, $window, $location) {
                 swal({ title: 'Oops...', text: resp.data.msg, type: 'error' });
         });
     }
-
+    function close() {
+        vm.datosUser = {};
+    }
 }

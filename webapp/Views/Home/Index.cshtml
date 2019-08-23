@@ -6,14 +6,17 @@
         <div ng-show="!vm.loading">
         </div>
     </div>*@
+
     <div class="row h-100" ng-controller="FichajesCtrl as vm">
         @*<div id="aside" class="col-2 p-0 m-0 bg-dark">
-           
+
 
         </div>*@
+        @Html.Partial("lateralSuperior")
         @Html.Partial("lateral")
         <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
             <div id="centralPerfil" class="row p-3 m-2 align-items-center pb-3 pt-3">
+
                 <h2>Fichajes</h2>
                 <div class="text-center mx-auto">
                     <a class="btn" ng-click="vm.sumarContador()">
@@ -40,7 +43,7 @@
                     </div>
 
                     <div class="progress mb-2">
-                        <button ng-click="vm.drop(x.fecha)" class="btn progress-bar progress-bar-striped bg-success progress-bar-animated" type="button"  data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="width:{{x.porcentaje}}"><span class="mx-auto">{{x.porcentaje}}</span></button>
+                        <button ng-click="vm.drop(x.fecha)" class="btn progress-bar progress-bar-striped bg-success progress-bar-animated" type="button" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="width:{{x.porcentaje}}"><span class="mx-auto">{{x.porcentaje}}</span></button>
                     </div>
                     <div id="{{x.fecha}}" hidden>
                         <table class="table table-hover">
@@ -60,9 +63,9 @@
 
         </div>
     </div>
-    
-        
- 
+
+
+
 
 
 
