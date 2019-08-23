@@ -17,7 +17,7 @@ function FichajesEmpleadosCtrl($scope, $http, $window) {
     vm.agrupacionPorDia = agrupacionPorDia;
     vm.sumarContador = sumarContador;
     vm.restarContador = restarContador;
-
+    vm.drop = drop;
     //Init
     //getDatosInicioFichajes();
 
@@ -100,6 +100,10 @@ function FichajesEmpleadosCtrl($scope, $http, $window) {
             }
         })
 
+    }
+    //Funcion para el collapse de los dias
+    function drop(fecha) {
+        document.getElementById(fecha).toggleAttribute('hidden');
     }
 
 
