@@ -48,3 +48,27 @@
     color: red;
 }
 
+
+@media (max-width: 653px) {
+
+    #nav1{
+        display:none;
+
+    }
+    #nav2{
+        display:block;
+    }
+    #nav3 {
+        display: none;
+    }
+}
+@media (min-width: 653px) {
+
+    #nav1 {
+        display: flex;
+    }
+
+    #nav2 {
+        display: none;
+    }
+}

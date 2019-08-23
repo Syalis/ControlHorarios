@@ -20,10 +20,11 @@ function FichajesCtrl($scope, $http, $window) {
     vm.sumarContador = sumarContador;
     vm.restarContador = restarContador;
     vm.drop = drop;
+    vm.comprobacionPantalla = comprobacionPantalla;
 
     //Init
     getDatosInicioFichajes();
-    
+    comprobacionPantalla();
     
     //Funciones
 
@@ -136,6 +137,15 @@ function FichajesCtrl($scope, $http, $window) {
     //Funcion para el collapse de los dias
     function drop(fecha) {
         document.getElementById(fecha).toggleAttribute('hidden');
+    }
+
+    //Funcion para comprobar el ancho de pantalla y cambiar de barra de navegacion
+    function comprobacionPantalla() {
+        if ($(window).width < 576) {
+            $('#nav1').attr('hidden');
+            
+        }
+           
     }
 
 

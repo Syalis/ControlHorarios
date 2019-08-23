@@ -1,5 +1,5 @@
 ﻿<!-- Navigation Bar-->
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark static-top m-0">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark static-top m-0" id="nav3">
         <!-- Brand -->
         
 
@@ -10,12 +10,11 @@
             <!-- Dropdown -->
             <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle mr-2" href="#" id="navbardrop" data-toggle="dropdown">
-                    <i class="far fa-user-circle mr-1"></i>Usuario
+                    <h6><strong class="text-white"><i class="far fa-user-circle mr-1"></i>{{vm.session.nombre | uppercase}} {{vm.session.primer_apellido | uppercase}} {{vm.session.segundo_apellido | uppercase}}</strong></h6>
                 </a>
-                <div class="dropdown-menu  dropdown-menu-md-right">
-                    <a class="dropdown-item" href="#">Link 1</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" target="_self" href="@Url.Action("Logout", "Account")">Cerrar Sesión</a>
+                <div class="dropdown-menu bg-dark dropdown-menu-md-right border-white">
+                    
+                    <a class="dropdown-item bg-dark text-white" target="_self" href="@Url.Action("Logout", "Account")">Cerrar Sesión</a>
                 </div>
             </li>
         </ul>

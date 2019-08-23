@@ -8,6 +8,7 @@
         @*<div id="aside" class="col-2 p-0 m-0 bg-dark">
 
         </div>*@
+        @Html.Partial("lateralSuperior")
         @Html.Partial("lateral")
         <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
             <div class="row">
@@ -29,7 +30,7 @@
                         </div>
                     </div>
                     <div class="row ml-3">
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><span><i class="fas fa-plus mr-1"></i></span>Nuevo Empleado</button>
+                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal"><span><i class="fas fa-plus mr-1"></i></span>Nuevo Empleado</button>
                     </div>
                 </form>
             </div>
@@ -86,16 +87,16 @@
         <!-- Modal Formulario Registro-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4>Formulario de registro</h4>
+                <h5>Formulario de registro</h5>
             </div>
 
             <form class="m-2" ng-submit="vm.InsertUser()">
 
                 <div class="form-group">
-                    <label class="font-weight-bold">Email</label>
-                    <input type="text" class="form-control" ng-model="vm.datosUser.email" placeholder="Email" required><br /> <br />
-                    <button class="btn btn-primary" type="submit" >Enviar Invitacion</button>
-                    <button class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    <label class="font-weight-bold"><strong>Email</strong></label>
+                    <input type="text" class="form-control input-sm mb-4" ng-model="vm.datosUser.email" placeholder="Email" required>
+                    <button class="btn btn-success btn-sm" type="submit" >Enviar Invitacion</button>
+                    <button class="btn btn-danger btn-sm"  ng-click="vm.close()" data-dismiss="modal">Cerrar</button>
 
                 </div>
 
@@ -105,8 +106,8 @@
     </div>
 </div>
 <!--Fin del modal-->
-<script>
+@*<script>
       $('body').on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
       });
-    </script>
+    </script>*@
