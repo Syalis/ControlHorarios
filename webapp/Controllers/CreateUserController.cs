@@ -42,7 +42,7 @@ namespace webapp.Controllers
                             Webapp.Data.Empleados.InsertUser(data);
                             resp.cod = "OK";
                             //enviar email a la direccion email dentro del data
-                            Extensiones.sendEmail(to: (Convert.ToString(data["email"])), subject: (Convert.ToString(data["invitacion"])), body: "Introduce el codigo que te hemos enviado junto con tus datos para finalizar el registro  <a href=http://localhost:51934/Account/FormularioRegistro> link de registro </a>", file: "");
+                            Extensiones.sendEmail(to: (Convert.ToString(data["email"])), subject: (Convert.ToString(data["invitacion"])), body: "Introduce el codigo que te hemos enviado junto con tus datos para finalizar el registro  <a href=http://localhost:51934/Account/FormularioRegistro> link de registro </a> ", file: "");
                         }
 
                         else
