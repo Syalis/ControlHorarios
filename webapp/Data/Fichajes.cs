@@ -82,17 +82,10 @@ namespace webapp.Data
                                           order by
                                                           m1) t left join
 
-                                          (select id_usuario, concat(round(sum((timediff(time(hora_salida), time(hora_entrada))) * 100 / time_to_sec('08:00:00')), 2), '%') as porcentaje,
-
-
-
-                                          time_format(timediff(ifnull(time(hora_salida), '08:00:00'), time(hora_entrada)), '%H:%i:%s') as computado,
-
-                                          date_format(fecha, '%d/%m/%Y') as fecha
-  
-
-
-                                          from control_horas group by date_format(fecha, '%d/%m/%Y')) h on t.fecha = h.fecha  and h.id_usuario = ?id order by(t.fecha)asc", new Dictionary<string, object>() { { "id", id } });
+                                                                                      (select id_usuario, concat(round(sum((time_to_sec((timediff(hora_salida, hora_entrada))) * 100) / time_to_sec('08:00:00')), 2), '%') as porcentaje,
+                                            sec_to_time(sum(time_to_sec(timediff(ifnull(hora_salida, now()), hora_entrada)))) as computado, 
+                                            date_format(fecha, '%d/%m/%Y') as fecha
+                                            from control_horas where id_usuario = ?id group by date_format(fecha, '%d/%m/%Y') ) h on t.fecha = h.fecha  and h.id_usuario = ?id order by(t.fecha)asc", new Dictionary<string, object>() { { "id", id } });
         }
         //Metodo de comprobacion de boton de fichajes
         public static List<Dictionary<string, object>> getEstadoBoton(int id)
@@ -189,17 +182,10 @@ namespace webapp.Data
                                           order by
                                                           m1) t left join
 
-                                          (select id_usuario, concat(round(sum((timediff(time(hora_salida), time(hora_entrada))) * 100 / time_to_sec('08:00:00')), 2), '%') as porcentaje,
-
-
-
-                                          time_format(timediff(ifnull(time(hora_salida), '08:00:00'), time(hora_entrada)), '%H:%i:%s') as computado,
-
-                                          date_format(fecha, '%d/%m/%Y') as fecha
-  
-
-
-                                          from control_horas group by date_format(fecha, '%d/%m/%Y')) h on t.fecha = h.fecha  and h.id_usuario = ?id order by(t.fecha)asc", new Dictionary<string, object>() { { "id", id }, { "nMes", nMes } });
+                                          (select id_usuario, concat(round(sum((time_to_sec((timediff(hora_salida, hora_entrada))) * 100) / time_to_sec('08:00:00')), 2), '%') as porcentaje,
+                                                sec_to_time(sum(time_to_sec(timediff(ifnull(hora_salida, now()), hora_entrada)))) as computado, 
+                                                date_format(fecha, '%d/%m/%Y') as fecha
+                                                from control_horas where id_usuario = ?id group by date_format(fecha, '%d/%m/%Y') ) h on t.fecha = h.fecha  and h.id_usuario = ?id order by(t.fecha)asc", new Dictionary<string, object>() { { "id", id }, { "nMes", nMes } });
         }
     }
 }
