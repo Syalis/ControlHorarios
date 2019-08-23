@@ -44,12 +44,7 @@ namespace webapp.Controllers
             return View();
         }
 
-        [AllowAnonymous]
-        public ActionResult FormularioRegistro(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
+       
         public ActionResult FichajesEmpleados()
         {
             return View();

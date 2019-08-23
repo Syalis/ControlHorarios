@@ -35,6 +35,12 @@ namespace webapp.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+        [AllowAnonymous]
+        public ActionResult FormularioRegistro(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
 
         [AllowAnonymous]
         public ActionResult LogOut()
@@ -260,8 +266,15 @@ namespace webapp.Controllers
                 if (Convert.ToString(data["pass1"]).Length > 6)
                     if (Webapp.Data.Empleados.getByCodigo(data["codigo"].ToString()) != null)
                     {
+                            //funcion que genera un codigo alfanumerico aleatorio e irrepetible
+                            int longitud = 4;
+                            Guid miGuid = Guid.NewGuid();
+                            string token = Convert.ToBase64String(miGuid.ToByteArray());
+                            token = token.Replace("=", "").Replace("+", "");
+                            Console.WriteLine(token.Substring(0, longitud));
+                            data.Add("salt", token);
 
-                        var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass1"])), salt: "");
+                            var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass1"])), salt: (Convert.ToString(data["salt"])));
                         data.Add("ClaveHashed", passhashed);
                         Webapp.Data.Empleados.resetPass(data);
                         resp.cod = "OK";

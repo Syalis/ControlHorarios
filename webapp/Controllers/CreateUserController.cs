@@ -42,7 +42,7 @@ namespace webapp.Controllers
                             Webapp.Data.Empleados.InsertUser(data);
                             resp.cod = "OK";
                             //enviar email a la direccion email dentro del data
-                            Extensiones.sendEmail(to: (Convert.ToString(data["email"])), subject: (Convert.ToString(data["invitacion"])), body: "Introduce el codigo que te hemos enviado junto con tus datos para finalizar el registro  <a href=http://localhost:51934/Home/FormularioRegistro/token?> link de registro </a> ", file: "");
+                            Extensiones.sendEmail(to: (Convert.ToString(data["email"])), subject: (Convert.ToString(data["invitacion"])), body: "Introduce el codigo que te hemos enviado junto con tus datos para finalizar el registro  <a href=http://localhost:51934/Account/FormularioRegistro> link de registro </a>", file: "");
                         }
 
                         else
@@ -82,8 +82,14 @@ namespace webapp.Controllers
                     if(Convert.ToString(data["pass"]).Length>6)
                     if (Webapp.Data.Empleados.getByInvitacion(data["invitacion"].ToString()) != null)
                     {
+                            int longitud = 7;
+                            Guid miGuid = Guid.NewGuid();
+                            string token = Convert.ToBase64String(miGuid.ToByteArray());
+                            token = token.Replace("=", "").Replace("+", "");
+                            Console.WriteLine(token.Substring(0, longitud));
+                            data.Add("salt", token);
 
-                        var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass"])), salt: "");
+                            var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass"])), salt: (Convert.ToString(data["salt"])));
                         data.Add("ClaveHashed", passhashed);
                         Webapp.Data.Empleados.UpdateUser(data);
                         resp.cod = "OK";
