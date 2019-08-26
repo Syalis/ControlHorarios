@@ -12,39 +12,39 @@ namespace webapp.Controllers
     public class FichajesController : Controller
     {
         //Metodo para iniciar la carga de fichajes hasta el momento del empleado en el mes actual por su id+comprobacion del boton de check
-        [HttpPost]
-        public JsonResult getInicioFichajes(int id)
-        {
-            RespGeneric resp = new RespGeneric("KO");
-            resp.msg = validarIntEmpleado(id);
+        //[HttpPost]
+        //public JsonResult getInicioFichajes(int id)
+        //{
+        //    RespGeneric resp = new RespGeneric("KO");
+        //    resp.msg = validarIntEmpleado(id);
 
-            if (string.IsNullOrEmpty(resp.msg))
-            {
-                try
-                {
-                    //Comprobacion del estado del boton+fichajes del mes en curso+totales de horas
-                    resp.d.Add("boton", Data.Fichajes.getEstadoBoton(id));
-                    resp.d.Add("fichajesTotales", Data.Fichajes.getTotalesFichajes(id));
-                    var fichajes = Data.Fichajes.getMesFichajes(id);
-                    foreach (var a in fichajes)
-                    {
-                       a["horas"]= a["horas"].ToString().Split(',').ToArray();
-                    }
-
-
-                    resp.d.Add("mesFichajes", fichajes);
-                    resp.cod = "OK";
-                    resp.msg = "Exito en la petición";
-                }
-                catch (Exception e)
-                {
-                    resp.msg = e.Message;
-                }
-            }
-            return Json(resp);
+        //    if (string.IsNullOrEmpty(resp.msg))
+        //    {
+        //        try
+        //        {
+        //            //Comprobacion del estado del boton+fichajes del mes en curso+totales de horas
+        //            resp.d.Add("boton", Data.Fichajes.getEstadoBoton(id));
+        //            resp.d.Add("fichajesTotales", Data.Fichajes.getTotalesFichajes(id));
+        //            var fichajes = Data.Fichajes.getMesFichajes(id);
+        //            foreach (var a in fichajes)
+        //            {
+        //               a["horas"]= a["horas"].ToString().Split(',').ToArray();
+        //            }
 
 
-        }
+        //            resp.d.Add("mesFichajes", fichajes);
+        //            resp.cod = "OK";
+        //            resp.msg = "Exito en la petición";
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            resp.msg = e.Message;
+        //        }
+        //    }
+        //    return Json(resp);
+
+
+        //}
         //Metodo para validar el id del empleado
         public string validarIntEmpleado(int id)
         {

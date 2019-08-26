@@ -9,7 +9,7 @@ function vacacionesCtrl($scope, $http, $window) {
     vm.session = $window.sessionStorage;
     vm.peticionVacaciones = peticionVacaciones;
     vm.calendario = calendario;
-    vm.diasRestantesVacaciones = diasRestantesVacaciones
+    //vm.diasRestantesVacaciones = diasRestantesVacaciones
     vm.eventoCalendario = eventoCalendario;
     vm.diasRestantesVacacionesNueva = diasRestantesVacacionesNueva;
     vm.sumarAnio = sumarAnio;
@@ -24,33 +24,37 @@ function vacacionesCtrl($scope, $http, $window) {
     vm.vacacionesBD = [];
 
     // Método que se inicia al iniciar la página. 
-    diasRestantesVacaciones();
+
     calendario();
 
     // Método para saber cúantos días restatntes nos queda de vacaciones
-    function diasRestantesVacaciones() {
-        try {
-            $http.post("Vacaciones/getDiasTotalVacaciones", {
-                item:
-                {
-                    id_usuario: vm.session.id
-                }
-            }).then(function (r) {
-                if (r.data.cod == "OK") {
-                    vm.diasVacaciones = r.data.d.data;
-                } else {
-                    console.log("Error");
-                }
-            });
+    //function diasRestantesVacaciones() {
+    //    try {
+    //        $http.post("Vacaciones/getDiasTotalVacaciones", {
+    //            item:
+    //            {
+    //                id_usuario: vm.session.id
+    //            }
+    //        }).then(function (r) {
+    //            if (r.data.cod == "OK") {
+    //                vm.diasVacaciones = r.data.d.data;
+    //                if (vm.diasVacaciones[0].total_vacaciones == 0) {
+    //                    $("#save-event").hide();
+    //                }
+    //            } else {
+    //                console.log("Error");
+    //            }
+    //        });
 
-        } catch (ex) {
-            return ex.message;
-        }
-    }
+    //    } catch (ex) {
+    //        return ex.message;
+    //    }
+    //}
 
     // Método para saber cúantos días restatntes nos queda de vacaciones en lo siguientes años
     function diasRestantesVacacionesNueva() {
         try {
+            $("#save-event").show();
             $http.post("Vacaciones/getDiasTotalVacacionesAnio", {
                 item:
                 {
@@ -64,6 +68,9 @@ function vacacionesCtrl($scope, $http, $window) {
                         vm.diasVacaciones[0].total_vacaciones = 30;
                     } else {
                         vm.diasVacaciones = r.data.d.data;
+                        if (vm.diasVacaciones[0].total_vacaciones == 0) {
+                            $("#save-event").hide();
+                        }
                     }
                    
                 } else {
@@ -87,6 +94,7 @@ function vacacionesCtrl($scope, $http, $window) {
             }).then(function (r) {
                 if (r.data.cod == "OK") {
                     vm.vacacionesCalendario = r.data.d.data;
+                    diasRestantesVacacionesNueva();
                     eventoCalendario();
                 } else {
                     console.log("Error");
@@ -111,7 +119,7 @@ function vacacionesCtrl($scope, $http, $window) {
             }).then(function (r) {
                 if (r.data.cod == "OK") {
                     vm.lista.data = r.data.d.data;
-                    diasRestantesVacaciones();
+                    diasRestantesVacacionesNueva();
                     calendario();
                     eventoCalendario();
                     Swal.fire({

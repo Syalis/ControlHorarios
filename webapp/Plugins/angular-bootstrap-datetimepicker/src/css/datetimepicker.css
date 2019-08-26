@@ -49,18 +49,18 @@
   color: #ebebeb;
   cursor: default;
 }
-.datetimepicker .active,
-.datetimepicker .active:hover,
-.datetimepicker .active.disabled,
-.datetimepicker .active.disabled:hover {
-  background-color: #0044cc;
-  background-image: linear-gradient(to bottom, #0088cc, #0044cc);
-  background-repeat: repeat-x;
-  border-color: #0044cc #0044cc #002a80;
-  color: #ffffff;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#08c', endColorstr='#04c', GradientType=0);
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
+    .datetimepicker .active,
+    .datetimepicker .active:hover,
+    .datetimepicker .active.disabled,
+    .datetimepicker .active.disabled:hover {
+        background-color: #0044cc;
+        background-image: linear-gradient(to bottom, #28a745, #28a745);
+        background-repeat: repeat-x;
+        border-color: #0044cc #0044cc #002a80;
+        color: #ffffff;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#08c', endColorstr='#04c', GradientType=0);
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    }
 .datetimepicker .active:hover,
 .datetimepicker .active:hover:hover,
 .datetimepicker .active.disabled:hover,

@@ -18,28 +18,28 @@ namespace webapp.Controllers
         /// <param name="item">párametro donde se recogen la id del usuario y los días de vacaciones</param>
         /// <param name="item">parámetro donde se recogen la fecha de incio y la fecha final</param>
         /// <returns></returns>
-        [HttpPost]
-        public JsonResult getDiasTotalVacaciones(Dictionary<string, object> item)
-        {
-            RespGeneric resp = new RespGeneric("KO");
+        //[HttpPost]
+        //public JsonResult getDiasTotalVacaciones(Dictionary<string, object> item)
+        //{
+        //    RespGeneric resp = new RespGeneric("KO");
            
 
-            if (string.IsNullOrEmpty(resp.msg))
-            {
-                try
-                {
-                    resp.d.Add("data", Data.Vacaciones.getDiasTotalVacaciones(item));
-                    resp.cod = "OK";
+        //    if (string.IsNullOrEmpty(resp.msg))
+        //    {
+        //        try
+        //        {
+        //            resp.d.Add("data", Data.Vacaciones.getDiasTotalVacaciones(item));
+        //            resp.cod = "OK";
                 
-                }
-                catch (Exception ex)
-                {
-                    resp.msg = ex.Message;
-                }
-            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            resp.msg = ex.Message;
+        //        }
+        //    }
 
-            return Json(resp);
-        }
+        //    return Json(resp);
+        //}
 
         /// <summary>
         /// Método de llamada a la consulta para que nos devuelva cuantos días de vacaciones nos queda al pasar del año actual. 
@@ -47,6 +47,7 @@ namespace webapp.Controllers
         /// <param name="item">párametro donde se recogen la id del usuario y los días de vacaciones</param>
         /// <param name="item">parámetro donde se recogen la fecha de incio y la fecha final</param>
         /// <returns></returns>
+
         [HttpPost]
         public JsonResult getDiasTotalVacacionesAnio(Dictionary<string, object> item)
         {

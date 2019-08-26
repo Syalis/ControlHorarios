@@ -32,10 +32,10 @@ function FichajesCtrl($scope, $http, $window) {
 
     //Funcion de muestra de fichajes mes actual (inicio) 
     function getDatosInicioFichajes() {
-        $http.post("Fichajes/getInicioFichajes", { id: vm.session.id }).then(function (r) {
+        $http.post("Fichajes/mesResta", { id: vm.session.id, nMes: vm.contador }).then(function (r) {
             if (r.data.cod == "OK") {
-                vm.fichajesTotales = r.data.d.fichajesTotales;
-                vm.fichajesMes = r.data.d.mesFichajes;
+                vm.fichajesTotales = r.data.d.fichajesTotalesResta;
+                vm.fichajesMes = r.data.d.mesFichajesResta;
                 vm.fichajesBoton = r.data.d.boton;
                 //console.log(r.data.d);
                 comprobacionBoton();

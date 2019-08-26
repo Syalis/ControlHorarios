@@ -17,7 +17,7 @@
             <!--Inicio card de dias de vacaciones-->
             <div class="row m-2 align-items-center pb-3" id="centralPerfil">
                 <div class="col-md-3">
-                    <div id="caja" class="card align-content-center">
+                    <div id="caja" class="card align-content-center bg-success text-white">
                         <div class="p-4">
                             <h4 class="text-center font-weight-bold">Días Pendientes</h4>
                             <h4 class="text-center font-weight-bold p-1">{{vm.diasVacaciones[0].total_vacaciones}}/30</h4>
@@ -58,7 +58,7 @@
                         <i class="fas fa-arrow-left"></i>
                     </a>
                     <span>
-                        <input id="date" class="text-center font-weight-bold" placeholder={{vm.vacacionesCalendario[0].anio}} readonly />
+                        <input id="date" class="text-center font-weight-bold h4" placeholder={{vm.vacacionesCalendario[0].anio}} readonly />
                     </span>
                     <a class="btn-lg" ng-click="vm.restarAnio(vm.item)">
                         <i class="fas fa-arrow-right"></i>
