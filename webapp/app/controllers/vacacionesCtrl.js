@@ -126,7 +126,7 @@ function vacacionesCtrl($scope, $http, $window) {
                         position: 'top-end',
                         type: 'success',
                         title: 'Petición correta!',
-                        footer: 'Vacaciones aceptadas!',
+                        text: 'Vacaciones aceptadas!',
                         showConfirmButton: false,
                         timer: 1700
                     })
@@ -137,6 +137,7 @@ function vacacionesCtrl($scope, $http, $window) {
                         position: 'top-end',
                         type: 'error',
                         title: 'Petición incorreta!',
+                        text: 'Revisa los campos de las fechas!',
                         showConfirmButton: false,
                         timer: 1700
                     })
