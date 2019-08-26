@@ -49,7 +49,7 @@
     -o-user-select: none;
     user-select: none;
     white-space: normal;
-    background-color: #8F8F8F;
+    background-color: #343A40;
     width: 100%;
 }
 
@@ -199,7 +199,7 @@
     position: absolute;
     width: 20%;
     display: block !important;
-    background-color: #8F8F8F;
+    background-color: #343A40;
     color: white;
 }
 
@@ -207,7 +207,7 @@
 .multiSelect .multiSelectItem {
     display: block;
     padding: 3px;
-    color: #444;       
+    color: white;       
     white-space: nowrap;
     -webkit-user-select: none;
     -moz-user-select: none;

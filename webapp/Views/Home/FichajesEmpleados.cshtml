@@ -11,15 +11,19 @@
         @Html.Partial("lateralSuperior")
         @Html.Partial("lateral")
         <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
-            <div class="col-4 mr-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-item-click="vm.getDatosInicioFichajes(vm.listaDropdown.select[0].id)" on-reset="vm.getNombresDropdown()"></div>
+            <div class="row mt-2 ml-3 align-items-center">
+                <h5><strong>Selecciona un empleado:</strong></h5>
+                <div class="col-4 mr-auto mb-3 mt-2 rounded" isteven-multi-select input-model="vm.listaDropdown" output-model="vm.listaDropdown.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-item-click="vm.getDatosInicioFichajes(vm.listaDropdown.select[0].id)" on-reset="vm.getNombresDropdown()"></div>
+
+            </div>
             <div id="centralPerfil" class="row m-2 align-items-center pb-3 pt-3">
-                <h2>Fichajes</h2>
-                <div class="text-center mx-auto">
+                <h2 class="col-4">Fichajes</h2>
+                <div class="text-center">
                     <a class="btn" ng-click="vm.sumarContador()">
                         <i class="fas fa-arrow-circle-left"></i>
                     </a>
                     <span>
-                        <input id="date" class="text-center" placeholder={{vm.fichajesMes[0].mes}} readonly />
+                        <input id="date" class="text-center h6" placeholder={{vm.fichajesMes[0].mes}} readonly />
                     </span>
                     <a class="btn" ng-click="vm.restarContador()">
                         <i class="fas fa-arrow-circle-right"></i>
@@ -29,7 +33,7 @@
             </div>
 
             <div id="centralDatos" class="row m-2">
-                <h2>Jornadas</h2>
+                <h2 class="col-4">Jornadas</h2>
                 <div class="container" ng-repeat="x in vm.fichajesTotales">
                     <div class="row">
                         <label class="ml-3 font-weight-bold">{{x.fecha}}</label>

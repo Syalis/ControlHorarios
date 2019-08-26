@@ -117,6 +117,7 @@
     text-align: center;
     height: 200px;
     padding: 0;
+    margin-bottom: 30px;
 }
 
 .calendar table.month th.month-title {
