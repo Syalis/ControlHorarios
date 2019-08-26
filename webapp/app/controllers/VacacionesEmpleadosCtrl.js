@@ -9,7 +9,7 @@ function VacacionesEmpleadosCtrl($scope, $http, $window) {
     vm.session = $window.sessionStorage;
 
     vm.calendario = calendario;
-    vm.diasRestantesVacaciones = diasRestantesVacaciones
+    //vm.diasRestantesVacaciones = diasRestantesVacaciones
 
     vm.diasRestantesVacacionesNueva = diasRestantesVacacionesNueva;
     vm.sumarAnio = sumarAnio;
@@ -46,32 +46,32 @@ function VacacionesEmpleadosCtrl($scope, $http, $window) {
     }
     ////////Final Drppdowm///////////
 
-    // Método para saber cúantos días restatntes nos queda de vacaciones
-    function diasRestantesVacaciones(id) {
-        try {
-            $http.post("Vacaciones/getDiasTotalVacaciones", {
-                item:
-                {
-                    id_usuario: id
-                }
-            }).then(function (r) {
-                if (r.data.cod == "OK") {
-                    vm.diasVacaciones = r.data.d.data;
+    //// Método para saber cúantos días restatntes nos queda de vacaciones
+    //function diasRestantesVacaciones(id) {
+    //    try {
+    //        $http.post("Vacaciones/getDiasTotalVacaciones", {
+    //            item:
+    //            {
+    //                id_usuario: id
+    //            }
+    //        }).then(function (r) {
+    //            if (r.data.cod == "OK") {
+    //                vm.diasVacaciones = r.data.d.data;
        
-                } else {
-                    console.log("Error");
-                }
-            });
+    //            } else {
+    //                console.log("Error");
+    //            }
+    //        });
 
-        } catch (ex) {
-            return ex.message;
-        }
-    }
+    //    } catch (ex) {
+    //        return ex.message;
+    //    }
+    //}
 
     //Función para llamar a dos funciones y para resetar el grip del calendario
     function gripCompleto(id) {
         vm.eventos = [];
-        diasRestantesVacaciones(id);
+        diasRestantesVacacionesNueva(id);
         calendario(id);
 
     }
@@ -92,6 +92,9 @@ function VacacionesEmpleadosCtrl($scope, $http, $window) {
                         vm.diasVacaciones[0].total_vacaciones = 30;
                     } else {
                         vm.diasVacaciones = r.data.d.data;
+                        if (vm.diasVacaciones[0].total_vacaciones == 0) {
+                            $("#save-event").hide();
+                        }
                     }
 
                 } else {
