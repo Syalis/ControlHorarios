@@ -11,14 +11,20 @@
         @Html.Partial("lateralSuperior")
         @Html.Partial("lateral")
         <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
-            <div class="row">
-                <a class="nav-link active text-success" target="_self" href="@Url.Action("Empleados", "Home")"><h3><i class="far fa-address-card mr-2"></i>Empleados</h3></a>
-                <a class="nav-link disabled" href=""><h3><i class="far fa-building mr-2"></i>Departamentos</h3></a>
+            <div class="row" role="tablist">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item border-bottom border-top-0 border-left-0 border-dark">
+                        <a class="nav-link active text-success" target="_self" href="@Url.Action("Empleados", "Home")"><h4><i class="far fa-address-card mr-2"></i>Empleados</h4></a>
+                    </li>
+                    <li class="nav-item border-top border-left border-right border-dark  border-bottom-0">
+                        <a class="nav-link disabled" href=""><h4><i class="far fa-building mr-2"></i>Departamentos</h4></a>
+                    </li>
+                </ul>
 
 
             </div>
 
-            <div>
+            <div class=" mt-2">
                 <form id="formDepartamentos">
                     <div class="form-row ml-3">
                         <div class="form-group mr-2">
@@ -68,6 +74,7 @@
                                 <a href="#" class="fas fa-trash-alt text-md-left text-danger"></a>
                                 <a href="#" class="fas fa-file-export text-md-left text-success"></a>
                                 <a href="#" class="fas fa-list-ul text-md-left text-primary"></a>
+
                             </td>
 
 

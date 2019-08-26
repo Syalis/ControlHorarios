@@ -11,9 +11,9 @@ namespace webapp.Data
         //Metodo para cargar empleados en la tabla
         public static List<Dictionary<string, object>> getEmpleadosTabla()
         {
-            return BD.getQueryResult($@"select upper(u.nombre) as Nombre, upper(concat_ws(' ', u.primer_apellido, u.segundo_apellido)) as Apellidos, 
+            return BD.getQueryResult($@"select u.nombre as Nombre, concat_ws(' ', u.primer_apellido, u.segundo_apellido) as Apellidos, 
 
-                                        u.email as Correo, upper(d.nombre) as Departamento,
+                                        u.email as Correo, d.nombre as Departamento,
 
 
                                         ifnull(sum(v.dias_disfrutados_vacaciones), 0) as Vacaciones from usuarios u left join vacaciones v 
@@ -26,7 +26,7 @@ namespace webapp.Data
         //Metodo para filtrar empleados en la tabla
         public static List<Dictionary<string, object>> getEmpleadosFiltrados(int id)
         {
-            return BD.getQueryResult($@"select upper(u.nombre) as Nombre, upper(concat_ws(' ', u.primer_apellido, u.segundo_apellido)) as Apellidos, u.email as Correo, u.departamento as departamento,
+            return BD.getQueryResult($@"select u.nombre as Nombre, concat_ws(' ', u.primer_apellido, u.segundo_apellido) as Apellidos, u.email as Correo, u.departamento as departamento,
                 ifnull(sum(v.dias_disfrutados_vacaciones), 0) as Vacaciones from usuarios u left join vacaciones v on u.id = v.id_usuario where u.id = ?id group by u.id", new Dictionary<string, object>() { { "id", id } });
         }
     }
