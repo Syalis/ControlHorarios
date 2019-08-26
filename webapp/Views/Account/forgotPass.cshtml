@@ -14,14 +14,14 @@
 
 
 
-        <div class="fadeIn first mt-4 mb-2">
+        <div class="fadeIn first mt-1 mb-2">
             <img src="~/images/logo.png" id="icon" alt="User Icon" />
         </div>
         <!-- recordar contraseña -->
-        <h5 class="mt-3">Restablece tu contraseña</h5>
-        <form ng-submit="vm.resetPass()" class="mt-2">
-            <input type="password" id="user" class="fadeIn second" name="pass" placeholder="Password" ng-model="vm.pass.pass1">
-            <input type="password" id="password" class="fadeIn third" name="repeatpass" placeholder="Repeat Password" ng-model="vm.pass.pass2">
+        <h5 class="mt-1">Restablece tu contraseña</h5>
+        <form ng-submit="vm.resetPass()" class="class="form-group"">
+            <input type="password" id="user" class="fadeIn second" name="pass" placeholder="Contraseña" ng-model="vm.pass.pass1">
+            <input type="password" id="password" class="fadeIn third" name="repeatpass" placeholder="Repite contraseña" ng-model="vm.pass.pass2">
             <input type="text" class="fadeIn third" placeholder="Codigo" ng-model="vm.pass.codigo">
 
             <input type="submit" class="botonlogin" value="Restablecer" ladda="vm.loading">

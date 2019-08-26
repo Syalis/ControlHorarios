@@ -322,6 +322,7 @@
     <Content Include="images\logo-login.png" />
     <Content Include="images\logo-main.png" />
     <Content Include="images\logo-only.png" />
+    <Content Include="images\logo.png" />
     <Content Include="Plugins\alaSQL\alasql.min.js" />
     <Content Include="Plugins\alaSQL\xlsx.min.js" />
     <Content Include="Plugins\angular-animate\angular-animate.js" />
