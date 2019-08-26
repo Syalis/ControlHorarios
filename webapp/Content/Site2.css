@@ -152,6 +152,10 @@ input[type=text], input[type=password] {
         color: #cccccc;
     }
 
+.transition {
+    transition: all linear 0.5s;
+ 
+}
 
 
 /* ANIMATIONS */

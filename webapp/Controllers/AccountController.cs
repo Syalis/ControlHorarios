@@ -264,8 +264,10 @@ namespace webapp.Controllers
             try { 
             if (Convert.ToString(data["pass1"]) == Convert.ToString(data["pass2"]))
                 if (Convert.ToString(data["pass1"]).Length > 6)
-                    if (Webapp.Data.Empleados.getByCodigo(data["codigo"].ToString()) != null)
-                    {
+                       
+
+                            if (Webapp.Data.Empleados.getByCodigo(data["codigo"].ToString()) != null)
+                                 {
                             //funcion que genera un codigo alfanumerico aleatorio e irrepetible
                             int longitud = 4;
                             Guid miGuid = Guid.NewGuid();
@@ -275,7 +277,8 @@ namespace webapp.Controllers
                             data.Add("salt", token);
 
                             var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass1"])), salt: (Convert.ToString(data["salt"])));
-                        data.Add("ClaveHashed", passhashed);
+                                data.Add("ClaveHashed", passhashed);
+                   
                         Webapp.Data.Empleados.resetPass(data);
                         resp.cod = "OK";
                         resp.d.Add("url", "Account/Login");
@@ -286,6 +289,7 @@ namespace webapp.Controllers
                             resp.msg = "El codigo para cambiar la contraseña no es valido";
 
                         }
+                     
                     else
                     {
                         resp.msg = "La contraseña debe tener minimo 6 caracteres";

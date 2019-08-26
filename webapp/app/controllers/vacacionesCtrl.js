@@ -38,6 +38,9 @@ function vacacionesCtrl($scope, $http, $window) {
             }).then(function (r) {
                 if (r.data.cod == "OK") {
                     vm.diasVacaciones = r.data.d.data;
+                    if (vm.diasVacaciones[0].total_vacaciones == 0) {
+                        $("#save-event").hide();
+                    }
                 } else {
                     console.log("Error");
                 }
@@ -51,6 +54,7 @@ function vacacionesCtrl($scope, $http, $window) {
     // Método para saber cúantos días restatntes nos queda de vacaciones en lo siguientes años
     function diasRestantesVacacionesNueva() {
         try {
+            $("#save-event").show();
             $http.post("Vacaciones/getDiasTotalVacacionesAnio", {
                 item:
                 {
@@ -64,6 +68,9 @@ function vacacionesCtrl($scope, $http, $window) {
                         vm.diasVacaciones[0].total_vacaciones = 30;
                     } else {
                         vm.diasVacaciones = r.data.d.data;
+                        if (vm.diasVacaciones[0].total_vacaciones == 0) {
+                            $("#save-event").hide();
+                        }
                     }
                    
                 } else {

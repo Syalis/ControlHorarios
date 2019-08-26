@@ -26,7 +26,7 @@
         </form>
 
         <!-- recordar contraseña -->
-        <div id="formFooter">
+        <div  class="transition">
 
             <a href="#" ng-click="vm.ShowHide()" ng-hide="vm.visible">No recuerdas tu contraseña?</a>
 
@@ -34,7 +34,7 @@
                 <br><br><div ng-show="vm.visible">
                     <h5>Introduce tu email para que te enviemos un enlace</h5>
                     <br />
-                    <input type="text" class="fadeIn third"  placeholder="Email" ng-model="vm.email.email">
+                    <input type="text" class="fadeIn third"  placeholder="Email" ng-model="vm.email.email" required>
 
                     <input  type="submit" class="btn btn-outline-secondary" value="restablecer">
                 </div>
