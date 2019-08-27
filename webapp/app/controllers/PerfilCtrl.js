@@ -53,7 +53,7 @@ function PerfilCtrl($scope, $http, $window) {
     function setEmail() {
         $http.post("Perfil/setEmail", { id: vm.session.id, emailUsuario: vm.emailUsuario }).then(function (r) {
             if (r.data.cod == "OK") {
-                vm.session.usuario = vm.emailUsuario;
+                vm.session.usuario = vm.emailUsuario.email;
                 
                 Swal.fire({
                     position: 'top-end',
