@@ -88,7 +88,7 @@ function EmpleadosCtrl($scope, $http, $window, $location) {
 
 
     function InsertUser() {
-        $http.post("CreateUser/InsertUser", { data: vm.datosUser}).then(function (resp) {
+        $http.post("CreateUser/InsertUser", { data: vm.datosUser, departamento: vm.TipoUsuario.select}).then(function (resp) {
             var respuesta = resp.data;
 
 
