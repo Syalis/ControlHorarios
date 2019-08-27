@@ -8,6 +8,7 @@ function PerfilCtrl($scope, $http, $window) {
     vm.nombreUsuario = {};
     vm.emailUsuario = {};
     vm.departamentoUsuario = {};
+    vm.setPass = setPass;
     
     vm.listaDepartamentos = { data: [], disp: [], filter: [] };
 
@@ -25,6 +26,33 @@ function PerfilCtrl($scope, $http, $window) {
     //Funcion para cambiar nombre y apellidos del usuario
     function setUsuario() {
         $http.post("Perfil/setNombre", { id: vm.session.id, nombreUsuario: vm.nombreUsuario }).then(function (r) {
+            if (r.data.cod == "OK") {
+                vm.session.nombre = vm.nombreUsuario.nombre;
+                vm.session.primer_apellido = vm.nombreUsuario.primer_apellido;
+                vm.session.segundo_apellido = vm.nombreUsuario.segundo_apellido;
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Petición correta!',
+                    text: 'Nombre y apellidos cambiados!',
+                    showConfirmButton: false,
+                    timer: 1700
+                })
+            } else {
+                //Swal.fire({
+                //    position: 'top-end',
+                //    type: 'error',
+                //    title: 'Petición incorreta!',
+                //    text: 'Revisa los campos!',
+                //    showConfirmButton: false,
+                //    timer: 1700
+                //})
+            }
+        })
+    }
+
+    function setPass() {
+        $http.post("Perfil/setNombre", { pass: vm.pass}).then(function (r) {
             if (r.data.cod == "OK") {
                 vm.session.nombre = vm.nombreUsuario.nombre;
                 vm.session.primer_apellido = vm.nombreUsuario.primer_apellido;
