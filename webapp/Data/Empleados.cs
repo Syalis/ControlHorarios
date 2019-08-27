@@ -34,7 +34,17 @@ namespace Webapp.Data
         //registro de usuario
         public static int UpdateUser(Dictionary<string, object> data)
         {
-            return BD.getNonQueryResult("UPDATE usuarios  SET password = ?ClaveHashed, telefono = ?telefono, validado = '1' ,nombre = ?nombre , primer_apellido= ?primer_apellido , segundo_apellido = ?segundo_apellido, salt =  ?salt, id_perfil = '1'  WHERE invitacion = ?invitacion " , data);
+            return BD.getNonQueryResult($@"UPDATE usuarios  SET password = ?ClaveHashed, telefono = ?telefono,
+
+
+             validado = '1', nombre = CONCAT(UPPER(LEFT(?nombre, 1)), LOWER(SUBSTRING(?nombre, 2))),
+
+             primer_apellido = CONCAT(UPPER(LEFT(?primer_apellido, 1)), LOWER(SUBSTRING(?primer_apellido, 2))),
+
+             segundo_apellido = CONCAT(UPPER(LEFT(?segundo_apellido, 1)), LOWER(SUBSTRING(?segundo_apellido, 2))),
+            salt =  ?salt ,
+
+            id_perfil = '1'   WHERE invitacion = ?invitacion " , data);
         }
         //comprobar invitacion de registro
         public static Dictionary<string, object> getByInvitacion(string invitacion)
