@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-group ml-3 my-auto pt-2">
-                                <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
+                                <button class="btn btn-success btn-sm" type="submit">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -59,16 +59,16 @@
                 <div class="bg-white pt-2">
                     <a class="btn ml-1 mb-2 text-left d-block" data-toggle="collapse" href="#formEmail" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><h6><i class="fas fa-cogs mr-3"></i>Email</h6></a>
                     <input type="text" placeholder="{{vm.session.usuario}}" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
-                    <form id="formEmail" class="collapse multi-collapse ml-2">
+                    <form id="formEmail" class="collapse multi-collapse ml-2" ng-submit="vm.setEmail()">
                         <div class="form-row ml-3 mt-2">
                             <div class="form-group mr-2 w-25">
                                 <label for="inputText">Email</label>
-                                <div class="input-group input-group-sm  ">
-                                    <input type="text" placeholder="{{vm.session.usuario}}" class="form-control" ng-model="vm.emailUsuario">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" placeholder="{{vm.session.usuario}}" class="form-control" ng-model="vm.emailUsuario" required>
                                 </div>
                             </div>
                             <div class="form-group ml-3 my-auto pt-2">
-                                <button class="btn btn-primary btn-sm">Guardar</button>
+                                <button class="btn btn-success btn-sm" type="submit">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                             <div class="form-group ml-3 my-auto pt-2">
-                                <button class="btn btn-primary btn-sm">Guardar</button>
+                                <button class="btn btn-success btn-sm" type="submit">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -100,8 +100,8 @@
                 <div class="bg-white pt-2">
                     <a class="btn ml-1 mb-2 text-left d-block" data-toggle="collapse" href="#formDepartamento" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><h6><i class="fas fa-cogs mr-3"></i>Departamento</h6></a>
                     <p class="text-left ml-3">Selecciona a qué departamento pertenece el empleado. Si no tienes añadido ningún departamento, añádelo desde aquí</p>
-                    <input type="text" placeholder="{{vm.session.departamento}}" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
-                    <form id="formDepartamento" class="collapse multi-collapse ml-2" ng-if="vm.session.id_perfil==1">
+                    <input type="text" placeholder="{{vm.session.departamentos}}" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
+                    <form id="formDepartamento" class="collapse multi-collapse ml-2" ng-if="vm.session.id_perfil==1" ng-submit="vm.setDepartamento()">
                         <div class="form-row ml-3 mt-2">
                             <div class="form-group mr-2 w-25">
                                 <label for="inputText">Departamento</label>
@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                             <div class="form-group ml-3 my-auto pt-2">
-                                <button class="btn btn-primary btn-sm">Guardar</button>
+                                <button class="btn btn-success btn-sm" type="submit">Guardar</button>
                             </div>
                         </div>
                     </form>

@@ -8,17 +8,18 @@ function PerfilCtrl($scope, $http, $window) {
     vm.nombreUsuario = {};
     vm.emailUsuario = {};
     vm.departamentoUsuario = {};
-    vm.tipoUsuario = {};
+    
     vm.listaDepartamentos = { data: [], disp: [], filter: [] };
 
     //Declaracion de funciones
     vm.setUsuario = setUsuario;
     vm.setEmail = setEmail;
     vm.setDepartamento = setDepartamento;
-    vm.setTipoUsuario = setTipoUsuario;
+    
     vm.getDepartamentosDropdown = getDepartamentosDropdown;
 
     //Init
+    getDepartamentosDropdown();
 
     //Funciones
     //Funcion para cambiar nombre y apellidos del usuario
