@@ -25,24 +25,30 @@
                 <div class="bg-white pt-2">
                     <a class="btn ml-1 mb-2 text-left d-block" data-toggle="collapse" href="#formNombreApellidos" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><h6><i class="fas fa-cogs mr-3"></i>Nombre y Apellidos</h6></a>
 
-                    <input type="text" placeholder="NOMBRE APELLIDOS" class="w-25 ml-3  mb-2 border-0" readonly />
-                    <form id="formNombreApellidos" class="collapse multi-collapse">
+                    <input type="text" placeholder="{{vm.session.nombre}} {{vm.session.primer_apellido}} {{vm.session.segundo_apellido}}" class="w-25 ml-4  mb-2 border-0" readonly />
+                    <form id="formNombreApellidos" class="collapse multi-collapse ml-2" ng-submit="vm.setUsuario()">
                         <div class="form-row ml-3 mt-2">
                             <div class="form-group mr-2">
                                 <label for="inputText">Nombre</label>
                                 <div class="input-group input-group-sm ">
-                                    <input type="text" class="form-control">
+                                    <input type="text" placeholder="{{vm.session.nombre}}" class="form-control" ng-model="vm.nombreUsuario.nombre" required>
                                 </div>
                             </div>
                             <div class="form-group ml-2">
-                                <label for="inputText">Apellidos</label>
+                                <label for="inputText">Primer Apellido</label>
                                 <div class="input-group input-group-sm ">
-                                    <input type="text" class="form-control">
+                                    <input type="text" placeholder="{{vm.session.primer_apellido}}" class="form-control" ng-model="vm.nombreUsuario.primer_apellido" required>
+                                </div>
+                            </div>
+                            <div class="form-group ml-2">
+                                <label for="inputText">Segundo Apellido</label>
+                                <div class="input-group input-group-sm ">
+                                    <input type="text" placeholder="{{vm.session.segundo_apellido}}" class="form-control" ng-model="vm.nombreUsuario.segundo_apellido" required>
                                 </div>
                             </div>
 
                             <div class="form-group ml-3 my-auto pt-2">
-                                <button class="btn btn-primary btn-sm">Guardar</button>
+                                <button class="btn btn-success btn-sm" type="submit">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -52,17 +58,17 @@
                 <!--Inicio del email-->
                 <div class="bg-white pt-2">
                     <a class="btn ml-1 mb-2 text-left d-block" data-toggle="collapse" href="#formEmail" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><h6><i class="fas fa-cogs mr-3"></i>Email</h6></a>
-                    <input type="text" placeholder="EMAIL" class="w-25 ml-3 mt-2 mb-2 border-0" readonly />
-                    <form id="formEmail" class="collapse multi-collapse">
+                    <input type="text" placeholder="{{vm.session.usuario}}" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
+                    <form id="formEmail" class="collapse multi-collapse ml-2" ng-submit="vm.setEmail()">
                         <div class="form-row ml-3 mt-2">
                             <div class="form-group mr-2 w-25">
                                 <label for="inputText">Email</label>
-                                <div class="input-group input-group-sm  ">
-                                    <input type="text" class="form-control">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" placeholder="{{vm.session.usuario}}" class="form-control" ng-model="vm.emailUsuario" required>
                                 </div>
                             </div>
                             <div class="form-group ml-3 my-auto pt-2">
-                                <button class="btn btn-primary btn-sm">Guardar</button>
+                                <button class="btn btn-success btn-sm" type="submit">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -73,8 +79,8 @@
                 <div class="bg-white pt-2">
                     <a class="btn ml-1 mb-2 text-left d-block" data-toggle="collapse" href="#formContrasena" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><h6><i class="fas fa-cogs mr-3"></i>Contraseña</h6></a>
                     <p class="text-left ml-3">¿Quieres que este usuario tenga acceso a la versión web? Introduce una contraseña para que pueda acceder al panel combinándola con su correo electrónico. </p>
-                    <input type="password" placeholder="CONTRASEÑA" class="w-25 ml-3 mt-2 mb-2 border-0" readonly />
-                    <form id="formContrasena" class="collapse multi-collapse">
+                    <input type="password" placeholder="CONTRASEÑA" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
+                    <form id="formContrasena" class="collapse multi-collapse ml-2">
                         <div class="form-row ml-3 mt-2">
                             <div class="form-group mr-2 w-25">
                                 <label for="inputText">Contraseña</label>
@@ -83,7 +89,7 @@
                                 </div>
                             </div>
                             <div class="form-group ml-3 my-auto pt-2">
-                                <button class="btn btn-primary btn-sm">Guardar</button>
+                                <button class="btn btn-success btn-sm" type="submit">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -94,17 +100,18 @@
                 <div class="bg-white pt-2">
                     <a class="btn ml-1 mb-2 text-left d-block" data-toggle="collapse" href="#formDepartamento" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><h6><i class="fas fa-cogs mr-3"></i>Departamento</h6></a>
                     <p class="text-left ml-3">Selecciona a qué departamento pertenece el empleado. Si no tienes añadido ningún departamento, añádelo desde aquí</p>
-                    <input type="text" placeholder="DEPARTAMENTO" class="w-25 ml-3 mt-2 mb-2 border-0" readonly />
-                    <form id="formDepartamento" class="collapse multi-collapse" ng-if="vm.session.id_perfil==1">
+                    <input type="text" placeholder="{{vm.session.departamentos}}" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
+                    <form id="formDepartamento" class="collapse multi-collapse ml-2" ng-if="vm.session.id_perfil==1" ng-submit="vm.setDepartamento()">
                         <div class="form-row ml-3 mt-2">
                             <div class="form-group mr-2 w-25">
                                 <label for="inputText">Departamento</label>
                                 <div class="input-group input-group-sm ">
-                                    <input type="text" class="form-control">
+                                    <div isteven-multi-select input-model=" vm.listaDepartamentos.data" output-model="vm.listaDepartamentos.select" button-label="nombre" item-label="nombre" tick-property="ticked" max-labels="1" selection-mode="single" on-item-click="" on-reset=""></div>
+
                                 </div>
                             </div>
                             <div class="form-group ml-3 my-auto pt-2">
-                                <button class="btn btn-primary btn-sm">Guardar</button>
+                                <button class="btn btn-success btn-sm" type="submit">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -115,20 +122,20 @@
                 <div class="bg-white pt-2">
                     <a class="btn ml-1 mb-2 text-left d-block" data-toggle="collapse" href="#formTipoUsuario" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><h6><i class="fas fa-cogs mr-3"></i>Tipo de usuario</h6></a>
                     <p class="text-left ml-3">Asigna el rol al que pertenece este usuario según los permisos que deseas que tenga. Dependiendo de su rol, el usuario estará capacitado para acceder a determinadas vistas y disfrutar de diferentes funcionalidades.</p>
-                    <input type="text" placeholder="TIPO DE USUARIO" class="w-25 ml-3 mt-2 mb-2 border-0" readonly />
-                    <form id="formTipoUsuario" class="collapse multi-collapse" ng-if="vm.session.id_perfil==1">
+                    <input type="text" placeholder="{{vm.session.tipo_perfil}}" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
+                    @*<form id="formTipoUsuario" class="collapse multi-collapse ml-2" ng-if="vm.session.id_perfil==1">
                         <div class="form-row ml-3 mt-2">
                             <div class="form-group mr-2 w-25">
                                 <label for="inputText">Tipo de usuario</label>
                                 <div class="input-group input-group-sm ">
-                                    <input type="text" class="form-control">
+                                    <input type="text" placeholder="{{vm.session.tipo_perfil}}" class="form-control" ng-model="vm.tipoUsuario">
                                 </div>
                             </div>
                             <div class="form-group ml-3 my-auto pt-2">
                                 <button class="btn btn-primary btn-sm">Guardar</button>
                             </div>
                         </div>
-                    </form>
+                    </form>*@
                     <div id="perfilAdmin" class="mx-auto mt-2"></div>
                 </div>
                 <!--Fin de tipo usario-->
