@@ -41,7 +41,7 @@
 
     </nav>*@
 
-<nav class="navbar navbar-expand-sm navbar-light bg-dark" id="nav1">
+<nav class="navbar navbar-expand-sm navbar-light bg-dark" id="nav1" ng-controller="lateralCtrl as vm">
 
     <button class="navbar-toggler align-self-baseline text-white" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -65,10 +65,10 @@
 
             </ul>
 
-            <p class=" m-0">
+            <p class=" m-0" ng-if="vm.session.id_perfil==1">
                 <strong class="text-white"><i class="fas fa-briefcase mr-1"></i>Empresa</strong>
             </p>
-            <ul class=" nav flex-column mx-auto mb-3 mt-2">
+            <ul class=" nav flex-column mx-auto mb-3 mt-2"  ng-if="vm.session.id_perfil==1">
 
                 <li class="nav-item">
                     <a class="nav-link text-white" role="button" target="_self" href="@Url.Action("Empleados", "Home")"><i class="fas fa-users mr-2"></i>Empleados</a>

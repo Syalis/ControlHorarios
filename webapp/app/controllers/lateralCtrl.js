@@ -3,6 +3,6 @@
 function lateralCtrl($scope, $http, $window) {
     var vm = this;
     vm.session = $window.sessionStorage;
-    vm.window = $window;
+    
   
 }
