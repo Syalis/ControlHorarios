@@ -72,9 +72,21 @@ function EmpleadosCtrl($scope, $http, $window, $location) {
 
     //Funciones de Jesus para el modal
     //funciones
+
     vm.InsertUser = InsertUser;
     vm.close = close;
     vm.datosUser = {};
+    vm.getTipoUsuarioDropdown = getTipoUsuarioDropdown;
+    //init
+    getTipoUsuarioDropdown();
+    //variables
+    var newUrl = $location.search().ReturnUrl;
+    vm.UpdateUser = UpdateUser;
+    vm.UpadateUserDatos = {};
+    vm.TipoUsuario = { data: [] };
+    //
+
+
     function InsertUser() {
         $http.post("CreateUser/InsertUser", { data: vm.datosUser }).then(function (resp) {
             var respuesta = resp.data;
@@ -90,9 +102,7 @@ function EmpleadosCtrl($scope, $http, $window, $location) {
                 swal({ title: 'Oops...', text: respuesta.msg, type: 'error' });
         });
     }
-    var newUrl = $location.search().ReturnUrl;
-    vm.UpdateUser = UpdateUser;
-    vm.UpadateUserDatos = {};
+
     function UpdateUser() {
         $http.post("CreateUser/UpdateUser", { data: vm.UpadateUserDatos }).then(function (resp) {
             var respuesta = resp.data;
@@ -118,4 +128,15 @@ function EmpleadosCtrl($scope, $http, $window, $location) {
     function close() {
         vm.datosUser = {};
     }
+   
+    function getTipoUsuarioDropdown() {
+        $http.post("CreateUser/getTipoUsuarioDropdown").then(function (r) {
+           
+            if (r.data.cod == "OK") {
+                vm.TipoUsuario.data = r.data.d.data;
+
+            }
+        })
+    }
+
 }
