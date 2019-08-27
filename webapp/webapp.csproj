@@ -271,6 +271,7 @@
     <Content Include="app\controllers\loginCtrl.js" />
     <Content Include="app\controllers\loginInicioCtrl.js" />
     <Content Include="app\controllers\mainCtrl.js" />
+    <Content Include="app\controllers\PerfilCtrl.js" />
     <Content Include="app\controllers\vacacionesCtrl.js" />
     <Content Include="app\controllers\VacacionesEmpleadosCtrl.js" />
     <Content Include="app\directives\directives.js" />
