@@ -229,6 +229,7 @@
     <Compile Include="Controllers\FichajesEmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\lateralController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\VacacionesController.cs" />
     <Compile Include="Controllers\VacacionesEmpleadosController.cs" />
     <Compile Include="Data\Departamentos.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Data\Fichajes.cs" />
     <Compile Include="Data\FichajesEmpleados.cs" />
     <Compile Include="Data\lateral.cs" />
+    <Compile Include="Data\Perfil.cs" />
     <Compile Include="Data\Vacaciones.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
