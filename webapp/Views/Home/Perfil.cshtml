@@ -79,19 +79,19 @@
                 <div class="bg-white pt-2">
                     <a class="btn ml-1 mb-2 text-left d-block" data-toggle="collapse" href="#formContrasena" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><h6><i class="fas fa-cogs mr-3"></i>Contraseña</h6></a>
                     <p class="text-left ml-3">¿Quieres que este usuario tenga acceso a la versión web? Introduce una contraseña para que pueda acceder al panel combinándola con su correo electrónico. </p>
-                    <input type="password" placeholder="CONTRASEÑA" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
+                    <input type="password" placeholder="***********" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
                     <form id="formContrasena" class="collapse multi-collapse ml-2">
                         <div class="form-row ml-3 mt-2">
                             <div class="form-group mr-2 w-25">
                                 <label for="inputText">Contraseña</label>
                                 <div class="input-group input-group-sm ">
-                                    <input type="password" class="form-control" ng-model="vm.pass1">
+                                    <input type="password" class="form-control" ng-model="vm.pass1" required>
                                 </div>
                             </div>
                             <div class="form-group mr-2 w-25">
                                 <label for="inputText">Repetir Contraseña</label>
                                 <div class="input-group input-group-sm ">
-                                    <input type="password" class="form-control" ng-model="vm.pass2">
+                                    <input type="password" class="form-control" ng-model="vm.pass2" required>
                                 </div>
                             </div>
                             <div class="form-group ml-3 my-auto pt-2">
@@ -106,7 +106,7 @@
                 <div class="bg-white pt-2">
                     <a class="btn ml-1 mb-2 text-left d-block" data-toggle="collapse" href="#formDepartamento" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><h6><i class="fas fa-cogs mr-3"></i>Departamento</h6></a>
                     <p class="text-left ml-3">Selecciona a qué departamento pertenece el empleado. Si no tienes añadido ningún departamento, añádelo desde aquí</p>
-                    <input type="text" placeholder="{{vm.session.departamentos_nombre}}" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
+                    <input type="text" placeholder="{{vm.session.departamento_nombre}}" class="w-25 ml-4 mt-2 mb-2 border-0" readonly />
                     <form id="formDepartamento" class="collapse multi-collapse ml-2" ng-if="vm.session.id_perfil==1" ng-submit="vm.setDepartamento()">
                         <div class="form-row ml-3 mt-2">
                             <div class="form-group mr-2 w-25">
