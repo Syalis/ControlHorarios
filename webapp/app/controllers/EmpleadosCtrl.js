@@ -83,12 +83,12 @@ function EmpleadosCtrl($scope, $http, $window, $location) {
     var newUrl = $location.search().ReturnUrl;
     vm.UpdateUser = UpdateUser;
     vm.UpadateUserDatos = {};
-    vm.TipoUsuario = { data: [] };
+    vm.TipoUsuario = [];
     //
 
 
     function InsertUser() {
-        $http.post("CreateUser/InsertUser", { data: vm.datosUser }).then(function (resp) {
+        $http.post("CreateUser/InsertUser", { data: vm.datosUser}).then(function (resp) {
             var respuesta = resp.data;
 
 

@@ -85,7 +85,7 @@ namespace webapp.Controllers
                     Session["primer_apellido"] = dtUsuario.Rows[0]["primer_apellido"];
                     Session["segundo_apellido"] = dtUsuario.Rows[0]["segundo_apellido"];
                     Session["id"] = dtUsuario.Rows[0]["id"];
-                    Session["departamento"] = dtUsuario.Rows[0]["departamento"];
+                    Session["departamento_nombre"] = dtUsuario.Rows[0]["departamento_nombre"];
 
                     FormsAuthentication.SetAuthCookie(usuario, false);
                     resp.cod = "OK";
@@ -99,7 +99,7 @@ namespace webapp.Controllers
                     resp.d.Add("segundo_apellido", dtUsuario.Rows[0]["segundo_apellido"]);
                     resp.d.Add("id", dtUsuario.Rows[0]["id"]);
                     resp.d.Add("url", "Home/Index");
-                    resp.d.Add("departamento", dtUsuario.Rows[0]["departamento"]);
+                    resp.d.Add("departamento_nombre", dtUsuario.Rows[0]["departamento_nombre"]);
 
                 }
                 else
@@ -123,7 +123,7 @@ namespace webapp.Controllers
 
             using (MySqlConnection con = new MySqlConnection(BD.CadConMySQL()))
             {
-                using (MySqlCommand cmd = new MySqlCommand("SELECT u.*,p.id as id_perfil , p.nombre as tipo_perfil FROM usuarios u LEFT JOIN perfiles p ON u.id_perfil = p.id WHERE u.email = ?usuario AND validado=1;", con))
+                using (MySqlCommand cmd = new MySqlCommand("SELECT u.*,p.id as id_perfil , p.nombre as tipo_perfil, d.nombre as departamento_nombre FROM usuarios u LEFT JOIN perfiles p ON u.id_perfil = p.id  right JOIN departamentos d on u.departamento = d.id WHERE u.email = ?usuario AND validado=1;", con))
                 {
                     cmd.Parameters.AddWithValue("?usuario", usuario);
 
