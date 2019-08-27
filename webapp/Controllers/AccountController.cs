@@ -85,6 +85,7 @@ namespace webapp.Controllers
                     Session["primer_apellido"] = dtUsuario.Rows[0]["primer_apellido"];
                     Session["segundo_apellido"] = dtUsuario.Rows[0]["segundo_apellido"];
                     Session["id"] = dtUsuario.Rows[0]["id"];
+                    Session["departamento"] = dtUsuario.Rows[0]["departamento"];
 
                     FormsAuthentication.SetAuthCookie(usuario, false);
                     resp.cod = "OK";
@@ -98,7 +99,7 @@ namespace webapp.Controllers
                     resp.d.Add("segundo_apellido", dtUsuario.Rows[0]["segundo_apellido"]);
                     resp.d.Add("id", dtUsuario.Rows[0]["id"]);
                     resp.d.Add("url", "Home/Index");
-
+                    resp.d.Add("departamento", dtUsuario.Rows[0]["departamento"]);
 
                 }
                 else

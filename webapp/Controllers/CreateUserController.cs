@@ -69,9 +69,31 @@ namespace webapp.Controllers
             }
             return Json(resp);
         }
-        
+
+        //Metodo para obtener todos los tipos de usuario para el dropdown
+        [HttpPost]
+        public JsonResult getTipoUsuarioDropdown()
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            resp.msg = string.Empty;
+
+            try
+            {
+                resp.d.Add("data", Webapp.Data.Empleados.getTipoUsuarioDropdown());
+                resp.cod = "OK";
+                resp.msg = "Exito en la petición";
+            }
+            catch (Exception e)
+            {
+                resp.msg = e.Message;
+            }
+
+            return Json(resp);
+
+        }
 
 
+        //actualizar datos de usuario para registrarse
         public JsonResult UpdateUser(Dictionary<string, object> data)
 
         {
