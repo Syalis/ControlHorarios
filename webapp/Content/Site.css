@@ -72,3 +72,8 @@
         display: none;
     }
 }
+input:focus {
+   
+    /* Opcion 2 */
+    outline: none;
+}
