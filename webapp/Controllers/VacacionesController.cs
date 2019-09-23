@@ -191,23 +191,15 @@ namespace webapp.Controllers
         /// <returns>Mensaje de error si no introduce una fecha</returns>
         private string validarFecha(Dictionary<string, object> item)
         {
-            RespGeneric resp = new RespGeneric();
             string msg = string.Empty;
 
-            try {
-
-                if (!Util.hasValidValue(item, "fecha_inicio_vacaciones", "datetime") && !string.IsNullOrEmpty(item["fecha_inicio_vacaciones"].ToString()))
-                {
-                    msg = "Introduce una fecha inicio";
-                }
-                else if (!Util.hasValidValue(item, "fecha_final_vacaciones", "datetime") && !string.IsNullOrEmpty(item["fecha_final_vacaciones"].ToString()))
-                {
-                    msg = "Introduce una fecha final";
-                }
-            }
-            catch (Exception ex)
+            if (!Util.hasValidValue(item, "fecha_inicio_vacaciones", "datetime") && !string.IsNullOrEmpty(item["fecha_inicio_vacaciones"].ToString()))
             {
-                resp.msg = ex.Message;
+                msg = "Introduce una fecha inicio";
+            }
+            else if (!Util.hasValidValue(item, "fecha_final_vacaciones", "datetime") && !string.IsNullOrEmpty(item["fecha_final_vacaciones"].ToString()))
+            {
+                msg = "Introduce una fecha final";
             }
 
             return msg;
@@ -222,24 +214,18 @@ namespace webapp.Controllers
         /// <returns>Mensaje de error si la fecha de inicio es superior a la fecha final</returns>
         public string verificarFechas(Dictionary<string, object> item)
         {
-            RespGeneric resp = new RespGeneric();
+
             string msg = string.Empty;
             var fechaActual = DateTime.Today;
 
-            try
+            if (DateTime.Parse(item["fecha_inicio_vacaciones"].ToString()) > DateTime.Parse(item["fecha_final_vacaciones"].ToString()))
             {
-                if (DateTime.Parse(item["fecha_inicio_vacaciones"].ToString()) > DateTime.Parse(item["fecha_final_vacaciones"].ToString()))
-                {
-                    msg = "Fecha de inicio de vacaciones no puede ser posterior a la fecha final de vaciones";
+                msg = "Fecha de inicio de vacaciones no puede ser posterior a la fecha final de vaciones";
 
-                } else if (DateTime.Parse(item["fecha_inicio_vacaciones"].ToString()) < fechaActual)
-                {
-                    msg = "Fecha de inicio de vacaciones no puede ser posterior a la fecha actual";
-                }
             }
-            catch (Exception ex)
+            else if (DateTime.Parse(item["fecha_inicio_vacaciones"].ToString()) < fechaActual)
             {
-                resp.msg = ex.Message;
+                msg = "Fecha de inicio de vacaciones no puede ser posterior a la fecha actual";
             }
 
             return msg;
