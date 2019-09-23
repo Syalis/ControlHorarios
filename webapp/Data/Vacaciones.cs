@@ -83,13 +83,15 @@ namespace webapp.Data
         /// Consulta para pasar sumar o restar al año actual. 
         public static List<Dictionary<string, object>> getYear(Dictionary<string, object> item)
         {
-            return BD.getQueryResult($@"select a.anio, b.id, b.id_usuario, dia_inicio, mes_inicio, anio_inicio, dia_final, mes_final, 
+            return BD.getQueryResult($@"
+
+                    select a.anio, b.id, b.id_usuario, dia_inicio, mes_inicio, anio_inicio, dia_final, mes_final, 
                 
-                anio_final 
-                from (select year(date_sub(now(), interval ?nYear year)) as anio) a
+                    anio_final
 
-                left join 
+                    from (select year(date_sub(now(), interval ?nYear year)) as anio) a
 
+                    left join 
 
                     (SELECT v.id, ifnull(v.id_usuario, ?id_usuario) as id_usuario, 
 

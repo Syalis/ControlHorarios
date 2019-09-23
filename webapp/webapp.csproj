@@ -513,6 +513,12 @@
     <Content Include="Plugins\fontawesome\css\font-awesome.min.css" />
     <Content Include="Plugins\fontawesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Plugins\fontawesome\HELP-US-OUT.txt" />
+    <Content Include="Plugins\fullcalendar-master\assets\css\fullcalendar.css" />
+    <Content Include="Plugins\fullcalendar-master\assets\css\fullcalendar.print.css" />
+    <Content Include="Plugins\fullcalendar-master\assets\js\fullcalendar.js" />
+    <Content Include="Plugins\fullcalendar-master\assets\js\jquery-1.10.2.js" />
+    <Content Include="Plugins\fullcalendar-master\assets\js\jquery-ui.custom.min.js" />
+    <Content Include="Plugins\fullcalendar-master\fullcalendar.html" />
     <Content Include="Plugins\isteven-select\isteven-multi-select.css" />
     <Content Include="Plugins\isteven-select\isteven-multi-select.js" />
     <Content Include="Plugins\isteven-select\isteven-multi-select.min.js" />
@@ -1051,6 +1057,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Plugins\fullcalendar-master\README.md" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -1137,6 +1144,8 @@
     <Content Include="Views\Home\VacacionesEmpleados.cshtml" />
     <Content Include="Views\Account\forgotPass.cshtml" />
     <Content Include="Views\Shared\lateralSuperior.cshtml" />
+    <Content Include="Views\Home\Agenda.cshtml" />
+    <Content Include="Views\Home\AgendaEmpleados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

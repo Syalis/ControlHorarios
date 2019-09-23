@@ -60,7 +60,9 @@ namespace webapp
                 "~/Plugins/angular-xeditable/xeditable.min.css",
                 "~/Plugins/angular-ui-select/select.min.css",
                 "~/Plugins/ladda/ladda-themeless.min.css",
-                "~/Plugins/bootstrap-year-calendar/bootstrap-year-calendar.css"
+                "~/Plugins/bootstrap-year-calendar/bootstrap-year-calendar.css",
+                "~/Plugins/fullcalendar-master/assets/css/fullcalendar.css",
+                "~/Plugins/fullcalendar-master/assets/css/fullcalendar.print.css"
                 ));
 
             // Plugins JS
@@ -107,7 +109,10 @@ namespace webapp
                 "~/Plugins/ladda/spin.min.js",
                 "~/Plugins/ladda/ladda.min.js",
                 "~/Plugins/angular-ladda/angular-ladda.min.js",
-                "~/Plugins/bootstrap-year-calendar/bootstrap-year-calendar.js"
+                "~/Plugins/bootstrap-year-calendar/bootstrap-year-calendar.js",
+                "~/Plugins/fullcalendar-master/assets/js/fullcalendar.js",
+                "~/Plugins/fullcalendar-master/assets/js/jquery-1.10.2.js",
+                "~/Plugins/fullcalendar-master/assets/js/jquery-ui.custom.min.js"
                 ));
 
             // webapp scripts

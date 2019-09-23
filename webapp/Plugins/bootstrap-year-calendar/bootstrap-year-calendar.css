@@ -184,7 +184,7 @@
     color: #dddddd;
 }
 
-.calendar table.month td.day.disabled .day-content:hover {
+.calendar table.month td.day. .day-content:hover {
     background: none;
     cursor: default;
 }

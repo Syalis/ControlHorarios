@@ -14,6 +14,7 @@ function vacacionesCtrl($scope, $http, $window) {
     vm.diasRestantesVacacionesNueva = diasRestantesVacacionesNueva;
     vm.sumarAnio = sumarAnio;
     vm.restarAnio = restarAnio;
+
     vm.contador = 0;
     
     vm.pintadoCalendario = [];
@@ -26,6 +27,7 @@ function vacacionesCtrl($scope, $http, $window) {
     // Método que se inicia al iniciar la página. 
 
     calendario();
+
 
     // Método para saber cúantos días restatntes nos queda de vacaciones
     //function diasRestantesVacaciones() {
@@ -186,6 +188,27 @@ function vacacionesCtrl($scope, $http, $window) {
 
     });
 
+    // M´etodo para marcar el día actual.
+    $(function () {
+        var currentYear = new Date().getFullYear();
+        var day = new Date().getDate();
+        var mes = new Date().getMonth();
+
+        var circleDateTime = new Date(currentYear, mes, day).getTime();
+
+        $('#calendar').calendar({
+            customDayRenderer: function (element, date) {
+               if (date.getTime() == circleDateTime) {
+                   $(element).css('border', '2px solid green');
+               }
+               
+            }
+        });
+    });
+
+
+
+
  
     // Método para sumar añadir un año
     function sumarAnio(item) {
@@ -206,6 +229,9 @@ function vacacionesCtrl($scope, $http, $window) {
         })
 
     }
+
+
+
 
     // Método para restar un año
     function restarAnio(item) {

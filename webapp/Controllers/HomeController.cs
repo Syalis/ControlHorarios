@@ -53,6 +53,15 @@ namespace webapp.Controllers
         {
             return View();
         }
+        public ActionResult Agenda()
+        {
+            return View();
+        }
+
+        public ActionResult AgendaEmpleados()
+        {
+            return View();
+        }
         
 
     }
