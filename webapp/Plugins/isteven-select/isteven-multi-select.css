@@ -243,6 +243,7 @@
 /* item labels focus on mouse hover */
 .multiSelect .multiSelectItem:hover, 
 .multiSelect .multiSelectGroup:hover {
+    color: black;
     background: #f2f2f2;
     cursor: pointer;        
     border: 1px solid #f2f2f2 !important;
