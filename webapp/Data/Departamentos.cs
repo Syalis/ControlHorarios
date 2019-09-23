@@ -36,8 +36,8 @@ namespace webapp.Data
         //Metodo para filtrar empleados por departamento seleccionando del dropdown
         public static List<Dictionary<string, object>> getDepartamentoEmpleadosFiltro(int id)
         {
-            return BD.getQueryResult($@"select upper(u.nombre) as Nombre,  upper(concat_ws(' ', u.primer_apellido, u.segundo_apellido)) as Apellidos, 
-                    u.email as Correo, ifnull(sum(dias_disfrutados_vacaciones), 0) as Vacaciones, upper(d.nombre) as Departamento
+            return BD.getQueryResult($@"select concat(upper(left(u.nombre, 1)), LOWER(SUBSTRING(u.nombre, 2))) as Nombre,  concat_ws(' ',concat(upper(left(u.primer_apellido, 1)), LOWER(SUBSTRING(u.primer_apellido, 2))) , concat(upper(left(u.segundo_apellido, 1)), LOWER(SUBSTRING(u.segundo_apellido, 2)))) as Apellidos, 
+                    u.email as Correo, ifnull(sum(dias_disfrutados_vacaciones), 0) as Vacaciones, concat(upper(left(d.nombre, 1)), LOWER(SUBSTRING(d.nombre, 2))) as Departamento
                     from usuarios u
                     left
                     join departamentos d
