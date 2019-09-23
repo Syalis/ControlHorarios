@@ -75,20 +75,23 @@ function EmpleadosCtrl($scope, $http, $window, $location) {
 
     vm.InsertUser = InsertUser;
     vm.close = close;
-    vm.datosUser = {};
+    vm.datosUser = { select: [] };
     vm.getTipoUsuarioDropdown = getTipoUsuarioDropdown;
     //init
     getTipoUsuarioDropdown();
     //variables
     var newUrl = $location.search().ReturnUrl;
     vm.UpdateUser = UpdateUser;
-    vm.UpadateUserDatos = {};
+    vm.lista = { data: [], select: []};
     vm.TipoUsuario = [];
     //
 
 
     function InsertUser() {
-        $http.post("CreateUser/InsertUser", { data: vm.datosUser, departamento: vm.TipoUsuario.select}).then(function (resp) {
+        console.log(vm.datosUser)
+       
+        console.log(vm.TipoUsuario.data)
+        $http.post("CreateUser/InsertUser", { data: vm.datosUser}).then(function (resp) {
             var respuesta = resp.data;
 
 

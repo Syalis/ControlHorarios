@@ -133,30 +133,39 @@ namespace webapp.Helpers
 
         #region SECURITY
       
-        public static bool CheckPassword(string passwordHash, string salt, string pass)
+        public static bool CheckPassword(string passwordHashed, string pass)
         {
-            String hashed = HashPassword(pass, salt);
-
-            if (hashed.Equals(passwordHash))
+            if (!string.IsNullOrEmpty(passwordHashed))
             {
-                return true;
-            }
+                String salt = passwordHashed.Substring(20, 12);
+                String hashed = HashPassword(pass, salt);
 
+                if (hashed.Equals(passwordHashed))
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
         public static string HashPassword(string pass, string salt)
 
         {
+            int passIterations = 12000;
 
-            string SaltYPass;
-            string ClaveHashed;
+            var hashed = String.Empty;
 
-            SaltYPass = pass + salt;
-            ClaveHashed = CalculateSha1(SaltYPass, System.Text.Encoding.UTF8);
-           
-            return ClaveHashed;
-            
+            using (var hmac = new HMACSHA256())
+            {
+                var df = new Pbkdf2(hmac, pass, salt, passIterations);
+
+                String passEncrypted = Convert.ToBase64String(df.GetBytes(32));
+
+                hashed = String.Format("pbkdf2_sha256${0}${1}${2}", passIterations, salt, passEncrypted);
+
+            }
+
+            return hashed;
         }
 
         private static string CalculateSha1(string text, System.Text.Encoding enc)

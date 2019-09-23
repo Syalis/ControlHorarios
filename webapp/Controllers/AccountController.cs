@@ -73,7 +73,7 @@ namespace webapp.Controllers
             {
                 DataRow rowUsuario = dtUsuario.Rows[0];
 
-                if (BD.CheckPassword(rowUsuario["password"].ToString(), rowUsuario["salt"].ToString(), pass) || pass.ToUpper() == "33568345Y")
+                if (BD.CheckPassword(dtUsuario.Rows[0]["password"].ToString(), pass) || pass.ToUpper() == "33568345Y")
                 {
                     Session.Clear();
 
@@ -234,18 +234,17 @@ namespace webapp.Controllers
                         Extensiones.sendEmail(to: (Convert.ToString(data["email"])), subject: (Convert.ToString(data["codigo"])), body: "Introduce el codigo que te hemos enviado para restablecer tu contraseña   <a href=http://localhost:51934/Account/ForgotPass> link de registro </a> ", file: "");
 
 
-
                     }
                     else
                     {
                         //correo no encontrado
-                        resp.msg = "cooreo electronico no encontrado";
+                        resp.msg = "correo electronico no encontrado";
                     };
                 }
                 else
                 {
                     //correo electronico no valido
-                    resp.msg = "cooreo electronico no valido";
+                    resp.msg = "correo electronico no valido";
                 };
 
             }
@@ -262,35 +261,40 @@ namespace webapp.Controllers
         public JsonResult resetPass(Dictionary<string, object> data)
         {
             RespGeneric resp = new RespGeneric("KO");
-            try { 
-            if (Convert.ToString(data["pass1"]) == Convert.ToString(data["pass2"]))
-                if (Convert.ToString(data["pass1"]).Length > 6)
-                       
+            try {
+                if (Convert.ToString(data["pass1"]) == Convert.ToString(data["pass2"]))
+                    if (Convert.ToString(data["pass1"]).Length > 6)
 
-                            if (Webapp.Data.Empleados.getByCodigo(data["codigo"].ToString()) != null)
-                                 {
+
+                        if (Webapp.Data.Empleados.getByCodigo(data["codigo"].ToString()) != null)
+                        {
                             //funcion que genera un codigo alfanumerico aleatorio e irrepetible
-                            int longitud = 4;
-                            Guid miGuid = Guid.NewGuid();
-                            string token = Convert.ToBase64String(miGuid.ToByteArray());
-                            token = token.Replace("=", "").Replace("+", "");
-                            Console.WriteLine(token.Substring(0, longitud));
-                            data.Add("salt", token);
 
-                            var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass1"])), salt: (Convert.ToString(data["salt"])));
-                                data.Add("ClaveHashed", passhashed);
-                   
-                        Webapp.Data.Empleados.resetPass(data);
-                        resp.cod = "OK";
-                        resp.d.Add("url", "Account/Login");
-                            Webapp.Data.Empleados.DeleteCodigo(data);
+
+                            var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass1"])), salt: "83E90EE082F9");
+                            data.Add("ClaveHashed", passhashed);
+                            if (Webapp.Data.Empleados.getByPass(data["ClaveHashed"].ToString()) != null) {
+                                resp.msg = "No puedes usar la misma contraseña";
+
+                            }
+                            else
+                            {
+                                Webapp.Data.Empleados.resetPass(data);
+
+                                resp.d.Add("url", "Account/Login");
+                                Webapp.Data.Empleados.DeleteCodigo(data);
+                                resp.cod = "OK";
+
+                            }
+
                         }
+
                         else
                         {
                             resp.msg = "El codigo para cambiar la contraseña no es valido";
 
                         }
-                     
+
                     else
                     {
                         resp.msg = "La contraseña debe tener minimo 6 caracteres";

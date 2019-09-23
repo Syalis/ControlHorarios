@@ -28,5 +28,20 @@ namespace webapp.Data
         {
             return BD.getInsertQueryResult($@"update usuario set departamento = ?id where id=?id1 ", new Dictionary<string, object>() { { "id1", id1 }, { "id", departamentoUsuario["id"] } });
         }
+
+        public static int setPass(Dictionary<string, object> data, int id)
+        {
+            return BD.getNonQueryResult($@"UPDATE usuarios  SET password = ?ClaveHashed, telefono = ?telefono,
+
+
+             validado = '1', nombre = CONCAT(UPPER(LEFT(?nombre, 1)), LOWER(SUBSTRING(?nombre, 2))),
+
+             primer_apellido = CONCAT(UPPER(LEFT(?primer_apellido, 1)), LOWER(SUBSTRING(?primer_apellido, 2))),
+
+             segundo_apellido = CONCAT(UPPER(LEFT(?segundo_apellido, 1)), LOWER(SUBSTRING(?segundo_apellido, 2))),
+            salt =  ?salt ,
+
+            id_perfil = '1'   WHERE invitacion = ?invitacion ", new Dictionary<string, object>() { { "id", id }, { "password", data["pass1"] } });
+        }
     }
 }

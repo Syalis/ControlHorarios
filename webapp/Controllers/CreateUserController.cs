@@ -104,14 +104,8 @@ namespace webapp.Controllers
                     if(Convert.ToString(data["pass"]).Length>6)
                     if (Webapp.Data.Empleados.getByInvitacion(data["invitacion"].ToString()) != null)
                     {
-                            int longitud = 7;
-                            Guid miGuid = Guid.NewGuid();
-                            string token = Convert.ToBase64String(miGuid.ToByteArray());
-                            token = token.Replace("=", "").Replace("+", "");
-                            Console.WriteLine(token.Substring(0, longitud));
-                            data.Add("salt", token);
 
-                            var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass"])), salt: (Convert.ToString(data["salt"])));
+                            var passhashed = BD.HashPassword(pass: (Convert.ToString(data["pass"])), salt: "83E90EE082F9");
                         data.Add("ClaveHashed", passhashed);
                         Webapp.Data.Empleados.UpdateUser(data);
                         resp.cod = "OK";

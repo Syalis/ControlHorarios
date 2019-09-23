@@ -116,5 +116,27 @@ namespace webapp.Controllers
             }
             return msg;
         }
+
+
+        [HttpPost]
+        public   JsonResult setPass(Dictionary<string, object>pass, int id )
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            
+            if (string.IsNullOrEmpty(resp.msg))
+            {
+                try
+                {
+                    resp.d.Add("setpass", Data.Perfil.setPass(pass, id ));
+                    resp.cod = "OK";
+                    resp.msg = "Exito en la petición";
+                }
+                catch (Exception e)
+                {
+                    resp.msg = e.Message;
+                }
+            }
+            return Json(resp);
+        }
     }
 }

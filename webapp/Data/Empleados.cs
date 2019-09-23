@@ -28,7 +28,7 @@ namespace Webapp.Data
        //insertar usuario (EMAIL,ACTIVO,NOMBRE 1 Y 2 APELLIDO , SI ESTA VALIDADO EL CORREO Y SALT   
         public static int InsertUser(Dictionary<string, object> data)
         {
-            return BD.getInsertQueryResult("INSERT INTO usuarios (email, activo,salt,invitacion,id_perfil) VALUES (?email,'0','',?invitacion,?id_perfil)", data);
+            return BD.getInsertQueryResult("INSERT INTO usuarios (email, activo,invitacion,departamento) VALUES (?email,'0',?invitacion,'1')", data);
 
         }
         //registro de usuario
@@ -42,7 +42,7 @@ namespace Webapp.Data
              primer_apellido = CONCAT(UPPER(LEFT(?primer_apellido, 1)), LOWER(SUBSTRING(?primer_apellido, 2))),
 
              segundo_apellido = CONCAT(UPPER(LEFT(?segundo_apellido, 1)), LOWER(SUBSTRING(?segundo_apellido, 2))),
-            salt =  ?salt ,
+            
 
             id_perfil = '1'   WHERE invitacion = ?invitacion " , data);
         }
@@ -62,7 +62,7 @@ namespace Webapp.Data
         //actualizar la contraseña
         public static int resetPass(Dictionary<string, object> data)
         {
-            return BD.getNonQueryResult("UPDATE usuarios  SET password = ?ClaveHashed, salt = ?salt  WHERE codigo_forgot_pass = ?codigo ", data);
+            return BD.getNonQueryResult("UPDATE usuarios  SET password = ?ClaveHashed WHERE codigo_forgot_pass = ?codigo ", data);
         }
         //comprobar que el codigo es valido
         public static Dictionary<string, object> getByCodigo(string codigo)

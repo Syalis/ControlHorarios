@@ -52,11 +52,10 @@ function PerfilCtrl($scope, $http, $window) {
     }
 
     function setPass() {
-        $http.post("Perfil/setNombre", { pass: vm.pass}).then(function (r) {
+        $http.post("Perfil/setPass", { pass: vm.pass, id: vm.session.id }).then(function (r) {
             if (r.data.cod == "OK") {
-                vm.session.nombre = vm.nombreUsuario.nombre;
-                vm.session.primer_apellido = vm.nombreUsuario.primer_apellido;
-                vm.session.segundo_apellido = vm.nombreUsuario.segundo_apellido;
+                vm.session.departamento_nombre = vm.tipo_departamento.departamento_nombre;
+               
                 Swal.fire({
                     position: 'top-end',
                     type: 'success',
