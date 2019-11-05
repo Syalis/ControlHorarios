@@ -34,7 +34,7 @@ namespace webapp.Helpers
         public static string ToMySqlDateTime(this DateTime d)
         {
             return d.ToString("yyyy-MM-dd");
-        }       
+        }
 
         public static List<Dictionary<string, object>> ToList(this DataTable dt)
         {
@@ -44,18 +44,18 @@ namespace webapp.Helpers
                 Dictionary<string, object> row = new Dictionary<string, object>();
                 foreach (DataColumn col in dt.Columns)
                 {
-                    if (dr[col].GetType() == typeof(System.String)){
+                    if (dr[col].GetType() == typeof(System.String)) {
                         row.Add(col.ColumnName, dr[col].ToString().Trim());
                     }
                     else
                     {
                         row.Add(col.ColumnName, dr[col]);
-                    }                    
+                    }
                 }
                 lstRows.Add(row);
             }
             return lstRows;
-        }        
+        }
 
         public static Dictionary<string, object> ToDictionary(this DataRow row)
         {
@@ -69,7 +69,7 @@ namespace webapp.Helpers
                 else
                 {
                     dictRow.Add(col.ColumnName.ToLower(), row[col.ColumnName]);
-                }                
+                }
             }
             return dictRow;
         }
@@ -217,7 +217,7 @@ namespace webapp.Helpers
                 }
                 email.From = new MailAddress("alertas@topgestion.es");
                 email.Subject = subject;
-             
+
                 email.Body = String.Format(body);
                 email.IsBodyHtml = true;
                 email.Priority = MailPriority.Normal;
@@ -230,7 +230,60 @@ namespace webapp.Helpers
                     inline.ContentType.Name = Path.GetFileName(file);
 
                 }
-                
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.1and1.es";
+                smtp.Port = 587;
+                smtp.EnableSsl = false;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential("alertas@topgestion.es", "3zC/8-&%");
+
+                smtp.Send(email);
+                smtp.Dispose();
+                email.Dispose();
+
+                string res = "Correo electrónico enviado satisfactoriamente";
+
+                return res;
+
+            }
+            catch (Exception e)
+            {
+                string res = "Error enviando correo electrónico";
+                Console.WriteLine(e.Message);
+                return res;
+
+            }
+
+        }
+
+
+        public static string envioEmail(string to, string subject, string body, string file)
+        {
+
+            try
+            {
+                MailMessage email = new MailMessage();
+                foreach (var address in to.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    email.To.Add(address);
+                }
+                email.From = new MailAddress("alertas@topgestion.es");
+                email.Subject = subject;
+
+                email.Body = String.Format(body);
+                email.IsBodyHtml = true;
+                email.Priority = MailPriority.Normal;
+                if (!file.IsEmpty())
+                {
+                    Attachment inline = new Attachment(file);
+                    inline.ContentDisposition.Inline = true;
+                    inline.ContentDisposition.DispositionType = DispositionTypeNames.Inline;
+                    inline.ContentType.MediaType = "file/pdf";
+                    inline.ContentType.Name = Path.GetFileName(file);
+
+                }
+
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.1and1.es";
                 smtp.Port = 587;
@@ -257,6 +310,6 @@ namespace webapp.Helpers
 
         }
     }
-
-    
 }
+
+   

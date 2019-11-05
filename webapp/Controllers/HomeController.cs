@@ -62,6 +62,10 @@ namespace webapp.Controllers
         {
             return View();
         }
+        public ActionResult FormularioVacaciones()
+        {
+            return View();
+        }
         
 
     }

@@ -14,7 +14,7 @@ function vacacionesCtrl($scope, $http, $window) {
     vm.diasRestantesVacacionesNueva = diasRestantesVacacionesNueva;
     vm.sumarAnio = sumarAnio;
     vm.restarAnio = restarAnio;
-
+    vm.envioEmail = envioEmail;
     vm.contador = 0;
     
     vm.pintadoCalendario = [];
@@ -188,7 +188,7 @@ function vacacionesCtrl($scope, $http, $window) {
 
     });
 
-    // M´etodo para marcar el día actual.
+    // Método para marcar el día actual.
     $(function () {
         var currentYear = new Date().getFullYear();
         var day = new Date().getDate();
@@ -206,10 +206,6 @@ function vacacionesCtrl($scope, $http, $window) {
         });
     });
 
-
-
-
- 
     // Método para sumar añadir un año
     function sumarAnio(item) {
         ++vm.contador;
@@ -230,9 +226,6 @@ function vacacionesCtrl($scope, $http, $window) {
 
     }
 
-
-
-
     // Método para restar un año
     function restarAnio(item) {
         --vm.contador;
@@ -251,5 +244,43 @@ function vacacionesCtrl($scope, $http, $window) {
             }
         })
 
+    }
+
+    function envioEmail() {
+        $http.post("Vacaciones/envioEmail", {
+            item:
+            {
+                departamento_nombre: vm.session.departamento_nombre,
+           
+            }
+        }).then(function (r) {
+            if (r.data.cod == "OK") {
+                vm.lista.data = r.data.d.data;
+                diasRestantesVacacionesNueva();
+                calendario();
+                eventoCalendario();
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Petición correta!',
+                    //text: 'Vacaciones aceptadas!',
+                    showConfirmButton: false,
+                    timer: 1700
+                })
+                vm.item = {};
+            } else {
+                vm.item = {};
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'error',
+                    title: 'Petición incorreta!',
+                    //text: 'Revisa los campos de las fechas!',
+                    showConfirmButton: false,
+                    timer: 1700
+                })
+
+            }
+            
+        })
     }
 }

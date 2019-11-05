@@ -1146,6 +1146,7 @@
     <Content Include="Views\Shared\lateralSuperior.cshtml" />
     <Content Include="Views\Home\Agenda.cshtml" />
     <Content Include="Views\Home\AgendaEmpleados.cshtml" />
+    <Content Include="Views\Home\FormularioVacaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

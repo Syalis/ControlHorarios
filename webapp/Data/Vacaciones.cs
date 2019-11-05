@@ -8,7 +8,7 @@ namespace webapp.Data
 {
     public class Vacaciones
     {
-       
+
         /// Consulta para pintar los días de vacaciones que nos queda en el año presente
         public static List<Dictionary<string, object>> getDiasTotalVacaciones(Dictionary<string, object> item)
         {
@@ -115,6 +115,23 @@ namespace webapp.Data
 
                     new Dictionary<string, object>() { { "id_usuario", item["id_usuario"] }, { "nYear", item["nYear"] } });
         }
-    }
+    
 
+        public static List<Dictionary<string, object>> envioEmail(Dictionary<string, object> email) {
+            return BD.getQueryResult($@"
+
+                    SELECT u.email, u. nombre as nombre_administrador, d.nombre as nombre_departamento, d.id as id_departamento from usuarios u 
+
+                    left join (select d.id , d.nombre from departamentos d) d on 
+
+                    d.id = u.departamento
+
+                    where id_perfil = '2' and departamento  = ?departamento_nombre)",
+
+                    new Dictionary<string, object>() { { "departamento_nombre", email["departamento_nombre"] } });
+        }
+    }
 }
+    
+    
+

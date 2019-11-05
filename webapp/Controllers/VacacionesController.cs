@@ -119,7 +119,7 @@ namespace webapp.Controllers
                 int dias = dif.Days; // Diferencia de dias entre la fecha final y la fecha de inicio.
                 var d = dias + 1; 
                 var a = Data.Vacaciones.getDiasTotalVacaciones(item);
-               //Recooremos el el campo "total_vacaciones" del diccionario. 
+               //Recorremos el el campo "total_vacaciones" del diccionario. 
                 foreach (var x in a)
                 {
                     x["total_vacaciones"].ToString();
@@ -173,6 +173,28 @@ namespace webapp.Controllers
                 try
                 {
                     resp.d.Add("year", Data.Vacaciones.getYear(item));
+                    resp.cod = "OK";
+                }
+                catch (Exception e)
+                {
+                    resp.msg = e.Message;
+                }
+            }
+            return Json(resp);
+        }
+
+        public JsonResult envioEmail(Dictionary<string , object> email)
+        {
+            RespGeneric resp = new RespGeneric("KO");
+            resp.msg = string.Empty;
+            if (string.IsNullOrEmpty(resp.msg))
+            {
+                try
+                {
+                    //enviar email a la direccion email dentro del data
+                    Extensiones.envioEmail(to: (Convert.ToString(email["email"])), subject: (Convert.ToString(email["invitacion"])), body: "Introduce el codigo que te hemos enviado junto con tus datos para finalizar el registro  <a href=http://localhost:51934/Account/FormularioRegistro> link de registro </a> ", file: "");
+                    resp.d.Add("email", Data.Vacaciones.envioEmail(email));
+
                     resp.cod = "OK";
                 }
                 catch (Exception e)

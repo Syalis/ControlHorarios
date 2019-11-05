@@ -6,65 +6,67 @@
         <div ng-show="!vm.loading">
         </div>
     </div>*@
-    <div class="row h-100" ng-controller="vacacionesCtrl as vm">
-        <!--Renderizado de la nav-bar-->
-        @*<div id="aside" class="col-2 p-0 m-0 bg-dark">
+<div class="row h-100" ng-controller="vacacionesCtrl as vm">
+    <!--Renderizado de la nav-bar-->
+    @*<div id="aside" class="col-2 p-0 m-0 bg-dark">
 
         </div>*@
-        @Html.Partial("lateralSuperior")
-        @Html.Partial("lateral")
-        <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
-            <!--Inicio card de dias de vacaciones-->
-            <div class="row m-2 align-items-center pb-3" id="centralPerfil">
-                <div class="col-md-3">
-                    <div id="caja" class="card align-content-center bg-success text-white">
-                        <div class="p-4">
-                            <h4 class="text-center font-weight-bold">Días Pendientes</h4>
-                            <h4 class="text-center font-weight-bold p-1">{{vm.diasVacaciones[0].total_vacaciones}}/30</h4>
-                        </div>
+    @Html.Partial("lateralSuperior")
+    @Html.Partial("lateral")
+    <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
+        <!--Inicio card de dias de vacaciones-->
+        <div class="row m-2 align-items-center pb-3" id="centralPerfil">
+            <div class="col-md-3">
+                <div id="caja" class="card align-content-center bg-success text-white">
+                    <div class="p-4">
+                        <h4 class="text-center font-weight-bold">Días Pendientes</h4>
+                        <h4 class="text-center font-weight-bold p-1">{{vm.diasVacaciones[0].total_vacaciones}}/30</h4>
                     </div>
                 </div>
-                <!--Fin card de dias de vacaciones-->
-                <div class="col-md-9">
-                    <!--Inicio formulario para recoger las fechas-->
-                    <form ng-submit="vm.peticionVacaciones(vm.item)">
-                        <div>
-                            <h4 class="text-center font-weight-bold">Solicita tus vacaciones</h4>
-                            <h6 class="text-center p-1">Introduce las fechas</h6>
+            </div>
+            <!--Fin card de dias de vacaciones-->
+            <div class="col-md-9">
+                <!--Inicio formulario para recoger las fechas-->
+                <form ng-submit="vm.peticionVacaciones(vm.item)">
+                    <div>
+                        <h4 class="text-center font-weight-bold">Solicita tus vacaciones</h4>
+                        <h6 class="text-center p-1">Introduce las fechas</h6>
 
-                            <div class="form-row align-content-center align-items-center p-3">
-                                <div class="col-sm-4 ml-5 ">
-                                    <label class="mt-0">Fecha Inicio Vacaciones</label>
-                                    <top-datepicker ng-model="vm.item.fecha_inicio_vacaciones"></top-datepicker>
-                                </div>
-                                <div class="col-sm-4 ml-0 ml-3">
-                                    <label class="mt-0">Fecha Final Vacaciones</label>
-                                    <top-datepicker ng-model="vm.item.fecha_final_vacaciones"></top-datepicker>
-                                </div>
-                                <div class="col-sm-2 mt-4 ml-3 pl-3">
-                                    <button type="submit" id="save-event" class="btn btn-success btn-sm">Solicitar</button>
-                                </div>
+                        <div class="form-row align-content-center align-items-center p-3">
+                            <div class="col-sm-4 ml-5 ">
+                                <label class="mt-0">Fecha Inicio Vacaciones</label>
+                                <top-datepicker ng-model="vm.item.fecha_inicio_vacaciones"></top-datepicker>
+                            </div>
+                            <div class="col-sm-4 ml-0 ml-3">
+                                <label class="mt-0">Fecha Final Vacaciones</label>
+                                <top-datepicker ng-model="vm.item.fecha_final_vacaciones"></top-datepicker>
+                            </div>
+                            <div class="col-sm-2 mt-4 ml-3 pl-3">
+                                <button type="submit" id="save-event" class="btn btn-success btn-sm">Solicitar</button>
                             </div>
                         </div>
-                    </form>
-                    <!--Fin formulario para recoger las fechas-->
-                </div>
+                    </div>
+                </form>
+                <!--Fin formulario para recoger las fechas-->
             </div>
-
-            <!--Calendario-->
-            <div class="row m-2 align-items-center pb-3 pt-3">
-                <div class="text-center mx-auto">
-                    <a class="btn-lg" ng-click="vm.sumarAnio(vm.item)">
-                        <i class="fas fa-arrow-left"></i>
-                    </a>
-                    <span>
-                        <input id="date" class="text-center font-weight-bold h4" placeholder={{vm.vacacionesCalendario[0].anio}} readonly />
-                    </span>
-                    <a class="btn-lg" ng-click="vm.restarAnio(vm.item)">
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div id="calendar" data-provide="calendar"></div>
         </div>
+
+        <!--Calendario-->
+        <div class="row m-2 align-items-center pb-3 pt-3">
+            <div class="text-center mx-auto">
+                <a class="btn-lg" ng-click="vm.sumarAnio(vm.item)">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <span>
+                    <input id="date" class="text-center font-weight-bold h4" placeholder={{vm.vacacionesCalendario[0].anio}} readonly />
+                </span>
+                <a class="btn-lg" ng-click="vm.restarAnio(vm.item)">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div id="calendar" data-provide="calendar"></div>
     </div>
+</div>
+
+

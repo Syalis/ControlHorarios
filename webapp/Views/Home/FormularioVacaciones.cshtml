@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "FormularioVacaciones";
+}
+
+
+    <div class="row h-100" ng-controller="vacacionesCtrl as vm">
+        <div id="central" class="col-9 mx-auto bg-white rounded  mt-5 mb-5">
+            <div>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <link rel="stylesheet" media="all" href="/assets/application-mailer-dbc5154d3c4160e8fa7ef52fa740fa402760c39b5d22c8f6d64ad5999499d263.css" />
+             
+            </div>
+            <!-- Edit the code below this line -->
+            <div class="bg-light">
+               
+                <div class="container">
+                    <img class="mx-auto mt-4 mb-3" width="150" height="150" src="~/images/logo.png" >
+                    <div class="card mb-4" style="border-top: 5px solid">
+                        <div class="card-body">
+
+                            <h4 class="text-center">Petición de Vacaciones</h4>
+                            <div>
+                                <h5 class="text-muted text-center">
+                                    El trabajador {{vm.session.nombre}} {{vm.session.primer_apellido}} {{vm.session.segundo_apellido}} del departamento de {{vm.session.departamento_nombre}},
+                                    ha solicitado los siguientes días de vacaciones, con fecha de inicio {{vm.item.fecha_inicio_vacaciones}} y con fecha final {{vm.item.fecha_final_vacaciones}}.
+                                    El total de días de vacaciones solicitados son: {{vm.session.nombre}} quedándole cómo días restantes de vacaciones: {{vm.diasVacaciones[0].total_vacaciones}} días.
+                                </h5>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-success">Aceptar</button>
+                                <button type="button" class="btn btn-danger">Rechazar</button>
+                            </div>
+                      
+
+                            <h5 class="text-muted text-center">September 21, 2017 at 6:54 PM</h5>
+
+                            <h5 class="text-center"><strong>Ride Details</strong></h5>
+
+                        </div>
+                    </div>
+                    @*<table class="table-unstyled text-muted mb-4">
+                        <tbody>
+                            <tr>
+                                <td>© Lyft 2017</td>
+                                <td>
+                                    <img class="float-right pl-2" width="20" height="20" src="https://s3.amazonaws.com/lyft.zimride.com/images/emails/social/v2/facebook@2x.png" />
+                                    <img class="float-right pl-2" width="20" height="20" src="https://s3.amazonaws.com/lyft.zimride.com/images/emails/social/v2/twitter@2x.png" />
+                                    <img class="float-right" width="20" height="20" src="https://s3.amazonaws.com/lyft.zimride.com/images/emails/social/v2/instagram@2x.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>548 Market St #68514</td>
+                                <td class="text-right">Work at Lyft</td>
+                            </tr>
+                            <tr>
+                                <td>San Francisco, CA 94104</td>
+                                <td class="text-right">Become a Driver</td>
+                            </tr>
+                        </tbody>
+                    </table>*@
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
