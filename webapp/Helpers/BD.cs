@@ -13,11 +13,11 @@ namespace webapp.Helpers
 {
     public class BD
     {
-        private static readonly string server = "192.168.0.107";
+        private static readonly string server = "127.0.0.1";
         private static readonly string schema = "control_horarios";
 
-        public const string BDuser = "horarios";
-        public const string BDpass = "fu3i4r378r12g";
+        public const string BDuser = "root";
+        public const string BDpass = "root";
 
         private static readonly int passIterations = 12000;
 
